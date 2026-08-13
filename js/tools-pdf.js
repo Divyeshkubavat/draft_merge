@@ -29,7 +29,8 @@ window.TOOL_DEFS.push(
  accept:'.pdf', multiple:true, minFiles:2, hint:'PDF files only · add 2 or more',
  options:[],
  run: async (files, opts, progress) => {
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const out = await PDFDocument.create();
  for (let i=0;i<files.length;i++){
  progress(Math.round((i/files.length)*90), `Reading ${files[i].name}`);
@@ -49,11 +50,13 @@ window.TOOL_DEFS.push(
  accept:'.pdf', multiple:false, minFiles:1, hint:'One PDF file',
  options:[],
  run: async (files, opts, progress) => {
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const bytes = await fileToArrayBuffer(files[0]);
  const src = await PDFDocument.load(bytes);
  const total = src.getPageCount();
- const zip = new JSZip();
+ const JSZip = await window.ensureLib("JSZip");
+    const zip = new JSZip();
  for (let i=0;i<total;i++){
  progress(Math.round((i/total)*90), `Splitting page ${i+1} of ${total}`);
  const out = await PDFDocument.create();
@@ -77,7 +80,8 @@ window.TOOL_DEFS.push(
  ], default:'90' }
  ],
  run: async (files, opts, progress) => {
- const { PDFDocument, degrees } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument, degrees } = PDFLib;
  const bytes = await fileToArrayBuffer(files[0]);
  const doc = await PDFDocument.load(bytes);
  const angle = parseInt(opts.angle || '90', 10);
@@ -101,9 +105,11 @@ window.TOOL_DEFS.push(
  ],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const out = await PDFDocument.create();
  const quality = (parseInt(opts.quality || 60,10))/100;
  for (let i=1;i<=total;i++){
@@ -129,9 +135,11 @@ window.TOOL_DEFS.push(
  ],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
- const zip = new JSZip();
+ const JSZip = await window.ensureLib("JSZip");
+    const zip = new JSZip();
  const quality = (parseInt(opts.quality || 88,10))/100;
  for (let i=1;i<=total;i++){
  progress(Math.round((i/total)*90), `Rendering page ${i} of ${total}`);
@@ -150,7 +158,8 @@ window.TOOL_DEFS.push(
  accept:'.jpg,.jpeg,.png', multiple:true, minFiles:1, hint:'JPG or PNG · any number, in order added',
  options:[],
  run: async (files, opts, progress) => {
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const out = await PDFDocument.create();
  for (let i=0;i<files.length;i++){
  progress(Math.round((i/files.length)*90), `Placing ${files[i].name}`);
@@ -178,7 +187,8 @@ window.TOOL_DEFS.push(
  ], default:'1' }
  ],
  run: async (files, opts, progress) => {
- const { PDFDocument, StandardFonts, rgb } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
  const bytes = await fileToArrayBuffer(files[0]);
  const doc = await PDFDocument.load(bytes);
  const font = await doc.embedFont(StandardFonts.Helvetica);
@@ -211,11 +221,13 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  progress(10, 'Reading DOCX');
- const zip = await JSZip.loadAsync(files[0]);
+ const JSZip = await window.ensureLib("JSZip");
+    const zip = await JSZip.loadAsync(files[0]);
  const docXml = await zip.file('word/document.xml').async('string');
  const text = docXml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
  progress(50, 'Creating PDF');
- const { PDFDocument, StandardFonts, rgb } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
  const doc = await PDFDocument.create();
  const font = await doc.embedFont(StandardFonts.Helvetica);
  const fontSize = 11;
@@ -254,7 +266,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
  let fullText = '';
  for(let i=1; i<=total; i++) {
@@ -275,7 +288,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
  let csvData = '';
  for(let i=1; i<=total; i++) {
@@ -295,7 +309,8 @@ window.TOOL_DEFS.push(
  run: async (files, opts, progress) => {
  const text = await files[0].text();
  const lines = text.split('\n');
- const { PDFDocument, StandardFonts, rgb } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
  const doc = await PDFDocument.create();
  const font = await doc.embedFont(StandardFonts.Helvetica);
  const fontSize = 10;
@@ -334,7 +349,8 @@ window.TOOL_DEFS.push(
  run: async (files, opts, progress) => {
  progress(20, 'Reading PDF');
  const bytes = await fileToArrayBuffer(files[0]);
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  progress(40, 'Unlocking');
  const doc = await PDFDocument.load(bytes, { password: opts.password || '' });
  progress(80, 'Saving unlocked PDF');
@@ -350,7 +366,8 @@ window.TOOL_DEFS.push(
  run: async (files, opts, progress) => {
  progress(20, 'Reading PDF');
  const bytes = await fileToArrayBuffer(files[0]);
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const doc = await PDFDocument.load(bytes);
  progress(80, 'Setting permissions');
  const out = await doc.save();
@@ -364,9 +381,11 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
- const zip = new JSZip();
+ const JSZip = await window.ensureLib("JSZip");
+    const zip = new JSZip();
  for (let i=1;i<=total;i++){
  progress(Math.round((i/total)*90), `Rendering page ${i} of ${total}`);
  const canvas = await renderPdfPageToCanvas(pdfjsDoc, i, 2);
@@ -384,7 +403,8 @@ window.TOOL_DEFS.push(
  accept:'.png', multiple:true, minFiles:1, hint:'PNG files · any number',
  options:[],
  run: async (files, opts, progress) => {
- const { PDFDocument } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument } = PDFLib;
  const out = await PDFDocument.create();
  for (let i=0;i<files.length;i++){
  progress(Math.round((i/files.length)*90), `Placing ${files[i].name}`);
@@ -405,7 +425,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  const bytes = await fileToArrayBuffer(files[0]);
- const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const pdfjsDoc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
  const total = pdfjsDoc.numPages;
  let html = '<!DOCTYPE html><html><body>';
  for(let i=1; i<=total; i++) {
@@ -426,7 +447,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  progress(10, 'Reading PPTX');
- const zip = await JSZip.loadAsync(files[0]);
+ const JSZip = await window.ensureLib("JSZip");
+    const zip = await JSZip.loadAsync(files[0]);
  let slideIndex = 1;
  let slides = [];
  while(zip.file(`ppt/slides/slide${slideIndex}.xml`)) {
@@ -436,7 +458,8 @@ window.TOOL_DEFS.push(
  slideIndex++;
  }
  progress(50, 'Creating PDF');
- const { PDFDocument, StandardFonts, rgb } = PDFLib;
+ const PDFLib = await window.ensureLib("PDFLib");
+    const { PDFDocument, StandardFonts, rgb } = PDFLib;
  const doc = await PDFDocument.create();
  const font = await doc.embedFont(StandardFonts.Helvetica);
  const fontSize = 12;

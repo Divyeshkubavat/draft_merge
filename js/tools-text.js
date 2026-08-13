@@ -10,7 +10,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  progress(5, 'Loading OCR engine');
- const result = await Tesseract.recognize(files[0], 'eng', {
+ const Tesseract = await window.ensureLib("Tesseract");
+    const result = await Tesseract.recognize(files[0], 'eng', {
  logger: m => {
  if (m.status === 'recognizing text'){
  progress(10 + Math.round(m.progress*85), 'Reading text');
@@ -28,7 +29,8 @@ window.TOOL_DEFS.push(
  options:[],
  run: async (files, opts, progress) => {
  const bytes = await files[0].arrayBuffer();
- const doc = await pdfjsLib.getDocument({ data: bytes }).promise;
+ const pdfjsLib = await window.ensureLib("pdfjsLib");
+    const doc = await pdfjsLib.getDocument({ data: bytes }).promise;
  let full = '';
  for (let i=1;i<=doc.numPages;i++){
  progress(Math.round((i/doc.numPages)*90), `Reading page ${i} of ${doc.numPages}`);

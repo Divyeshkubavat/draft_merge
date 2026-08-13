@@ -203,6 +203,7 @@ window.TOOL_DEFS.push(
   accept:'.jpg,.jpeg,.png', multiple:true, minFiles:1, hint:'JPG or PNG · any number, in order added',
   options:[],
   run: async (files, opts, progress) => {
+    const PDFLib = await window.ensureLib("PDFLib");
     const { PDFDocument } = PDFLib;
     const out = await PDFDocument.create();
     for (let i=0;i<files.length;i++){
@@ -224,6 +225,7 @@ window.TOOL_DEFS.push(
   accept:'.jpg,.jpeg,.png,.webp', multiple:true, minFiles:1, hint:'Any number of JPG, PNG or WebP files',
   options:[ { type:'range', id:'quality', label:'Quality', min:20, max:95, step:5, default:70, suffix:'%' } ],
   run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib("JSZip");
     const zip = new JSZip();
     const q = parseInt(opts.quality||70,10)/100;
     for (let i=0;i<files.length;i++){
@@ -476,6 +478,7 @@ window.TOOL_DEFS.push(
   run: async (files, opts, progress) => {
     progress(20,'Loading image');
     const img = await loadImageFromFile(files[0]);
+    const JSZip = await window.ensureLib("JSZip");
     const zip = new JSZip();
     const sizes = [16, 32, 48, 64];
     for(let size of sizes){

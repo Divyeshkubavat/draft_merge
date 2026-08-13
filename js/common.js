@@ -112,4 +112,60 @@
       });
     });
   }
+
+  // ---------- dynamic dependency loader ----------
+  window.loadScript = function(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[src="${src}"]`);
+      if (existing) {
+        if (existing.getAttribute('data-loaded') === 'true') return resolve();
+        existing.addEventListener('load', () => resolve());
+        existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)));
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.crossOrigin = 'anonymous';
+      script.onload = () => { script.setAttribute('data-loaded', 'true'); resolve(); };
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
+  };
+
+  window.ensureLib = async function(libName) {
+    if (libName === 'pdfjsLib') {
+      if (!window.pdfjsLib) {
+        await window.loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+      }
+      if (window.pdfjsLib && !window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+      return window.pdfjsLib;
+    }
+    if (libName === 'PDFLib') {
+      if (!window.PDFLib) {
+        await window.loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js');
+      }
+      return window.PDFLib;
+    }
+    if (libName === 'JSZip') {
+      if (!window.JSZip) {
+        await window.loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+      }
+      return window.JSZip;
+    }
+    if (libName === 'Tesseract') {
+      if (!window.webTesseract && !window.Tesseract) {
+        await window.loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.0.4/dist/tesseract.min.js');
+      }
+      return window.Tesseract;
+    }
+    if (libName === 'FFmpeg') {
+      if (!window.FFmpeg) {
+        await window.loadScript('https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
+      }
+      return window.FFmpeg;
+    }
+  };
 })();
+

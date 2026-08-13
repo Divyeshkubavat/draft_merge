@@ -96,6 +96,7 @@ window.TOOL_DEFS.push(
   ], default: 'txt' } ],
   run: async (files, opts, progress) => {
     progress(10, 'Reading EPUB');
+    const JSZip = await window.ensureLib("JSZip");
     const zip = await JSZip.loadAsync(files[0]);
     let allText = '';
     const entries = Object.keys(zip.files).filter(f => f.match(/\.x?html?$/i)).sort();
@@ -165,6 +166,7 @@ window.TOOL_DEFS.push(
   options: [],
   run: async (files, opts, progress) => {
     progress(10, 'Reading archive');
+    const JSZip = await window.ensureLib("JSZip");
     const zip = await JSZip.loadAsync(files[0]);
     const outZip = new JSZip();
     const entries = Object.keys(zip.files).filter(f => !zip.files[f].dir);
@@ -210,6 +212,7 @@ window.TOOL_DEFS.push(
   ], default: 'DEFLATE' } ],
   run: async (files, opts, progress) => {
     progress(10, 'Reading archive');
+    const JSZip = await window.ensureLib("JSZip");
     const zip = await JSZip.loadAsync(files[0]);
     const outZip = new JSZip();
     const entries = Object.keys(zip.files).filter(f => !zip.files[f].dir);
