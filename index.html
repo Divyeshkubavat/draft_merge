@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
-<title>Draft &amp; Merge — a file workshop</title>
-<meta name="description" content="Merge, compress, convert and clean up your PDFs, images and video — right in your browser. Nothing is uploaded, ever.">
+<title>Draft &amp; Merge | a file workshop</title>
+<meta name="description" content="Merge, compress, convert and clean up your PDFs, images and video | right in your browser. Nothing is uploaded, ever.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -66,20 +66,24 @@
       <a href="text.html" data-transition>Text</a>
       <a href="audio.html" data-transition>Audio</a>
       <a href="converters.html" data-transition>Converters</a>
+      <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
 </header>
 
 <section class="hero">
-  <div class="hero-eyebrow reveal">61 tools · zero uploads</div>
+  <div class="hero-eyebrow reveal">150+ tools | zero uploads</div>
   <h1 class="hero-title reveal">Every file has a job to<br> get done. <span class="accent">This is the bench</span><br>you do it on.</h1>
-  <p class="hero-desc reveal">Merge a PDF, shrink a photo, clip a video, pull text off a scan. No sign-up, no daily limit, no watermark — and your files never leave this browser tab.</p>
+  <p class="hero-desc reveal">Merge a PDF, shrink a photo, clip a video, convert an audio track, format JSON, or generate a QR code. No sign-up, no daily limit, no watermark | and your files never leave this browser tab.</p>
 
-  <div class="hero-stats reveal-stagger">
-    <div class="hero-stat"><div class="num"><span data-count="61">0</span></div><div class="lbl">Tools on the bench</div></div>
-    <div class="hero-stat"><div class="num"><span data-count="0">0</span></div><div class="lbl">Files ever uploaded</div></div>
-    <div class="hero-stat"><div class="num"><span data-count="6">0</span></div><div class="lbl">Workbenches — PDF / Image / Video / Audio / Text / Converters</div></div>
+  <div class="central-search-box reveal">
+    <div class="cs-input-wrapper">
+      <svg class="cs-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="centralSearchInput" placeholder="Search 150+ tools (e.g. compress pdf, remove bg, qr code, mp4 to mp3)..." autocomplete="off">
+      <button id="csClearBtn" class="cs-clear hidden" aria-label="Clear search"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div id="searchResultsGrid" class="search-results-grid hidden"></div>
   </div>
 
   <div class="hero-orbit" aria-hidden="true">
@@ -95,31 +99,31 @@
 <section class="how-it-works reveal">
   <h2>How it works</h2>
   <div class="how-grid reveal-stagger">
-    <div class="how-step"><div class="how-num">1</div><h3>Pick a bench</h3><p>Choose PDF, Image, Video or Text, then pick the exact tool you need from the grid.</p></div>
-    <div class="how-step"><div class="how-num">2</div><h3>Drop your file</h3><p>Drag it in or click to choose. Nothing uploads — the file stays on your device the whole time.</p></div>
+    <div class="how-step"><div class="how-num">1</div><h3>Pick a bench</h3><p>Choose PDF, Image, Video, Audio, Text, Converters, or Utility, or use central search.</p></div>
+    <div class="how-step"><div class="how-num">2</div><h3>Drop your file</h3><p>Drag it in or click to choose. Nothing uploads | the file stays on your device the whole time.</p></div>
     <div class="how-step"><div class="how-num">3</div><h3>Download the result</h3><p>Watch the live progress, then grab your finished file straight from the browser.</p></div>
   </div>
 </section>
 
 <section class="reveal" style="max-width:1220px;margin:44px auto 0;padding:0 28px;">
-  <h2 style="font-size:22px;font-weight:700;letter-spacing:-.3px;">Explore the four benches</h2>
-  <p style="font-size:13.5px;color:var(--n-text-soft);margin-top:8px;max-width:600px;">Each bench is its own page with the full detail on what it does and every tool it holds.</p>
+  <h2 style="font-size:22px;font-weight:700;letter-spacing:-.3px;">Explore the seven benches</h2>
+  <p style="font-size:13.5px;color:var(--n-text-soft);margin-top:8px;max-width:600px;">Each bench is its own workstation with specialized tools built specifically for that file format.</p>
 </section>
 <div class="bench-explore-grid reveal-stagger">
     <a class="bench-card" data-bench="pdf" href="pdf.html" data-transition>
       <div class="bc-icon"><svg class="icon"><use href="#i-merge"/></svg></div>
-      <span class="bc-count">17 tools</span>
+      <span class="bc-count">32 tools</span>
       <h3>PDF Bench</h3>
-      <p class="bc-desc">Seventeen tools built for one job: making PDFs behave.</p>
-      <div class="bc-chips"><span class="bc-chip">Merge</span><span class="bc-chip">Split</span><span class="bc-chip">Protect</span><span class="bc-chip">Compress</span><span class="bc-chip">PDF→JPG</span><span class="bc-chip">+12 more</span></div>
+      <p class="bc-desc">Thirty-two tools built for one job: making PDFs behave.</p>
+      <div class="bc-chips"><span class="bc-chip">Merge</span><span class="bc-chip">Split</span><span class="bc-chip">Sign</span><span class="bc-chip">OCR</span><span class="bc-chip">Forms</span><span class="bc-chip">+27 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
     <a class="bench-card" data-bench="image" href="image.html" data-transition>
       <div class="bc-icon"><svg class="icon"><use href="#i-image"/></svg></div>
-      <span class="bc-count">8 tools</span>
+      <span class="bc-count">22 tools</span>
       <h3>Image Bench</h3>
-      <p class="bc-desc">Eight tools for getting a photo exactly the way you need it.</p>
-      <div class="bc-chips"><span class="bc-chip">Compress</span><span class="bc-chip">Resize</span><span class="bc-chip">Crop</span><span class="bc-chip">Convert</span><span class="bc-chip">Watermark</span><span class="bc-chip">+3 more</span></div>
+      <p class="bc-desc">Twenty-two tools for getting a photo or graphic exactly right.</p>
+      <div class="bc-chips"><span class="bc-chip">Remove BG</span><span class="bc-chip">Blur</span><span class="bc-chip">Collage</span><span class="bc-chip">Meme</span><span class="bc-chip">EXIF</span><span class="bc-chip">+17 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
     <a class="bench-card" data-bench="video" href="video.html" data-transition>
@@ -127,50 +131,106 @@
       <span class="bc-count">23 tools</span>
       <h3>Video Bench</h3>
       <p class="bc-desc">Twenty-three tools that turn your browser into a video workstation.</p>
-      <div class="bc-chips"><span class="bc-chip">Compress</span><span class="bc-chip">Convert</span><span class="bc-chip">Trim</span><span class="bc-chip">Record</span><span class="bc-chip">GIF</span><span class="bc-chip">+18 more</span></div>
+      <div class="bc-chips"><span class="bc-chip">Compress</span><span class="bc-chip">Convert</span><span class="bc-chip">Trim</span><span class="bc-chip">Subtitles</span><span class="bc-chip">Frames</span><span class="bc-chip">+18 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
     <a class="bench-card" data-bench="text" href="text.html" data-transition>
       <div class="bc-icon"><svg class="icon"><use href="#i-ocr"/></svg></div>
-      <span class="bc-count">2 tools</span>
+      <span class="bc-count">22 tools</span>
       <h3>Text Bench</h3>
-      <p class="bc-desc">Two tools for getting text back out of an image or a scan.</p>
-      <div class="bc-chips"><span class="bc-chip">Image→Text</span><span class="bc-chip">PDF→Text</span></div>
+      <p class="bc-desc">Twenty-two tools for manipulating text, JSON, XML, CSV, and code formatting.</p>
+      <div class="bc-chips"><span class="bc-chip">OCR</span><span class="bc-chip">Markdown</span><span class="bc-chip">JSON</span><span class="bc-chip">Base64</span><span class="bc-chip">CSV</span><span class="bc-chip">+17 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
     <a class="bench-card" data-bench="audio" href="audio.html" data-transition>
       <div class="bc-icon"><svg class="icon"><use href="#i-music"/></svg></div>
-      <span class="bc-count">8 tools</span>
+      <span class="bc-count">17 tools</span>
       <h3>Audio Bench</h3>
-      <p class="bc-desc">Eight tools for trimming, converting, and mixing audio files.</p>
-      <div class="bc-chips"><span class="bc-chip">Trim</span><span class="bc-chip">Pitch</span><span class="bc-chip">Record</span><span class="bc-chip">Volume</span><span class="bc-chip">EQ</span><span class="bc-chip">+3 more</span></div>
+      <p class="bc-desc">Seventeen tools for editing, converting, and mixing audio files.</p>
+      <div class="bc-chips"><span class="bc-chip">Trim</span><span class="bc-chip">Vocals</span><span class="bc-chip">Noise</span><span class="bc-chip">Normalize</span><span class="bc-chip">Compress</span><span class="bc-chip">+12 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
     <a class="bench-card" data-bench="converter" href="converters.html" data-transition>
       <div class="bc-icon"><svg class="icon"><use href="#i-convert"/></svg></div>
-      <span class="bc-count">8 tools</span>
+      <span class="bc-count">28 tools</span>
       <h3>Converters Bench</h3>
-      <p class="bc-desc">Eight tools for switching between audio, video, image, and document formats.</p>
-      <div class="bc-chips"><span class="bc-chip">Audio</span><span class="bc-chip">Video</span><span class="bc-chip">Image</span><span class="bc-chip">Document</span><span class="bc-chip">Ebook</span><span class="bc-chip">+3 more</span></div>
+      <p class="bc-desc">Twenty-eight tools for converting across video, audio, image, and document formats.</p>
+      <div class="bc-chips"><span class="bc-chip">HEIC</span><span class="bc-chip">WebP</span><span class="bc-chip">SVG</span><span class="bc-chip">DOCX</span><span class="bc-chip">XLSX</span><span class="bc-chip">+23 more</span></div>
       <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
     </a>
-</div>
+    <a class="bench-card" data-bench="utility" href="utility.html" data-transition>
+      <div class="bc-icon"><svg class="icon"><use href="#i-spark"/></svg></div>
+      <span class="bc-count">10 tools</span>
+      <h3>Utility Bench</h3>
+      <p class="bc-desc">Ten tools for QR codes, barcodes, passwords, file hashes, and color conversion.</p>
+      <div class="bc-chips"><span class="bc-chip">QR Code</span><span class="bc-chip">Barcode</span><span class="bc-chip">Password</span><span class="bc-chip">File Hash</span><span class="bc-chip">Color</span><span class="bc-chip">+5 more</span></div>
+      <div class="bc-go">Explore bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div>
+    </a>
+<div class="workspace-overlay hidden" id="workspaceOverlay">
+  <div class="workspace" id="workspace">
+    <button class="close-btn" id="closeWorkspace" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
 
+    <div class="ws-head">
+      <div class="tile" id="wsTile"><svg class="icon"><use href="#i-merge"/></svg></div>
+      <div>
+        <div class="ws-eyebrow" id="wsEyebrow">Bench</div>
+        <h2 id="wsTitle">Tool title</h2>
+        <p class="ws-desc" id="wsDesc">Tool description.</p>
+      </div>
+    </div>
+
+    <div class="ws-body">
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
+        <div class="dz-text"><b>Click to choose files</b> or drag them here</div>
+        <div class="dz-hint" id="dzHint">Accepted files</div>
+        <input type="file" id="fileInput" style="display:none" multiple>
+      </div>
+
+      <div class="file-list" id="fileList"></div>
+
+      <div class="opt-row" id="optRow"></div>
+
+      <button class="run-btn" id="runBtn" disabled><span class="spinner"></span><span id="runBtnLabel">Add a file first</span></button>
+
+      <div class="status-box" id="statusBox">
+        <div class="status-line"><span class="status-left"><span class="proc-orbit" aria-hidden="true"></span><span id="statusText">Working…</span></span><span id="statusPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="status-tip" id="statusTip"></div>
+      </div>
+
+      <div class="error-box" id="errorBox"><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg><span id="errorText"></span></div>
+
+      <div class="result-box" id="resultBox">
+        <div class="r-title"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg> Ready</div>
+        <div class="r-files" id="resultFiles"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="strip">
   <div class="strip-inner reveal-stagger">
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made — nothing stamped on top of it.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made | nothing stamped on top of it.</p></div>
   </div>
 </div>
 
 <footer>
-  <div class="fmark">Draft &amp; Merge — <b>built for the desk, not the cloud.</b></div>
-  <div class="fmark">Large video jobs use extra memory — a modern desktop browser works best.</div>
+  <div class="fmark">Draft &amp; Merge | <b>built for the desk, not the cloud.</b></div>
+  <div class="fmark">Large video jobs use extra memory | a modern desktop browser works best.</div>
 </footer>
 
-<script src="js/common.js"></script>
 
+<script src="js/common.js"></script>
+<script src="js/tools-pdf.js"></script>
+<script src="js/tools-image.js"></script>
+<script src="js/tools-video.js"></script>
+<script src="js/tools-audio.js"></script>
+<script src="js/tools-text.js"></script>
+<script src="js/tools-converters.js"></script>
+<script src="js/tools-utility.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

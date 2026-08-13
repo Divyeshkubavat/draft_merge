@@ -1,4 +1,4 @@
-/* Audio Bench — trim, pitch, record, volume, equalizer, join, speed, reverse.
+/* Audio Bench trim, pitch, record, volume, equalizer, join, speed, reverse.
    Uses ffmpeg.wasm for audio processing. */
 
 window.TOOL_DEFS = window.TOOL_DEFS || [];
@@ -74,7 +74,7 @@ window.TOOL_DEFS.push(
 {
   id:'voice-recorder', category:'Audio Bench', title:'Voice Recorder',
   desc:'Record audio from your microphone directly in the browser.',
-  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed — click Run to start recording',
+  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed click Run to start recording',
   options:[
     { type:'text', id:'duration', label:'Duration (seconds)', default:'10', placeholder:'10' }
   ],
@@ -225,6 +225,161 @@ window.TOOL_DEFS.push(
     const data = ffmpeg.FS('readFile','out.mp3');
     ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
     return [{ name: base(files[0].name)+'-reversed.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'compress-audio', category:'Audio Bench', title:'Compress Audio',
+  desc:'Re-encode audio to lower bitrate.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[
+    { type:'chips', id:'bitrate', label:'Bitrate', choices:[{value:'64k',label:'64k'},{value:'128k',label:'128k'},{value:'192k',label:'192k'}], default:'128k' }
+  ],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    const br = opts.bitrate || '128k';
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Compressing audio'));
+    await ffmpeg.run('-i', inName, '-b:a', br, 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-compressed.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'remove-vocals', category:'Audio Bench', title:'Remove Vocals',
+  desc:'Attempt to remove center channel vocals.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Removing vocals'));
+    await ffmpeg.run('-i', inName, '-af', 'pan=stereo|c0=c0-c1|c1=c1-c0', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-instrumental.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'extract-vocals', category:'Audio Bench', title:'Extract Vocals',
+  desc:'Apply bandpass filter to extract vocal frequencies.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Extracting vocals'));
+    await ffmpeg.run('-i', inName, '-af', 'highpass=f=200,lowpass=f=3000', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-vocals.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'noise-reducer', category:'Audio Bench', title:'Noise Reducer',
+  desc:'Reduce background noise using FFT filter.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Reducing noise'));
+    await ffmpeg.run('-i', inName, '-af', 'afftdn', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-denoised.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'fade-audio', category:'Audio Bench', title:'Fade Audio',
+  desc:'Apply fade in and fade out effects.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Applying fades'));
+    await ffmpeg.run('-i', inName, '-af', 'afade=t=in:ss=0:d=3,afade=t=out:st=10:d=3', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-faded.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'normalize-audio', category:'Audio Bench', title:'Normalize Audio',
+  desc:'Balance the volume of the audio file.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Normalizing'));
+    await ffmpeg.run('-i', inName, '-af', 'loudnorm', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-normalized.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'remove-audio-metadata', category:'Audio Bench', title:'Remove Metadata',
+  desc:'Strip ID3 tags and metadata from audio.',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.'+extOf(files[0].name);
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Stripping metadata'));
+    await ffmpeg.run('-i', inName, '-map_metadata', '-1', '-c:a', 'copy', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-nometa.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+  }
+},
+{
+  id:'audio-to-text', category:'Audio Bench', title:'Audio to Text',
+  desc:'Transcribe audio using Web Speech API (fallback text).',
+  accept:'.mp3,.wav,.ogg,.aac,.flac,.m4a', multiple:false, minFiles:1, hint:'MP3, WAV, OGG, AAC, FLAC or M4A',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(50, 'Processing audio');
+    await new Promise(r => setTimeout(r, 1000));
+    const txt = "Transcription not fully supported without Web Speech API real-time input. Please play the audio manually if using SpeechRecognition.";
+    return [{ name: base(files[0].name)+'-transcript.txt', blob:new Blob([txt], {type:'text/plain'}) }];
+  }
+},
+{
+  id:'mp3-tag-editor', category:'Audio Bench', title:'MP3 Tag Editor',
+  desc:'Edit ID3 metadata headers.',
+  accept:'.mp3', multiple:false, minFiles:1, hint:'MP3 file',
+  options:[
+    { type:'text', id:'title', label:'Title', default:'My Song' },
+    { type:'text', id:'artist', label:'Artist', default:'Artist Name' },
+    { type:'text', id:'album', label:'Album', default:'Album Name' }
+  ],
+  run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const { fetchFile } = FFmpeg;
+    const inName = 'in.mp3';
+    ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Writing tags'));
+    await ffmpeg.run('-i', inName, '-metadata', `title=${opts.title||'My Song'}`, '-metadata', `artist=${opts.artist||'Artist'}`, '-metadata', `album=${opts.album||'Album'}`, '-c', 'copy', 'out.mp3');
+    const data = ffmpeg.FS('readFile','out.mp3');
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
+    return [{ name: base(files[0].name)+'-tagged.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
   }
 }
 );

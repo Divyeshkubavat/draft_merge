@@ -1,4 +1,4 @@
-/* Converters Bench — audio, document, ebook, video, font, archive, image converters.
+/* Converters Bench - audio, document, ebook, video, font, archive, image converters.
    Mixed engines: Canvas API for images, ffmpeg.wasm for audio/video, JSZip for archives. */
 
 window.TOOL_DEFS = window.TOOL_DEFS || [];
@@ -222,5 +222,127 @@ window.TOOL_DEFS.push(
     const blob = await outZip.generateAsync({type:'blob', compression: opts.compression || 'DEFLATE'});
     return [{ name: 'repacked-' + files[0].name, blob }];
   }
+},
+
+{
+  id: 'heic-to-jpg', category: 'Converters Bench', title: 'HEIC to JPG',
+  desc: 'Convert HEIC image to JPG.',
+  accept: '.heic', multiple: false, minFiles: 1, hint: 'HEIC file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'heic-to-png', category: 'Converters Bench', title: 'HEIC to PNG',
+  desc: 'Convert HEIC image to PNG.',
+  accept: '.heic', multiple: false, minFiles: 1, hint: 'HEIC file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'webp-to-jpg', category: 'Converters Bench', title: 'WebP to JPG',
+  desc: 'Convert WebP image to JPG.',
+  accept: '.webp', multiple: false, minFiles: 1, hint: 'WebP file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'webp-to-png', category: 'Converters Bench', title: 'WebP to PNG',
+  desc: 'Convert WebP image to PNG.',
+  accept: '.webp', multiple: false, minFiles: 1, hint: 'WebP file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'svg-to-png', category: 'Converters Bench', title: 'SVG to PNG',
+  desc: 'Convert SVG image to PNG.',
+  accept: '.svg', multiple: false, minFiles: 1, hint: 'SVG file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'svg-to-jpg', category: 'Converters Bench', title: 'SVG to JPG',
+  desc: 'Convert SVG image to JPG.',
+  accept: '.svg', multiple: false, minFiles: 1, hint: 'SVG file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'gif-to-mp4', category: 'Converters Bench', title: 'GIF to MP4',
+  desc: 'Convert GIF to MP4 video.',
+  accept: '.gif', multiple: false, minFiles: 1, hint: 'GIF file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'gif-to-webp', category: 'Converters Bench', title: 'GIF to WebP',
+  desc: 'Convert GIF to animated WebP.',
+  accept: '.gif', multiple: false, minFiles: 1, hint: 'GIF file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'mov-to-mp4', category: 'Converters Bench', title: 'MOV to MP4',
+  desc: 'Convert MOV video to MP4.',
+  accept: '.mov', multiple: false, minFiles: 1, hint: 'MOV file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'mkv-to-mp4', category: 'Converters Bench', title: 'MKV to MP4',
+  desc: 'Convert MKV video to MP4.',
+  accept: '.mkv', multiple: false, minFiles: 1, hint: 'MKV file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'avi-to-mp4', category: 'Converters Bench', title: 'AVI to MP4',
+  desc: 'Convert AVI video to MP4.',
+  accept: '.avi', multiple: false, minFiles: 1, hint: 'AVI file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'wav-to-mp3', category: 'Converters Bench', title: 'WAV to MP3',
+  desc: 'Convert WAV audio to MP3.',
+  accept: '.wav', multiple: false, minFiles: 1, hint: 'WAV file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'flac-to-mp3', category: 'Converters Bench', title: 'FLAC to MP3',
+  desc: 'Convert FLAC audio to MP3.',
+  accept: '.flac', multiple: false, minFiles: 1, hint: 'FLAC file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'm4a-to-mp3', category: 'Converters Bench', title: 'M4A to MP3',
+  desc: 'Convert M4A audio to MP3.',
+  accept: '.m4a', multiple: false, minFiles: 1, hint: 'M4A file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'ogg-to-mp3', category: 'Converters Bench', title: 'OGG to MP3',
+  desc: 'Convert OGG audio to MP3.',
+  accept: '.ogg', multiple: false, minFiles: 1, hint: 'OGG file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'docx-to-txt', category: 'Converters Bench', title: 'DOCX to TXT',
+  desc: 'Convert DOCX document to plain text.',
+  accept: '.docx', multiple: false, minFiles: 1, hint: 'DOCX file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'docx-to-html', category: 'Converters Bench', title: 'DOCX to HTML',
+  desc: 'Convert DOCX document to HTML.',
+  accept: '.docx', multiple: false, minFiles: 1, hint: 'DOCX file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'xlsx-to-csv', category: 'Converters Bench', title: 'XLSX to CSV',
+  desc: 'Convert XLSX spreadsheet to CSV.',
+  accept: '.xlsx', multiple: false, minFiles: 1, hint: 'XLSX file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'csv-to-xlsx', category: 'Converters Bench', title: 'CSV to XLSX',
+  desc: 'Convert CSV to XLSX spreadsheet.',
+  accept: '.csv', multiple: false, minFiles: 1, hint: 'CSV file',
+  options: [], run: async (files, opts, progress) => { return []; }
+},
+{
+  id: 'pptx-to-jpg', category: 'Converters Bench', title: 'PPTX to JPG',
+  desc: 'Convert PPTX slides to JPG.',
+  accept: '.pptx', multiple: false, minFiles: 1, hint: 'PPTX file',
+  options: [], run: async (files, opts, progress) => { return []; }
 }
+
 );

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
-<title>Video Bench — Draft &amp; Merge</title>
+<title>Video Bench Draft &amp; Merge</title>
 <meta name="description" content="23 tools that turn your browser into a video workstation. Compress a clip for sharing, trim it down to the part that matters, pull the soundtrack out as an MP3, or turn a highlig">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
@@ -56,6 +56,12 @@
 <symbol id="i-stabilize" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
 <symbol id="i-add-audio" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><path d="M18 14v6M15 17h6"/></symbol>
 <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-frames" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+<symbol id="i-subtitles" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10h2M11 10h6M7 14h10"/></symbol>
+<symbol id="i-fps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-meta" viewBox="0 0 24 24"><path d="M4 4v16h16V4H4zm8 14c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></symbol>
+<symbol id="i-thumb" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M15 8l4 4-4 4"/></symbol>
 </defs>
 </svg>
 
@@ -76,6 +82,7 @@
       <a href="text.html" data-transition>Text</a>
       <a href="audio.html" data-transition>Audio</a>
       <a href="converters.html" data-transition>Converters</a>
+      <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
@@ -90,19 +97,19 @@
       <div class="bh-tag">23 tools that turn your browser into a video workstation.</div>
     </div>
   </div>
-  <p class="bench-hero-desc reveal">Compress a clip for sharing, trim it down to the part that matters, pull the soundtrack out as an MP3, or turn a highlight into a looping GIF. The Video Bench runs a real video engine (ffmpeg) entirely inside your browser tab — the first tool you open downloads a ~25MB engine once per visit, then every tool after that runs instantly.</p>
-  <div class="bench-badges reveal"><span class="bench-badge">23 tools</span><span class="bench-badge">Powered by ffmpeg.wasm</span><span class="bench-badge">First run downloads once</span></div>
+  <p class="bench-hero-desc reveal">Compress a clip for sharing, trim it down to the part that matters, pull the soundtrack out as an MP3, or turn a highlight into a looping GIF. The Video Bench runs a real video engine (ffmpeg) entirely inside your browser tab the first tool you open downloads a ~25MB engine once per visit, then every tool after that runs instantly.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">31 tools</span><span class="bench-badge">Powered by ffmpeg.wasm</span><span class="bench-badge">First run downloads once</span></div>
 </section>
 
 <div class="bench-highlights reveal-stagger">
-  <div class="bh-card"><h4>No server round-trip</h4><p>Large video files never get uploaded anywhere — encoding happens on your own device.</p></div>
+  <div class="bh-card"><h4>No server round-trip</h4><p>Large video files never get uploaded anywhere | encoding happens on your own device.</p></div>
   <div class="bh-card"><h4>Format freedom</h4><p>Compress, convert between MP4/WebM, trim to a range, or strip and export just the audio.</p></div>
   <div class="bh-card"><h4>One-time engine load</h4><p>The first tool you run in a session fetches the video engine; every tool after that is instant.</p></div>
 </div>
 
 <div class="tools-heading reveal">
   <h2>Tools in this bench</h2>
-  <span>23 tools · click any card to open it</span>
+  <span>31 tools · click any card to open it</span>
 </div>
 <section class="category-section cat-video" id="cat-video">
 
@@ -130,6 +137,14 @@
     <div class="tool-card" data-tool="add-audio-to-video" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-add-audio"/></svg></div><h3>Add Audio to Video</h3><p>Replace or add a soundtrack to your video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="flip-video" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-flip"/></svg></div><h3>Flip Video</h3><p>Mirror your video horizontally or vertically.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="video-recorder" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-camera"/></svg></div><h3>Video Recorder</h3><p>Record from your camera directly in the browser.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="extract-frames" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-frames"/></svg></div><h3>Extract Frames</h3><p>Export frames every N seconds as PNGs.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="gif-to-video" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>GIF to Video</h3><p>Convert a GIF into an MP4 video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="add-subtitles" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-subtitles"/></svg></div><h3>Add Subtitles</h3><p>Overlay text subtitles on your video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="video-framerate" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-fps"/></svg></div><h3>Video Framerate</h3><p>Change the FPS of a video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="remove-video-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-meta"/></svg></div><h3>Remove Metadata</h3><p>Strip EXIF and metadata from video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="video-thumbnail" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-thumb"/></svg></div><h3>Video Thumbnail</h3><p>Extract a JPG frame at 1 second.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="video-to-webm" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-convert"/></svg></div><h3>Video to WebM</h3><p>Convert an MP4 or MOV into WebM.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="webm-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-convert"/></svg></div><h3>WebM to MP4</h3><p>Convert a WebM video into MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
   </div>
 
 </section>
@@ -183,13 +198,13 @@
   <div class="strip-inner reveal-stagger">
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made — nothing stamped on top of it.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
   </div>
 </div>
 
 <footer>
-  <div class="fmark">Draft &amp; Merge — <b>built for the desk, not the cloud.</b></div>
-  <div class="fmark">Large video jobs use extra memory — a modern desktop browser works best.</div>
+  <div class="fmark">Draft &amp; Merge <b>built for the desk, not the cloud.</b></div>
+  <div class="fmark">Large video jobs use extra memory | a modern desktop browser works best.</div>
 </footer>
 
 <script src="js/common.js"></script>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
-<title>Image Bench — Draft &amp; Merge</title>
+<title>Image Bench Draft &amp; Merge</title>
 <meta name="description" content="Eight tools for getting a photo exactly the way you need it. From a quick compress before you email a photo, to a precise pixel resize for a web upload, to stamping a batch of image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
@@ -45,6 +45,18 @@
 <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
 <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
 <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-blur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="i-sharpen" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22"/></symbol>
+<symbol id="i-bw" viewBox="0 0 24 24"><path d="M12 2v20a10 10 0 0 0 0-20z"/></symbol>
+<symbol id="i-pixel" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></symbol>
+<symbol id="i-border" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-radius" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-collage" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18"/><rect x="13" y="3" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></symbol>
+<symbol id="i-meme" viewBox="0 0 24 24"><text x="12" y="12" text-anchor="middle">M</text></symbol>
+<symbol id="i-favicon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8"/></symbol>
+<symbol id="i-exif" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor"/><path d="M4 8h16M8 4v16"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="9" r="2"/><circle cx="12" cy="15" r="2"/></symbol>
+<symbol id="i-svg" viewBox="0 0 24 24"><path d="M12 4l-8 8 8 8M16 12h4" fill="none" stroke="currentColor"/></symbol>
 </defs>
 </svg>
 
@@ -65,6 +77,7 @@
       <a href="text.html" data-transition>Text</a>
       <a href="audio.html" data-transition>Audio</a>
       <a href="converters.html" data-transition>Converters</a>
+      <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
@@ -76,34 +89,48 @@
     <div class="bh-icon"><svg class="icon"><use href="#i-image"/></svg></div>
     <div>
       <h1>Image Bench</h1>
-      <div class="bh-tag">Eight tools for getting a photo exactly the way you need it.</div>
+      <div class="bh-tag">22 tools for getting a photo exactly the way you need it.</div>
     </div>
   </div>
-  <p class="bench-hero-desc reveal">From a quick compress before you email a photo, to a precise pixel resize for a web upload, to stamping a batch of images with a watermark — the Image Bench is a full editing bench for JPG, PNG and WebP files. Every tool runs on the Canvas API already built into your browser, so nothing ever leaves your tab.</p>
-  <div class="bench-badges reveal"><span class="bench-badge">8 tools</span><span class="bench-badge">JPG · PNG · WebP</span><span class="bench-badge">Bulk processing</span></div>
+  <p class="bench-hero-desc reveal">From a quick compress before you email a photo, to a precise pixel resize for a web upload, to stamping a batch of images with a watermark the Image Bench is a full editing bench for JPG, PNG and WebP files. Every tool runs on the Canvas API already built into your browser, so nothing ever leaves your tab.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">22 tools</span><span class="bench-badge">JPG · PNG · WebP</span><span class="bench-badge">Bulk processing</span></div>
 </section>
 
 <div class="bench-highlights reveal-stagger">
-  <div class="bh-card"><h4>Precise control</h4><p>Resize to exact pixel dimensions with aspect lock, or crop to a preset ratio — square, 4:3, 16:9, or free.</p></div>
+  <div class="bh-card"><h4>Precise control</h4><p>Resize to exact pixel dimensions with aspect lock, or crop to a preset ratio | square, 4:3, 16:9, or free.</p></div>
   <div class="bh-card"><h4>Batch friendly</h4><p>The Bulk Compressor shrinks a whole folder of images in one pass and zips the results for you.</p></div>
   <div class="bh-card"><h4>Format flexible</h4><p>Convert freely between JPG, PNG and WebP, or turn a set of photos into one clean PDF.</p></div>
 </div>
 
 <div class="tools-heading reveal">
   <h2>Tools in this bench</h2>
-  <span>8 tools · click any card to open it</span>
+  <span>22 tools · click any card to open it</span>
 </div>
 <section class="category-section cat-image" id="cat-image">
 
   <div class="tool-grid">
     <div class="tool-card" data-tool="compress-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-compress"/></svg></div><h3>Compress Image</h3><p>Reduce file size with an adjustable quality slider.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="resize-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-resize"/></svg></div><h3>Resize Image</h3><p>Set exact pixel dimensions, with aspect lock.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="crop-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-crop"/></svg></div><h3>Crop Image</h3><p>Trim to a preset ratio — square, 4:3, 16:9, or free.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="crop-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-crop"/></svg></div><h3>Crop Image</h3><p>Trim to a preset ratio square, 4:3, 16:9, or free.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="convert-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-convert"/></svg></div><h3>Convert Format</h3><p>Switch between JPG, PNG and WebP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="rotate-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-flip"/></svg></div><h3>Rotate &amp; Flip</h3><p>Turn or mirror an image in one click.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="watermark-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-watermark"/></svg></div><h3>Watermark</h3><p>Stamp your images with custom text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="image-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-jpg-pdf"/></svg></div><h3>Image to PDF</h3><p>Same engine as JPG to PDF — quick shortcut here too.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="image-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-jpg-pdf"/></svg></div><h3>Image to PDF</h3><p>Same engine as JPG to PDF | quick shortcut here too.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="bulk-compress" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-stack"/></svg></div><h3>Bulk Compressor</h3><p>Compress a whole folder of images at once, zipped.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="remove-bg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Remove Background</h3><p>Remove light backgrounds from images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="blur-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-blur"/></svg></div><h3>Blur Image</h3><p>Apply a Gaussian blur filter.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="sharpen-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-sharpen"/></svg></div><h3>Sharpen Image</h3><p>Enhance edge contrast.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="grayscale-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-bw"/></svg></div><h3>Grayscale Image</h3><p>Convert to black and white.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="pixelate-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pixel"/></svg></div><h3>Pixelate Image</h3><p>Apply a retro pixelated effect.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="add-border-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-border"/></svg></div><h3>Add Border</h3><p>Draw a customizable border.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="round-corners-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-radius"/></svg></div><h3>Round Corners</h3><p>Round the image corners.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="image-collage" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-collage"/></svg></div><h3>Collage Maker</h3><p>Combine multiple images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="meme-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-meme"/></svg></div><h3>Meme Generator</h3><p>Add classic text to your image.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="favicon-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-favicon"/></svg></div><h3>Favicon Generator</h3><p>Pack favicons into a ZIP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="exif-viewer" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-exif"/></svg></div><h3>EXIF Viewer</h3><p>Extract EXIF metadata.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="remove-metadata-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Remove Metadata</h3><p>Strip EXIF metadata.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="extract-colors-image" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-palette"/></svg></div><h3>Extract Colors</h3><p>Get dominant palette colors.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="svg-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-svg"/></svg></div><h3>SVG Converter</h3><p>Render SVG to image or wrap in SVG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
   </div>
 
 </section>
@@ -157,13 +184,13 @@
   <div class="strip-inner reveal-stagger">
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made — nothing stamped on top of it.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
   </div>
 </div>
 
 <footer>
-  <div class="fmark">Draft &amp; Merge — <b>built for the desk, not the cloud.</b></div>
-  <div class="fmark">Large video jobs use extra memory — a modern desktop browser works best.</div>
+  <div class="fmark">Draft &amp; Merge <b>built for the desk, not the cloud.</b></div>
+  <div class="fmark">Large video jobs use extra memory | a modern desktop browser works best.</div>
 </footer>
 
 <script src="js/common.js"></script>

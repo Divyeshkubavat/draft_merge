@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
-<title>Audio Bench — Draft &amp; Merge</title>
+<title>Audio Bench Draft &amp; Merge</title>
 <meta name="description" content="Eight tools for editing, recording, and transforming audio. Trim a podcast clip, boost the bass, reverse a sound effect, or join multiple tracks into one.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
@@ -69,9 +69,10 @@
       <a href="pdf.html" data-transition>PDF</a>
       <a href="image.html" data-transition>Image</a>
       <a href="video.html" data-transition>Video</a>
-      <a href="audio.html" class="active" data-transition>Audio</a>
       <a href="text.html" data-transition>Text</a>
+      <a href="audio.html" class="active" data-transition>Audio</a>
       <a href="converters.html" data-transition>Converters</a>
+      <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
@@ -86,19 +87,19 @@
       <div class="bh-tag">Eight tools for editing, recording, and transforming audio.</div>
     </div>
   </div>
-  <p class="bench-hero-desc reveal">Trim a podcast clip, boost the bass, reverse a sound effect, or join multiple tracks into one. The Audio Bench runs a real audio engine (ffmpeg) entirely inside your browser tab — the first tool you open downloads a ~25MB engine once per visit, then every tool after that runs instantly.</p>
-  <div class="bench-badges reveal"><span class="bench-badge">8 tools</span><span class="bench-badge">Powered by ffmpeg.wasm</span><span class="bench-badge">First run downloads once</span></div>
+  <p class="bench-hero-desc reveal">Trim a podcast clip, boost the bass, reverse a sound effect, or join multiple tracks into one. The Audio Bench runs a real audio engine (ffmpeg) entirely inside your browser tab the first tool you open downloads a ~25MB engine once per visit, then every tool after that runs instantly.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">17 tools</span><span class="bench-badge">Powered by ffmpeg.wasm</span><span class="bench-badge">First run downloads once</span></div>
 </section>
 
 <div class="bench-highlights reveal-stagger">
-  <div class="bh-card"><h4>No server round-trip</h4><p>Large audio files never get uploaded anywhere — processing happens on your own device.</p></div>
+  <div class="bh-card"><h4>No server round-trip</h4><p>Large audio files never get uploaded anywhere | processing happens on your own device.</p></div>
   <div class="bh-card"><h4>Format freedom</h4><p>Process, filter, trim, or merge tracks of different audio formats instantly.</p></div>
   <div class="bh-card"><h4>One-time engine load</h4><p>The first tool you run in a session fetches the audio engine; every tool after that is instant.</p></div>
 </div>
 
 <div class="tools-heading reveal">
   <h2>Tools in this bench</h2>
-  <span>8 tools · click any card to open it</span>
+  <span>17 tools · click any card to open it</span>
 </div>
 <section class="category-section cat-audio" id="cat-audio">
 
@@ -111,6 +112,15 @@
     <div class="tool-card" data-tool="audio-joiner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-join"/></svg></div><h3>Audio Joiner</h3><p>Concatenate multiple audio files into one track.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="change-speed" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-speed"/></svg></div><h3>Change Speed</h3><p>Speed up or slow down without changing pitch.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="reverse-audio" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-reverse"/></svg></div><h3>Reverse Audio</h3><p>Play an audio file backwards.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="compress-audio" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-compress"/></svg></div><h3>Compress Audio</h3><p>Re-encode audio to lower bitrate.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="remove-vocals" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-mute"/></svg></div><h3>Remove Vocals</h3><p>Attempt to remove center channel vocals.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="extract-vocals" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>Extract Vocals</h3><p>Apply bandpass filter for vocal frequencies.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="noise-reducer" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-volume"/></svg></div><h3>Noise Reducer</h3><p>Reduce background noise using FFT.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="fade-audio" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>Fade Audio</h3><p>Apply fade in and fade out effects.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="normalize-audio" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-equalizer"/></svg></div><h3>Normalize Audio</h3><p>Balance the volume of the audio file.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="remove-audio-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>Remove Metadata</h3><p>Strip ID3 tags from audio.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="audio-to-text" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-text-extract"/></svg></div><h3>Audio to Text</h3><p>Transcribe audio to text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="mp3-tag-editor" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>MP3 Tag Editor</h3><p>Edit ID3 metadata headers.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
   </div>
 
 </section>
@@ -164,13 +174,13 @@
   <div class="strip-inner reveal-stagger">
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
     <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made — nothing stamped on top of it.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
   </div>
 </div>
 
 <footer>
-  <div class="fmark">Draft &amp; Merge — <b>built for the desk, not the cloud.</b></div>
-  <div class="fmark">Large audio jobs use extra memory — a modern desktop browser works best.</div>
+  <div class="fmark">Draft &amp; Merge <b>built for the desk, not the cloud.</b></div>
+  <div class="fmark">Large audio jobs use extra memory | a modern desktop browser works best.</div>
 </footer>
 
 <script src="js/common.js"></script>

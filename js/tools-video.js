@@ -1,6 +1,6 @@
-/* Video Bench — compress, convert, trim, extract audio, gif, mute.
+/* Video Bench compress, convert, trim, extract audio, gif, mute.
    Uses ffmpeg.wasm, loaded once and reused across tools.
-   First run on a page load downloads the ffmpeg core (~25MB) — this is
+   First run on a page load downloads the ffmpeg core (~25MB) this is
    expected and only happens once per session. */
 
 window.TOOL_DEFS = window.TOOL_DEFS || [];
@@ -255,7 +255,7 @@ window.TOOL_DEFS.push(
 {
   id:'screen-recorder', category:'Video Bench', title:'Screen Recorder',
   desc:'Capture your screen directly from the browser.',
-  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed — click Run to start recording',
+  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed click Run to start recording',
   options:[ { type:'text', id:'duration', label:'Duration (seconds)', default:'10' } ],
   run: async (files, opts, progress) => {
     const stream = await navigator.mediaDevices.getDisplayMedia({video:true, audio:true});
@@ -323,7 +323,7 @@ window.TOOL_DEFS.push(
 {
   id:'text-to-speech', category:'Video Bench', title:'Text to Speech',
   desc:'Reads your text aloud using your browser\'s built-in voices. The text is also saved as a downloadable file.',
-  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed — click Run to speak',
+  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed click Run to speak',
   options:[
     { type:'text', id:'text', label:'Text', default:'Hello world' },
     { type:'text', id:'rate', label:'Rate (0.5-2.0)', default:'1.0' }
@@ -532,7 +532,7 @@ window.TOOL_DEFS.push(
 {
   id:'video-recorder', category:'Video Bench', title:'Video Recorder',
   desc:'Record from your camera directly in the browser.',
-  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed — click Run to start recording',
+  accept:'', multiple:false, minFiles:0, noFile:true, hint:'No file needed click Run to start recording',
   options:[ { type:'text', id:'duration', label:'Duration (seconds)', default:'10' } ],
   run: async (files, opts, progress) => {
     const stream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});

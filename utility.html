@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
-<title>Converters Bench | Draft &amp; Merge</title>
-<meta name="description" content="Audio to MP3, video to WebM, image to PNG, document to HTML, ebook to text | the Converters Bench handles format switching across every file type. Some converters use the ffmpeg engine for audio and video; others work instantly with your browser's built-in capabilities.">
+<title>Utility Bench | Draft &amp; Merge</title>
+<meta name="description" content="Utility Bench for generating, formatting, hashing and inspecting files.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -68,24 +68,24 @@
       <a href="video.html" data-transition>Video</a>
       <a href="text.html" data-transition>Text</a>
       <a href="audio.html" data-transition>Audio</a>
-      <a href="converters.html" class="active" data-transition>Converters</a>
+      <a href="utility.html" class="active" data-transition>Utility</a>\n      <a href="converters.html" data-transition>Converters</a>
       <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
 </header>
 
-<section class="bench-hero cat-converter" style="-bc-color:var(-c-converter);-bc-soft:var(-c-converter-soft);">
-  <div class="crumbs reveal"><a href="index.html" data-transition>Home</a> <svg viewBox="0 0 24 24" style="width:11px;height:11px;opacity:.5"><use href="#i-arrow-right"/></svg> <span>Converters Bench</span></div>
+<section class="bench-hero cat-utility" style="-bc-color:var(-c-converter);-bc-soft:var(-c-converter-soft);">
+  <div class="crumbs reveal"><a href="index.html" data-transition>Home</a> <svg viewBox="0 0 24 24" style="width:11px;height:11px;opacity:.5"><use href="#i-arrow-right"/></svg> <span>Utility Bench</span></div>
   <div class="bench-hero-top reveal">
     <div class="bh-icon"><svg class="icon"><use href="#i-convert"/></svg></div>
     <div>
-      <h1>Converters Bench</h1>
-      <div class="bh-tag">28 tools for converting between any file format.</div>
+      <h1>Utility Bench</h1>
+      <div class="bh-tag">10 tools for converting between any file format.</div>
     </div>
   </div>
-  <p class="bench-hero-desc reveal">Audio to MP3, video to WebM, image to PNG, document to HTML, ebook to text | the Converters Bench handles format switching across every file type. Some converters use the ffmpeg engine for audio and video; others work instantly with your browser's built-in capabilities.</p>
-  <div class="bench-badges reveal"><span class="bench-badge">28 tools</span><span class="bench-badge">Multi-format support</span><span class="bench-badge">Runs on your device</span></div>
+  <p class="bench-hero-desc reveal">Utility Bench for generating, formatting, hashing and inspecting files.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">10 tools</span><span class="bench-badge">Multi-format support</span><span class="bench-badge">Runs on your device</span></div>
 
     <div class="tool-card" data-tool="heic-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to JPG</h3><p>Convert HEIC image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
     <div class="tool-card" data-tool="heic-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to PNG</h3><p>Convert HEIC image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
@@ -118,40 +118,20 @@
 
 <div class="tools-heading reveal">
   <h2>Tools in this bench</h2>
-  <span>28 tools · click any card to open it</span>
+  <span>10 tools · click any card to open it</span>
 </div>
-<section class="category-section cat-converter" id="cat-converter">
+<section class="category-section cat-utility" id="cat-utility">
   <div class="tool-grid">
-    <div class="tool-card" data-tool="audio-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>Audio Converter</h3><p>Convert between MP3, WAV, OGG, AAC, and FLAC.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="document-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>Document Converter</h3><p>Convert plain text or Markdown files to HTML.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="ebook-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-ebook"/></svg></div><h3>Ebook Converter</h3><p>Extract text content from an EPUB ebook.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="video-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>Video Converter</h3><p>Convert between MP4, WebM, AVI, and MOV.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="font-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-font"/></svg></div><h3>Font Converter</h3><p>Extract font metadata and file information.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="archive-extractor" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-archive"/></svg></div><h3>Archive Extractor</h3><p>Extract all files from a ZIP archive.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="image-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Image Converter</h3><p>Convert between JPG, PNG, and WebP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="archive-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-archive"/></svg></div><h3>Archive Converter</h3><p>Repack a ZIP with different compression settings.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-  </div>
-
-    <div class="tool-card" data-tool="heic-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to JPG</h3><p>Convert HEIC image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="heic-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to PNG</h3><p>Convert HEIC image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="webp-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>WebP to JPG</h3><p>Convert WebP image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="webp-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>WebP to PNG</h3><p>Convert WebP image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="svg-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>SVG to PNG</h3><p>Convert SVG image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="svg-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>SVG to JPG</h3><p>Convert SVG image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="gif-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>GIF to MP4</h3><p>Convert GIF to MP4 video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="gif-to-webp" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>GIF to WebP</h3><p>Convert GIF to animated WebP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="mov-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>MOV to MP4</h3><p>Convert MOV video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="mkv-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>MKV to MP4</h3><p>Convert MKV video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="avi-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>AVI to MP4</h3><p>Convert AVI video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="wav-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>WAV to MP3</h3><p>Convert WAV audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="flac-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>FLAC to MP3</h3><p>Convert FLAC audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="m4a-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>M4A to MP3</h3><p>Convert M4A audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="ogg-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>OGG to MP3</h3><p>Convert OGG audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="docx-to-txt" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>DOCX to TXT</h3><p>Convert DOCX document to plain text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="docx-to-html" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>DOCX to HTML</h3><p>Convert DOCX document to HTML.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="xlsx-to-csv" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>XLSX to CSV</h3><p>Convert XLSX spreadsheet to CSV.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="csv-to-xlsx" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>CSV to XLSX</h3><p>Convert CSV to XLSX spreadsheet.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="pptx-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>PPTX to JPG</h3><p>Convert PPTX slides to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="qr-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>QR Generator</h3><p>Canvas-based QR code generator.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="qr-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>QR Scanner</h3><p>Image upload QR scanner.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="barcode-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Barcode Generator</h3><p>Canvas barcode renderer.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="barcode-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Barcode Scanner</h3><p>Barcode image decoder.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="password-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-shield"/></svg></div><h3>Password Generator</h3><p>Customizable password generator.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-hash" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-shield"/></svg></div><h3>File Hash</h3><p>SHA-256 / SHA-1 digest.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>File Metadata</h3><p>Full browser file inspector.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-size-calc" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>File Size Calc</h3><p>File size unit converter.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="color-picker" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Color Picker</h3><p>Eyedropper API / color input.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="color-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Color Converter</h3><p>HEX / RGB / HSL / CMYK converter.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
   </div>
 </section>
 
@@ -216,7 +196,7 @@
 <script src="js/common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
-<script src="js/tools-converters.js"></script>
+<script src="js/tools-utility.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

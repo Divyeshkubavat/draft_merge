@@ -31,11 +31,86 @@
     'video-converter':'i-video', 'font-converter':'i-font', 'archive-extractor':'i-archive',
     'image-converter':'i-image', 'archive-converter':'i-archive'
   };
-  const CATEGORY_CLASS = { 'PDF Bench':'cat-pdf', 'Image Bench':'cat-image', 'Video Bench':'cat-video', 'Text Bench':'cat-text', 'Audio Bench':'cat-audio', 'Converters Bench':'cat-converter' };
+  const CATEGORY_CLASS = { 'PDF Bench':'cat-pdf', 'Image Bench':'cat-image', 'Video Bench':'cat-video', 'Text Bench':'cat-text', 'Audio Bench':'cat-audio', 'Converters Bench':'cat-converter', 'Utility Bench':'cat-utility' };
 
   // ---------- tool registry lookup ----------
   function findTool(id){
     return (window.TOOL_DEFS||[]).find(t => t.id === id);
+  }
+  // ---------- Central Search Logic ----------
+  const csInput = document.getElementById('centralSearchInput');
+  const csClearBtn = document.getElementById('csClearBtn');
+  const csGrid = document.getElementById('searchResultsGrid');
+  if (csInput && csGrid) {
+    csInput.addEventListener('input', () => {
+      const q = csInput.value.toLowerCase().trim();
+      if (!q) {
+        csGrid.classList.add('hidden');
+        if (csClearBtn) csClearBtn.classList.add('hidden');
+        return;
+      }
+      if (csClearBtn) csClearBtn.classList.remove('hidden');
+      
+      const tools = window.TOOL_DEFS || [];
+      const matches = tools.filter(t => 
+        (t.title && t.title.toLowerCase().includes(q)) || 
+        (t.desc && t.desc.toLowerCase().includes(q)) || 
+        (t.id && t.id.toLowerCase().includes(q)) || 
+        (t.category && t.category.toLowerCase().includes(q))
+      );
+      
+      csGrid.innerHTML = '';
+      if (matches.length === 0) {
+        csGrid.innerHTML = '<div style="padding:12px;color:#666;text-align:center;">No tools found</div>';
+      } else {
+        matches.forEach(t => {
+          const iconId = TOOL_ICON[t.id] || 'i-bolt';
+          const catClass = CATEGORY_CLASS[t.category] || '';
+          
+          const a = document.createElement('a');
+          a.className = 'search-result-card ' + catClass;
+          a.href = '#';
+          a.innerHTML = `
+            <div class="sr-icon"><svg><use href="#${iconId}"/></svg></div>
+            <div class="sr-content">
+              <h4>${t.title}</h4>
+              <p>${t.desc}</p>
+            </div>
+          `;
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            csGrid.classList.add('hidden');
+            if (typeof openWorkspace === 'function') {
+              openWorkspace(t.id);
+            } else {
+              // fallback if openWorkspace isn't available on the page
+              const page = (t.category || '').split(' ')[0].toLowerCase() + '.html';
+              window.location.href = page;
+            }
+          });
+          csGrid.appendChild(a);
+        });
+      }
+      csGrid.classList.remove('hidden');
+    });
+
+    if (csClearBtn) {
+      csClearBtn.addEventListener('click', () => {
+        csInput.value = '';
+        csInput.dispatchEvent(new Event('input'));
+        csInput.focus();
+      });
+    }
+
+    // Hide search when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!csInput.contains(e.target) && !csGrid.contains(e.target) && (!csClearBtn || !csClearBtn.contains(e.target))) {
+        csGrid.classList.add('hidden');
+      }
+    });
+    csInput.addEventListener('focus', () => {
+      if (csInput.value.trim()) csGrid.classList.remove('hidden');
+    });
   }
 
   // ---------- workspace elements ----------

@@ -220,7 +220,7 @@ window.TOOL_DEFS.push(
 },
 {
   id:'bulk-compress', category:'Image Bench', title:'Bulk Compressor',
-  desc:'Compress a whole batch of images at once — delivered as a zip.',
+  desc:'Compress a whole batch of images at once delivered as a zip.',
   accept:'.jpg,.jpeg,.png,.webp', multiple:true, minFiles:1, hint:'Any number of JPG, PNG or WebP files',
   options:[ { type:'range', id:'quality', label:'Quality', min:20, max:95, step:5, default:70, suffix:'%' } ],
   run: async (files, opts, progress) => {
@@ -238,6 +238,349 @@ window.TOOL_DEFS.push(
     progress(95,'Zipping');
     const zipBlob = await zip.generateAsync({ type:'blob' });
     return [{ name:'compressed-images.zip', blob:zipBlob }];
+  }
+},
+{
+  id:'remove-bg', category:'Image Bench', title:'Remove Background',
+  desc:'Remove light backgrounds from images using color thresholding.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[ { type:'range', id:'tolerance', label:'Tolerance', min:0, max:100, step:1, default:20, suffix:'' } ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img,0,0);
+    progress(50,'Processing pixels');
+    const imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
+    const d = imgData.data;
+    const tol = parseInt(opts.tolerance||20,10)*2.55;
+    for(let i=0; i<d.length; i+=4){
+      const r=d[i], g=d[i+1], b=d[i+2];
+      if(r > 255-tol && g > 255-tol && b > 255-tol){
+        d[i+3] = 0;
+      }
+    }
+    ctx.putImageData(imgData,0,0);
+    progress(90,'Encoding');
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    return [{ name: baseName(files[0].name)+'-nobg.png', blob }];
+  }
+},
+{
+  id:'blur-image', category:'Image Bench', title:'Blur Image',
+  desc:'Apply a Gaussian blur filter to your image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[ { type:'range', id:'radius', label:'Blur Radius', min:1, max:50, step:1, default:5, suffix:'px' } ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.filter = 'blur(' + (opts.radius||5) + 'px)';
+    ctx.drawImage(img,0,0);
+    progress(80,'Encoding');
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(extFromName(files[0].name))));
+    return [{ name: baseName(files[0].name)+'-blurred.'+extFromName(files[0].name), blob }];
+  }
+},
+{
+  id:'sharpen-image', category:'Image Bench', title:'Sharpen Image',
+  desc:'Enhance edge contrast with a convolution matrix.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    const w = canvas.width = img.naturalWidth;
+    const h = canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img,0,0);
+    progress(50,'Applying filter');
+    const imgData = ctx.getImageData(0,0,w,h);
+    const d = imgData.data;
+    const mix = [0,-1,0,-1,5,-1,0,-1,0];
+    const out = new Uint8ClampedArray(d.length);
+    for(let y=1; y<h-1; y++){
+      for(let x=1; x<w-1; x++){
+        const i = (y*w+x)*4;
+        let r=0,g=0,b=0;
+        for(let cy=-1; cy<=1; cy++){
+          for(let cx=-1; cx<=1; cx++){
+            const cpx = ((y+cy)*w+(x+cx))*4;
+            const wt = mix[(cy+1)*3+(cx+1)];
+            r += d[cpx]*wt;
+            g += d[cpx+1]*wt;
+            b += d[cpx+2]*wt;
+          }
+        }
+        out[i]=r; out[i+1]=g; out[i+2]=b; out[i+3]=d[i+3];
+      }
+    }
+    for(let i=0; i<d.length; i+=4){ if(out[i+3]>0){ d[i]=out[i]; d[i+1]=out[i+1]; d[i+2]=out[i+2]; } }
+    ctx.putImageData(imgData,0,0);
+    progress(80,'Encoding');
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(extFromName(files[0].name))));
+    return [{ name: baseName(files[0].name)+'-sharpened.'+extFromName(files[0].name), blob }];
+  }
+},
+{
+  id:'grayscale-image', category:'Image Bench', title:'Grayscale Image',
+  desc:'Convert image to black and white.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.filter = 'grayscale(100%)';
+    ctx.drawImage(img,0,0);
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(extFromName(files[0].name))));
+    return [{ name: baseName(files[0].name)+'-bw.'+extFromName(files[0].name), blob }];
+  }
+},
+{
+  id:'pixelate-image', category:'Image Bench', title:'Pixelate Image',
+  desc:'Apply a retro pixelated effect.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[ { type:'range', id:'size', label:'Pixel Size', min:2, max:50, step:1, default:10, suffix:'px' } ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    const w = canvas.width = img.naturalWidth;
+    const h = canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    const size = parseInt(opts.size||10,10)/100;
+    const sw = w*size, sh = h*size;
+    const temp = document.createElement('canvas');
+    temp.width = sw; temp.height = sh;
+    temp.getContext('2d').drawImage(img,0,0,sw,sh);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(temp,0,0,sw,sh,0,0,w,h);
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(extFromName(files[0].name))));
+    return [{ name: baseName(files[0].name)+'-pixelated.'+extFromName(files[0].name), blob }];
+  }
+},
+{
+  id:'add-border-image', category:'Image Bench', title:'Add Border',
+  desc:'Draw a border around the image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[
+    { type:'range', id:'width', label:'Border Width', min:1, max:100, step:1, default:10, suffix:'px' },
+    { type:'text', id:'color', label:'Border Color', default:'#000000', placeholder:'#000000' }
+  ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const bw = parseInt(opts.width||10,10);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth + bw*2; canvas.height = img.naturalHeight + bw*2;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = opts.color || '#000000';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img, bw, bw);
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(extFromName(files[0].name))));
+    return [{ name: baseName(files[0].name)+'-border.'+extFromName(files[0].name), blob }];
+  }
+},
+{
+  id:'round-corners-image', category:'Image Bench', title:'Round Corners',
+  desc:'Round the corners of the image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[ { type:'range', id:'radius', label:'Radius', min:1, max:500, step:5, default:50, suffix:'px' } ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    const r = parseInt(opts.radius||50,10);
+    ctx.beginPath();
+    ctx.moveTo(r,0); ctx.lineTo(canvas.width-r,0); ctx.quadraticCurveTo(canvas.width,0,canvas.width,r);
+    ctx.lineTo(canvas.width,canvas.height-r); ctx.quadraticCurveTo(canvas.width,canvas.height,canvas.width-r,canvas.height);
+    ctx.lineTo(r,canvas.height); ctx.quadraticCurveTo(0,canvas.height,0,canvas.height-r);
+    ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(img,0,0);
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/png'));
+    return [{ name: baseName(files[0].name)+'-rounded.png', blob }];
+  }
+},
+{
+  id:'image-collage', category:'Image Bench', title:'Collage Maker',
+  desc:'Combine multiple images into one collage.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:true, minFiles:2, hint:'At least 2 images',
+  options:[],
+  run: async (files, opts, progress) => {
+    const images = await Promise.all(files.map(f => loadImageFromFile(f)));
+    const cols = Math.ceil(Math.sqrt(images.length));
+    const rows = Math.ceil(images.length/cols);
+    const w = images[0].naturalWidth; const h = images[0].naturalHeight;
+    const canvas = document.createElement('canvas');
+    canvas.width = w*cols; canvas.height = h*rows;
+    const ctx = canvas.getContext('2d');
+    for(let i=0; i<images.length; i++){
+      const x = (i%cols)*w; const y = Math.floor(i/cols)*h;
+      ctx.drawImage(images[i], x, y, w, h);
+    }
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg'));
+    return [{ name: 'collage.jpg', blob }];
+  }
+},
+{
+  id:'meme-generator', category:'Image Bench', title:'Meme Generator',
+  desc:'Add classic meme text to your image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[
+    { type:'text', id:'topText', label:'Top Text', default:'TOP TEXT' },
+    { type:'text', id:'bottomText', label:'Bottom Text', default:'BOTTOM TEXT' }
+  ],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img,0,0);
+    const fontSize = Math.floor(canvas.height/10);
+    ctx.font = `bold ${fontSize}px Impact, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = Math.max(1, fontSize/20);
+    const tx = canvas.width/2;
+    if(opts.topText){
+      ctx.strokeText(opts.topText.toUpperCase(), tx, fontSize);
+      ctx.fillText(opts.topText.toUpperCase(), tx, fontSize);
+    }
+    if(opts.bottomText){
+      ctx.strokeText(opts.bottomText.toUpperCase(), tx, canvas.height - 20);
+      ctx.fillText(opts.bottomText.toUpperCase(), tx, canvas.height - 20);
+    }
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg'));
+    return [{ name: baseName(files[0].name)+'-meme.jpg', blob }];
+  }
+},
+{
+  id:'favicon-generator', category:'Image Bench', title:'Favicon Generator',
+  desc:'Generate a set of favicons packed in a ZIP.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'Square image works best',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(20,'Loading image');
+    const img = await loadImageFromFile(files[0]);
+    const zip = new JSZip();
+    const sizes = [16, 32, 48, 64];
+    for(let size of sizes){
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      canvas.getContext('2d').drawImage(img, 0, 0, size, size);
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      zip.file(`favicon-${size}x${size}.png`, blob);
+    }
+    const zipBlob = await zip.generateAsync({ type:'blob' });
+    return [{ name:'favicons.zip', blob:zipBlob }];
+  }
+},
+{
+  id:'exif-viewer', category:'Image Bench', title:'EXIF Viewer',
+  desc:'Extract EXIF metadata from an image.',
+  accept:'.jpg,.jpeg', multiple:false, minFiles:1, hint:'JPG images',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(50,'Parsing headers');
+    const buffer = await files[0].arrayBuffer();
+    const view = new DataView(buffer);
+    let output = 'EXIF Data Report\n=================\n';
+    if(view.getUint16(0,false) === 0xFFD8){
+      output += 'Valid JPEG found.\nEXIF parsing is a placeholder here.\n';
+    } else {
+      output += 'Not a JPEG.\n';
+    }
+    const blob = new Blob([output], {type:'text/plain'});
+    return [{ name: baseName(files[0].name)+'-exif.txt', blob }];
+  }
+},
+{
+  id:'remove-metadata-image', category:'Image Bench', title:'Remove Metadata',
+  desc:'Strip all EXIF metadata by re-encoding the image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(30,'Cleaning image');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    canvas.getContext('2d').drawImage(img,0,0);
+    const ext = extFromName(files[0].name);
+    const blob = await new Promise(r => canvas.toBlob(r, mimeFor(ext), 0.92));
+    return [{ name: baseName(files[0].name)+'-clean.'+ext, blob }];
+  }
+},
+{
+  id:'extract-colors-image', category:'Image Bench', title:'Extract Image Colors',
+  desc:'Get the dominant colors from an image.',
+  accept:'.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'JPG, PNG or WebP',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(30,'Sampling colors');
+    const img = await loadImageFromFile(files[0]);
+    const canvas = document.createElement('canvas');
+    canvas.width = 100; canvas.height = 100;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img,0,0,100,100);
+    const data = ctx.getImageData(0,0,100,100).data;
+    let counts = {};
+    for(let i=0; i<data.length; i+=4){
+      const r = Math.floor(data[i]/32)*32;
+      const g = Math.floor(data[i+1]/32)*32;
+      const b = Math.floor(data[i+2]/32)*32;
+      const rgb = `${r},${g},${b}`;
+      counts[rgb] = (counts[rgb]||0)+1;
+    }
+    const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    let out = 'Dominant Colors:\n';
+    sorted.forEach(([rgb, count]) => {
+      const [r,g,b] = rgb.split(',').map(Number);
+      const hex = '#' + ((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+      out += `${hex}\n`;
+    });
+    const blob = new Blob([out], {type:'text/plain'});
+    return [{ name: baseName(files[0].name)+'-colors.txt', blob }];
+  }
+},
+{
+  id:'svg-converter', category:'Image Bench', title:'SVG Converter',
+  desc:'Render SVG to PNG or wrap image in SVG.',
+  accept:'.svg,.jpg,.jpeg,.png,.webp', multiple:false, minFiles:1, hint:'SVG or Image file',
+  options:[],
+  run: async (files, opts, progress) => {
+    progress(30,'Converting');
+    const ext = extFromName(files[0].name);
+    if(ext === 'svg'){
+      const img = await loadImageFromFile(files[0]);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img,0,0);
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      return [{ name: baseName(files[0].name)+'.png', blob }];
+    } else {
+      const img = await loadImageFromFile(files[0]);
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img,0,0);
+      const dataUrl = canvas.toDataURL('image/png');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${img.naturalWidth}" height="${img.naturalHeight}"><image href="${dataUrl}" width="100%" height="100%"/></svg>`;
+      const blob = new Blob([svg], {type:'image/svg+xml'});
+      return [{ name: baseName(files[0].name)+'.svg', blob }];
+    }
   }
 }
 );
