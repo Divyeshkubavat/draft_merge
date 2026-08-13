@@ -646,8 +646,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 /* Central Search Component */
 .central-search-box {
   width: 100%;
-  max-width: 640px;
-  margin: 32px auto 0;
+  max-width: 720px;
+  margin: 28px 0 0;
   position: relative;
   z-index: 100;
 }
