@@ -6,7 +6,7 @@
 <script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
 <meta name="theme-color" content="#f6f7fb">
 <title>Utility Bench | Draft &amp; Merge</title>
-<meta name="description" content="Utility Bench for generating, formatting, hashing and inspecting files.">
+<meta name="description" content="Ten essential utilities for QR codes, barcodes, password generation, file hashing, metadata inspection, and color space conversion.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -45,10 +45,11 @@
 <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
 <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
 <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-<symbol id="i-ebook" viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M4 19h16"/><path d="M8 7h8M8 11h5"/></symbol>
-<symbol id="i-font" viewBox="0 0 24 24"><path d="M6 20h12"/><path d="M12 4v16"/><path d="M7 4h10"/></symbol>
-<symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></symbol>
 <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+<symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM17 17h4v4h-4zM14 17h3v4h-3z"/></symbol>
+<symbol id="i-barcode" viewBox="0 0 24 24"><path d="M3 5v14M6 5v14M10 5v14M13 5v14M17 5v14M21 5v14"/></symbol>
+<symbol id="i-hash" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3v18M14 3v18"/></symbol>
+<symbol id="i-color" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z"/></symbol>
 </defs>
 </svg>
 
@@ -68,52 +69,30 @@
       <a href="video.html" data-transition>Video</a>
       <a href="text.html" data-transition>Text</a>
       <a href="audio.html" data-transition>Audio</a>
-      <a href="utility.html" class="active" data-transition>Utility</a>\n      <a href="converters.html" data-transition>Converters</a>
-      <a href="utility.html" data-transition>Utility</a>
+      <a href="converters.html" data-transition>Converters</a>
+      <a href="utility.html" class="active" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
   </div>
 </header>
 
-<section class="bench-hero cat-utility" style="-bc-color:var(-c-converter);-bc-soft:var(-c-converter-soft);">
+<section class="bench-hero cat-utility" style="--bc-color:var(--c-utility);--bc-soft:var(--c-utility-soft);">
   <div class="crumbs reveal"><a href="index.html" data-transition>Home</a> <svg viewBox="0 0 24 24" style="width:11px;height:11px;opacity:.5"><use href="#i-arrow-right"/></svg> <span>Utility Bench</span></div>
   <div class="bench-hero-top reveal">
-    <div class="bh-icon"><svg class="icon"><use href="#i-convert"/></svg></div>
+    <div class="bh-icon"><svg class="icon"><use href="#i-spark"/></svg></div>
     <div>
       <h1>Utility Bench</h1>
-      <div class="bh-tag">10 tools for converting between any file format.</div>
+      <div class="bh-tag">10 tools for generating, formatting, hashing, and inspecting files.</div>
     </div>
   </div>
-  <p class="bench-hero-desc reveal">Utility Bench for generating, formatting, hashing and inspecting files.</p>
-  <div class="bench-badges reveal"><span class="bench-badge">10 tools</span><span class="bench-badge">Multi-format support</span><span class="bench-badge">Runs on your device</span></div>
-
-    <div class="tool-card" data-tool="heic-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to JPG</h3><p>Convert HEIC image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="heic-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>HEIC to PNG</h3><p>Convert HEIC image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="webp-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>WebP to JPG</h3><p>Convert WebP image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="webp-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>WebP to PNG</h3><p>Convert WebP image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="svg-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>SVG to PNG</h3><p>Convert SVG image to PNG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="svg-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>SVG to JPG</h3><p>Convert SVG image to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="gif-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>GIF to MP4</h3><p>Convert GIF to MP4 video.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="gif-to-webp" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>GIF to WebP</h3><p>Convert GIF to animated WebP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="mov-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>MOV to MP4</h3><p>Convert MOV video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="mkv-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>MKV to MP4</h3><p>Convert MKV video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="avi-to-mp4" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>AVI to MP4</h3><p>Convert AVI video to MP4.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="wav-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>WAV to MP3</h3><p>Convert WAV audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="flac-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>FLAC to MP3</h3><p>Convert FLAC audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="m4a-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>M4A to MP3</h3><p>Convert M4A audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="ogg-to-mp3" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>OGG to MP3</h3><p>Convert OGG audio to MP3.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="docx-to-txt" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>DOCX to TXT</h3><p>Convert DOCX document to plain text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="docx-to-html" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>DOCX to HTML</h3><p>Convert DOCX document to HTML.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="xlsx-to-csv" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>XLSX to CSV</h3><p>Convert XLSX spreadsheet to CSV.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="csv-to-xlsx" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>CSV to XLSX</h3><p>Convert CSV to XLSX spreadsheet.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="pptx-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>PPTX to JPG</h3><p>Convert PPTX slides to JPG.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-  </div>
+  <p class="bench-hero-desc reveal">Generate QR codes and barcodes, scan codes from uploaded images, create secure passwords, compute SHA-256 file hashes, inspect file headers, calculate download sizes, and convert between color spaces.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">10 tools</span><span class="bench-badge">Zero uploads</span><span class="bench-badge">Runs on your device</span></div>
 </section>
 
 <div class="bench-highlights reveal-stagger">
-  <div class="bh-card"><h4>Every media type</h4><p>Convert audio, video, and images reliably without uploading anything to a server.</p></div>
-  <div class="bh-card"><h4>Documents & text</h4><p>Extract text from eBooks and turn Markdown into clean HTML documents.</p></div>
-  <div class="bh-card"><h4>System & archives</h4><p>Peek inside fonts or repack ZIP files entirely inside your browser tab.</p></div>
+  <div class="bh-card"><h4>Generators &amp; Scanners</h4><p>Create QR codes and barcodes, or scan codes directly from images.</p></div>
+  <div class="bh-card"><h4>File Security &amp; Hashes</h4><p>Compute SHA-256 file digests and generate cryptographically secure passwords.</p></div>
+  <div class="bh-card"><h4>Inspectors &amp; Math</h4><p>Inspect raw file metadata, calculate file size units, and convert HEX/RGB/CMYK colors.</p></div>
 </div>
 
 <div class="tools-heading reveal">
@@ -122,20 +101,20 @@
 </div>
 <section class="category-section cat-utility" id="cat-utility">
   <div class="tool-grid">
-    <div class="tool-card" data-tool="qr-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>QR Generator</h3><p>Canvas-based QR code generator.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="qr-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>QR Scanner</h3><p>Image upload QR scanner.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="barcode-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Barcode Generator</h3><p>Canvas barcode renderer.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="barcode-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Barcode Scanner</h3><p>Barcode image decoder.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="password-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-shield"/></svg></div><h3>Password Generator</h3><p>Customizable password generator.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="file-hash" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-shield"/></svg></div><h3>File Hash</h3><p>SHA-256 / SHA-1 digest.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="file-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>File Metadata</h3><p>Full browser file inspector.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="file-size-calc" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>File Size Calc</h3><p>File size unit converter.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="color-picker" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Color Picker</h3><p>Eyedropper API / color input.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-    <div class="tool-card" data-tool="color-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Color Converter</h3><p>HEX / RGB / HSL / CMYK converter.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="qr-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-qr"/></svg></div><h3>QR Code Generator</h3><p>Create custom QR codes for URLs and text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="qr-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-qr"/></svg></div><h3>QR Code Scanner</h3><p>Scan and decode QR codes from image files.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="barcode-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-barcode"/></svg></div><h3>Barcode Generator</h3><p>Generate Code 128 barcodes as downloadable images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="barcode-scanner" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-barcode"/></svg></div><h3>Barcode Scanner</h3><p>Decode barcodes from uploaded images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="password-generator" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-shield"/></svg></div><h3>Password Generator</h3><p>Generate secure random passwords with custom rules.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-hash" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-hash"/></svg></div><h3>File Hash Generator</h3><p>Compute SHA-256 and SHA-1 checksums for any file.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>File Metadata Viewer</h3><p>Inspect MIME type, size, dimensions, and header bytes.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="file-size-calc" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-bolt"/></svg></div><h3>File Size Calculator</h3><p>Convert bytes to KB/MB/GB and calculate transfer speeds.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="color-picker" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-color"/></svg></div><h3>Color Picker</h3><p>Pick colors with browser eyedropper and palette viewer.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="color-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-color"/></svg></div><h3>Color Converter</h3><p>Convert values between HEX, RGB, HSL, and CMYK.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
   </div>
 </section>
 
-<div class="bench-crosslink reveal"><a href="audio.html" data-transition><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><use href="#i-arrow-right"/></svg> Audio Bench</a><a href="text.html" data-transition>Text Bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a></div>
+<div class="bench-crosslink reveal"><a href="converters.html" data-transition><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><use href="#i-arrow-right"/></svg> Converters Bench</a><a href="text.html" data-transition>Text Bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a></div>
 
 <div class="workspace-overlay hidden" id="workspaceOverlay">
   <div class="workspace" id="workspace">
@@ -194,8 +173,6 @@
 </footer>
 
 <script src="js/common.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
 <script src="js/tools-utility.js"></script>
 <script src="js/app.js"></script>
 </body>
