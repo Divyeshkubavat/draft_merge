@@ -44,7 +44,14 @@ window.TOOL_DEFS.push(
     ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
     const crf = { light:'26', medium:'30', strong:'34' }[opts.level||'medium'];
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Compressing'));
-    await ffmpeg.run('-i', inName, '-vcodec','libx264','-crf', crf, '-preset','veryfast','-acodec','aac', 'out.mp4');
+    await ffmpeg.run(
+    '-i', inName,
+    '-c:v', 'libx264',
+    '-preset', 'ultrafast',
+    '-crf', crf,
+    '-c:a', 'aac',
+    '-movflags', '+faststart',
+    'out.mp4');
     const data = ffmpeg.FS('readFile','out.mp4');
     ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp4');
     return [{ name: base(files[0].name)+'-compressed.mp4', blob:new Blob([data.buffer], {type:'video/mp4'}) }];
