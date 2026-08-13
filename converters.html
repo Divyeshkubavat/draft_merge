@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
+<meta name="theme-color" content="#f6f7fb">
+<title>Converters Bench — Draft &amp; Merge</title>
+<meta name="description" content="Audio to MP3, video to WebM, image to PNG, document to HTML, ebook to text — the Converters Bench handles format switching across every file type. Some converters use the ffmpeg engine for audio and video; others work instantly with your browser's built-in capabilities.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232564cf'/%3E%3Cstop offset='55%25' stop-color='%238764b8'/%3E%3Cstop offset='100%25' stop-color='%23e3008c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="pageLoadBar"></div>
+<div id="pageTransition"></div>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<defs>
+<symbol id="i-merge" viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V3M9 21v-6M15 21v-6M12 21v-4"/><path d="m3 6 3-3 3 3M18 6l3-3 3 3"/></symbol>
+<symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M8 21l4-4 4 4M8 21v-3a4 4 0 0 1 4-4 4 4 0 0 1 4 4v3"/><path d="m9 6 3-3 3 3"/></symbol>
+<symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></symbol>
+<symbol id="i-compress" viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3M16 3v3a2 2 0 0 0 2 2h3M8 21v-3a2 2 0 0 0-2-2H3M16 21v-3a2 2 0 0 1 2-2h3"/></symbol>
+<symbol id="i-pdf-jpg" viewBox="0 0 24 24"><rect x="4" y="3" width="12" height="16" rx="2"/><path d="M7 8h6M7 12h4"/><circle cx="17.5" cy="16.5" r="4.5"/><path d="m20.5 19.5-2-2"/></symbol>
+<symbol id="i-jpg-pdf" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="2"/><circle cx="7" cy="7" r="1.4"/><path d="m4 13 3-3 2 2 3-4 3 3"/><path d="M18 12v9M18 21l-3-3M18 21l3-3"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m3.5 17 5.5-5.5a2 2 0 0 1 2.8 0L18 17.5"/></symbol>
+<symbol id="i-resize" viewBox="0 0 24 24"><path d="M4 14v6h6M20 10V4h-6M20 4l-7 7M4 20l7-7"/></symbol>
+<symbol id="i-crop" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14M18 22V8a2 2 0 0 0-2-2H2"/></symbol>
+<symbol id="i-convert" viewBox="0 0 24 24"><path d="M17 3 21 7l-4 4"/><path d="M3 11V9a2 2 0 0 1 2-2h16"/><path d="M7 21 3 17l4-4"/><path d="M21 13v2a2 2 0 0 1-2 2H3"/></symbol>
+<symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M7 7l-4 5 4 5M17 7l4 5-4 5"/></symbol>
+<symbol id="i-watermark" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
+<symbol id="i-stack" viewBox="0 0 24 24"><rect x="3" y="10" width="8" height="8" rx="1.5"/><rect x="8" y="6" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="2.5"/><path d="m16.5 10 5-3v10l-5-3z"/></symbol>
+<symbol id="i-trim" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><path d="m8.5 7.5 11 9M20 4 8.5 16.5"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+<symbol id="i-gif" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M8 9.5v5M12.2 14.5V9.5l1.8 3 1.8-3v5M18.5 9.5h-2v5M16.5 12h1.6"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9H3Z"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
+<symbol id="i-ocr" viewBox="0 0 24 24"><path d="M4 7V5a1 1 0 0 1 1-1h2M4 17v2a1 1 0 0 0 1 1h2M20 7V5a1 1 0 0 0-1-1h-2M20 17v2a1 1 0 0 1-1 1h-2"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
+<symbol id="i-text-extract" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5"/><path d="M4 20h16"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-ebook" viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"/><path d="M4 19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M4 19h16"/><path d="M8 7h8M8 11h5"/></symbol>
+<symbol id="i-font" viewBox="0 0 24 24"><path d="M6 20h12"/><path d="M12 4v16"/><path d="M7 4h10"/></symbol>
+<symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9"/><path d="M10 13h4"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></symbol>
+</defs>
+</svg>
+
+<header class="site" id="siteHeader">
+  <div class="header-inner">
+    <a class="brand" id="logoHome" href="index.html" data-transition>
+      <div class="brand-mark">D&amp;M</div>
+      <div>
+        <div class="brand-text">Draft <span>&amp;</span> Merge</div>
+        <div class="brand-sub">a file workshop</div>
+      </div>
+    </a>
+    <nav class="top-nav">
+      <a href="index.html" data-transition>Home</a>
+      <a href="pdf.html" data-transition>PDF</a>
+      <a href="image.html" data-transition>Image</a>
+      <a href="video.html" data-transition>Video</a>
+      <a href="audio.html" data-transition>Audio</a>
+      <a href="text.html" data-transition>Text</a>
+      <a href="converters.html" class="active" data-transition>Converters</a>
+    </nav>
+    <div class="privacy-pill">runs on your device</div>
+  </div>
+</header>
+
+<section class="bench-hero cat-converter" style="--bc-color:var(--c-converter);--bc-soft:var(--c-converter-soft);">
+  <div class="crumbs reveal"><a href="index.html" data-transition>Home</a> <svg viewBox="0 0 24 24" style="width:11px;height:11px;opacity:.5"><use href="#i-arrow-right"/></svg> <span>Converters Bench</span></div>
+  <div class="bench-hero-top reveal">
+    <div class="bh-icon"><svg class="icon"><use href="#i-convert"/></svg></div>
+    <div>
+      <h1>Converters Bench</h1>
+      <div class="bh-tag">Eight tools for converting between any file format.</div>
+    </div>
+  </div>
+  <p class="bench-hero-desc reveal">Audio to MP3, video to WebM, image to PNG, document to HTML, ebook to text — the Converters Bench handles format switching across every file type. Some converters use the ffmpeg engine for audio and video; others work instantly with your browser's built-in capabilities.</p>
+  <div class="bench-badges reveal"><span class="bench-badge">8 tools</span><span class="bench-badge">Multi-format support</span><span class="bench-badge">Runs on your device</span></div>
+</section>
+
+<div class="bench-highlights reveal-stagger">
+  <div class="bh-card"><h4>Every media type</h4><p>Convert audio, video, and images reliably without uploading anything to a server.</p></div>
+  <div class="bh-card"><h4>Documents & text</h4><p>Extract text from eBooks and turn Markdown into clean HTML documents.</p></div>
+  <div class="bh-card"><h4>System & archives</h4><p>Peek inside fonts or repack ZIP files entirely inside your browser tab.</p></div>
+</div>
+
+<div class="tools-heading reveal">
+  <h2>Tools in this bench</h2>
+  <span>8 tools · click any card to open it</span>
+</div>
+<section class="category-section cat-converter" id="cat-converter">
+  <div class="tool-grid">
+    <div class="tool-card" data-tool="audio-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-music"/></svg></div><h3>Audio Converter</h3><p>Convert between MP3, WAV, OGG, AAC, and FLAC.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="document-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-doc"/></svg></div><h3>Document Converter</h3><p>Convert plain text or Markdown files to HTML.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="ebook-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-ebook"/></svg></div><h3>Ebook Converter</h3><p>Extract text content from an EPUB ebook.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="video-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-video"/></svg></div><h3>Video Converter</h3><p>Convert between MP4, WebM, AVI, and MOV.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="font-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-font"/></svg></div><h3>Font Converter</h3><p>Extract font metadata and file information.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="archive-extractor" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-archive"/></svg></div><h3>Archive Extractor</h3><p>Extract all files from a ZIP archive.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="image-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Image Converter</h3><p>Convert between JPG, PNG, and WebP.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+    <div class="tool-card" data-tool="archive-converter" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-archive"/></svg></div><h3>Archive Converter</h3><p>Repack a ZIP with different compression settings.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
+  </div>
+</section>
+
+<div class="bench-crosslink reveal"><a href="audio.html" data-transition><svg viewBox="0 0 24 24" style="transform:rotate(180deg)"><use href="#i-arrow-right"/></svg> Audio Bench</a><a href="text.html" data-transition>Text Bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a></div>
+
+<div class="workspace-overlay hidden" id="workspaceOverlay">
+  <div class="workspace" id="workspace">
+    <button class="close-btn" id="closeWorkspace" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+
+    <div class="ws-head">
+      <div class="tile" id="wsTile"><svg class="icon"><use href="#i-merge"/></svg></div>
+      <div>
+        <div class="ws-eyebrow" id="wsEyebrow">Bench</div>
+        <h2 id="wsTitle">Tool title</h2>
+        <p class="ws-desc" id="wsDesc">Tool description.</p>
+      </div>
+    </div>
+
+    <div class="ws-body">
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
+        <div class="dz-text"><b>Click to choose files</b> or drag them here</div>
+        <div class="dz-hint" id="dzHint">Accepted files</div>
+        <input type="file" id="fileInput" style="display:none" multiple>
+      </div>
+
+      <div class="file-list" id="fileList"></div>
+
+      <div class="opt-row" id="optRow"></div>
+
+      <button class="run-btn" id="runBtn" disabled><span class="spinner"></span><span id="runBtnLabel">Add a file first</span></button>
+
+      <div class="status-box" id="statusBox">
+        <div class="status-line"><span class="status-left"><span class="proc-orbit" aria-hidden="true"></span><span id="statusText">Working…</span></span><span id="statusPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="status-tip" id="statusTip"></div>
+      </div>
+
+      <div class="error-box" id="errorBox"><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg><span id="errorText"></span></div>
+
+      <div class="result-box" id="resultBox">
+        <div class="r-title"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg> Ready</div>
+        <div class="r-files" id="resultFiles"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-inner reveal-stagger">
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
+    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made — nothing stamped on top of it.</p></div>
+  </div>
+</div>
+
+<footer>
+  <div class="fmark">Draft &amp; Merge — <b>built for the desk, not the cloud.</b></div>
+  <div class="fmark">Large video jobs use extra memory — a modern desktop browser works best.</div>
+</footer>
+
+<script src="js/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
+<script src="js/tools-converters.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
