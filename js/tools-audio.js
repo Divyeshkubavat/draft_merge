@@ -44,10 +44,11 @@ window.TOOL_DEFS.push(
     const start = opts.start || '0';
     const dur = opts.duration || '10';
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Trimming'));
-    await ffmpeg.run('-ss', String(start), '-i', inName, '-t', String(dur), '-c', 'copy', 'out.mp3');
-    const data = ffmpeg.FS('readFile','out.mp3');
-    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
-    return [{ name: base(files[0].name)+'-trimmed.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+    const outName = 'out.' + extOf(files[0].name);
+    await ffmpeg.run('-ss', String(start), '-i', inName, '-t', String(dur), outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    return [{ name: base(files[0].name)+'-trimmed.'+extOf(files[0].name), blob:new Blob([data.buffer], {type:files[0].type || 'audio/mp3'}) }];
   }
 },
 {
@@ -176,16 +177,16 @@ window.TOOL_DEFS.push(
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Joining tracks'));
     
     if (exts.size === 1) {
-      await ffmpeg.run('-f', 'concat', '-safe', '0', '-i', 'list.txt', '-c', 'copy', 'out.mp3');
+      await ffmpeg.run('-f', 'concat', '-safe', '0', '-i', 'list.txt', 'out.' + extOf(files[0].name));
     } else {
-      await ffmpeg.run('-f', 'concat', '-safe', '0', '-i', 'list.txt', '-acodec', 'libmp3lame', 'out.mp3');
+      await ffmpeg.run('-f', 'concat', '-safe', '0', '-i', 'list.txt', 'out.' + extOf(files[0].name));
     }
     
-    const data = ffmpeg.FS('readFile','out.mp3');
+    const data = ffmpeg.FS('readFile', 'out.' + extOf(files[0].name));
     for(let i=0; i<files.length; i++) ffmpeg.FS('unlink', `in${i}.${extOf(files[i].name)}`);
     ffmpeg.FS('unlink', 'list.txt');
-    ffmpeg.FS('unlink', 'out.mp3');
-    return [{ name: 'joined-audio.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+    ffmpeg.FS('unlink', 'out.' + extOf(files[0].name));
+    return [{ name: 'joined-audio.' + extOf(files[0].name), blob:new Blob([data.buffer], {type:files[0].type || 'audio/mp3'}) }];
   }
 },
 {
@@ -343,10 +344,11 @@ window.TOOL_DEFS.push(
     const inName = 'in.'+extOf(files[0].name);
     ffmpeg.FS('writeFile', inName, await fetchFile(files[0]));
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Stripping metadata'));
-    await ffmpeg.run('-i', inName, '-map_metadata', '-1', '-c:a', 'copy', 'out.mp3');
-    const data = ffmpeg.FS('readFile','out.mp3');
-    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp3');
-    return [{ name: base(files[0].name)+'-nometa.mp3', blob:new Blob([data.buffer], {type:'audio/mp3'}) }];
+    const outName = 'out.' + extOf(files[0].name);
+    await ffmpeg.run('-i', inName, '-map_metadata', '-1', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    return [{ name: base(files[0].name)+'-nometa.'+extOf(files[0].name), blob:new Blob([data.buffer], {type:files[0].type || 'audio/mp3'}) }];
   }
 },
 {

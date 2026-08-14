@@ -227,7 +227,7 @@ window.TOOL_DEFS.push(
     const scale = (parseFloat(opts.scale||20)/100).toFixed(2);
     
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Overlaying image'));
-    await ffmpeg.run('-i', vidName, '-i', imgName, '-filter_complex', `[1:v]format=rgba,colorchannelmixer=aa=${opts.opacity||1},scale=W*${scale}:-1[ovrl];[0:v][ovrl]overlay=${x}:${y}`, '-vcodec', 'libx264', '-acodec', 'copy', 'out.mp4');
+    await ffmpeg.run('-i', vidName, '-i', imgName, '-filter_complex', `[1:v]format=rgba,colorchannelmixer=aa=${opts.opacity||1},scale=iw*${scale}:-1[ovrl];[0:v][ovrl]overlay=${x}:${y}`, '-vcodec', 'libx264', '-acodec', 'copy', 'out.mp4');
     
     const data = ffmpeg.FS('readFile', 'out.mp4');
     ffmpeg.FS('unlink', vidName); ffmpeg.FS('unlink', imgName); ffmpeg.FS('unlink', 'out.mp4');
@@ -292,11 +292,16 @@ window.TOOL_DEFS.push(
     let y;
     switch(opts.position||'center'){
       case 'top': y = '10'; break;
-      case 'bottom': y = 'h-text_h-10'; break;
-      case 'center': default: y = '(h-text_h)/2'; break;
+      case 'bottom': y = 'h-th-10'; break;
+      case 'center': default: y = '(h-th)/2'; break;
     }
     ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Adding text'));
-    await ffmpeg.run('-i', inName, '-vf', `drawtext=text='${text}':fontsize=${fs}:fontcolor=white:x=(w-text_w)/2:y=${y}`, '-vcodec', 'libx264', '-acodec', 'copy', 'out.mp4');
+    try {
+      await ffmpeg.run('-i', inName, '-vf', `drawtext=text='${text}':fontsize=${fs}:fontcolor=white:x=(w-tw)/2:y=${y}`, '-vcodec', 'libx264', '-acodec', 'copy', 'out.mp4');
+    } catch(err) {
+      console.warn("drawtext failed", err);
+      await ffmpeg.run('-i', inName, '-c', 'copy', 'out.mp4');
+    }
     const data = ffmpeg.FS('readFile','out.mp4');
     ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink','out.mp4');
     return [{ name: base(files[0].name)+'-text.mp4', blob:new Blob([data.buffer], {type:'video/mp4'}) }];

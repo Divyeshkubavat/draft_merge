@@ -779,3 +779,108 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   overflow: hidden;
 }
 
+/* ============================================================
+   RESPONSIVE SEARCH & NAVIGATION
+   ============================================================ */
+
+/* Tablet */
+@media (max-width:900px) {
+  .central-search-box {
+    max-width: 100%;
+    margin: 20px 0 0;
+  }
+  .search-results-grid {
+    grid-template-columns: 1fr 1fr;
+    max-height: 50vh;
+  }
+}
+
+/* Mobile */
+@media (max-width:600px) {
+  .central-search-box {
+    max-width: 100%;
+    margin: 16px 0 0;
+  }
+  .cs-input-wrapper {
+    border-radius: 10px;
+    padding: 2px 4px;
+  }
+  #centralSearchInput {
+    font-size: 15px;
+    padding: 12px 0;
+  }
+  .cs-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+  }
+  .search-results-grid {
+    grid-template-columns: 1fr;
+    max-height: 60vh;
+    padding: 8px;
+    gap: 4px;
+    border-radius: 10px;
+  }
+  .search-result-card {
+    padding: 10px;
+  }
+  .sr-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+  .sr-content h4 {
+    font-size: 14px;
+  }
+  .sr-content p {
+    font-size: 12px;
+    -webkit-line-clamp: 1;
+  }
+
+  /* Fix hero section padding on mobile */
+  .hero {
+    padding: 40px 16px 32px;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  /* Fix workspace modal on mobile */
+  .workspace {
+    padding: 16px;
+  }
+  .workspace h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Fix bench grid on mobile */
+  .bench-explore-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Fix strip (tool cards) grid on mobile */
+  .strip-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 12px;
+  }
+}
+
+/* Very small screens */
+@media (max-width:380px) {
+  .cs-icon {
+    display: none;
+  }
+  #centralSearchInput {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+}
+

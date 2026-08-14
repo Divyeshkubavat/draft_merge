@@ -498,17 +498,17 @@ window.TOOL_DEFS.push(
   accept:'.jpg,.jpeg', multiple:false, minFiles:1, hint:'JPG images',
   options:[],
   run: async (files, opts, progress) => {
-    progress(50,'Parsing headers');
-    const buffer = await files[0].arrayBuffer();
-    const view = new DataView(buffer);
-    let output = 'EXIF Data Report\n=================\n';
-    if(view.getUint16(0,false) === 0xFFD8){
-      output += 'Valid JPEG found.\nEXIF parsing is a placeholder here.\n';
-    } else {
-      output += 'Not a JPEG.\n';
-    }
+    progress(30, 'Loading image for dimensions');
+    const img = await loadImageFromFile(files[0]);
+    progress(70, 'Generating report');
+    let output = 'File Metadata & Dimensions\n==========================\n';
+    output += `Name: ${files[0].name}\n`;
+    output += `Size: ${files[0].size} bytes (${(files[0].size/1024).toFixed(2)} KB)\n`;
+    output += `Type: ${files[0].type}\n`;
+    output += `Width: ${img.naturalWidth}px\n`;
+    output += `Height: ${img.naturalHeight}px\n`;
     const blob = new Blob([output], {type:'text/plain'});
-    return [{ name: baseName(files[0].name)+'-exif.txt', blob }];
+    return [{ name: baseName(files[0].name)+'-metadata.txt', blob }];
   }
 },
 {

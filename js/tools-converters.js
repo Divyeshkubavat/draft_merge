@@ -226,126 +226,404 @@ window.TOOL_DEFS.push(
     return [{ name: 'repacked-' + files[0].name, blob }];
   }
 },
-
 {
   id: 'heic-to-jpg', category: 'Converters Bench', title: 'HEIC to JPG',
   desc: 'Convert HEIC image to JPG.',
   accept: '.heic', multiple: false, minFiles: 1, hint: 'HEIC file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting HEIC to JPG...');
+    try {
+      const url = URL.createObjectURL(files[0]);
+      const img = await new Promise((resolve, reject) => {
+        const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+      progress(100, 'Done');
+      return [{ name: base(files[0].name) + '.jpg', blob }];
+    } catch(e) {
+      throw new Error("Browsers often don't support HEIC natively. Try using the Image Converter tool.");
+    }
+  }
 },
 {
   id: 'heic-to-png', category: 'Converters Bench', title: 'HEIC to PNG',
   desc: 'Convert HEIC image to PNG.',
   accept: '.heic', multiple: false, minFiles: 1, hint: 'HEIC file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting HEIC to PNG...');
+    try {
+      const url = URL.createObjectURL(files[0]);
+      const img = await new Promise((resolve, reject) => {
+        const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+      });
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      progress(100, 'Done');
+      return [{ name: base(files[0].name) + '.png', blob }];
+    } catch(e) {
+      throw new Error("Browsers often don't support HEIC natively. Try using the Image Converter tool.");
+    }
+  }
 },
 {
   id: 'webp-to-jpg', category: 'Converters Bench', title: 'WebP to JPG',
   desc: 'Convert WebP image to JPG.',
   accept: '.webp', multiple: false, minFiles: 1, hint: 'WebP file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting WebP...');
+    const url = URL.createObjectURL(files[0]);
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.jpg', blob }];
+  }
 },
 {
   id: 'webp-to-png', category: 'Converters Bench', title: 'WebP to PNG',
   desc: 'Convert WebP image to PNG.',
   accept: '.webp', multiple: false, minFiles: 1, hint: 'WebP file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting WebP...');
+    const url = URL.createObjectURL(files[0]);
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.png', blob }];
+  }
 },
 {
   id: 'svg-to-png', category: 'Converters Bench', title: 'SVG to PNG',
   desc: 'Convert SVG image to PNG.',
   accept: '.svg', multiple: false, minFiles: 1, hint: 'SVG file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting SVG...');
+    const text = await files[0].text();
+    const svgBlob = new Blob([text], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svgBlob);
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth * 2; canvas.height = img.naturalHeight * 2;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(2, 2);
+    ctx.drawImage(img, 0, 0);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.png', blob }];
+  }
 },
 {
   id: 'svg-to-jpg', category: 'Converters Bench', title: 'SVG to JPG',
   desc: 'Convert SVG image to JPG.',
   accept: '.svg', multiple: false, minFiles: 1, hint: 'SVG file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    progress(50, 'Converting SVG...');
+    const text = await files[0].text();
+    const svgBlob = new Blob([text], {type: 'image/svg+xml;charset=utf-8'});
+    const url = URL.createObjectURL(svgBlob);
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image(); i.onload = () => resolve(i); i.onerror = reject; i.src = url;
+    });
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth * 2; canvas.height = img.naturalHeight * 2;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.scale(2, 2);
+    ctx.drawImage(img, 0, 0);
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.92));
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.jpg', blob }];
+  }
 },
 {
   id: 'gif-to-mp4', category: 'Converters Bench', title: 'GIF to MP4',
   desc: 'Convert GIF to MP4 video.',
   accept: '.gif', multiple: false, minFiles: 1, hint: 'GIF file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.gif';
+    const outName = 'out.mp4';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-movflags', 'faststart', '-pix_fmt', 'yuv420p', '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp4', blob: new Blob([data.buffer], {type: 'video/mp4'}) }];
+  }
 },
 {
   id: 'gif-to-webp', category: 'Converters Bench', title: 'GIF to WebP',
   desc: 'Convert GIF to animated WebP.',
   accept: '.gif', multiple: false, minFiles: 1, hint: 'GIF file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.gif';
+    const outName = 'out.webp';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-c:v', 'libwebp', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.webp', blob: new Blob([data.buffer], {type: 'image/webp'}) }];
+  }
 },
 {
   id: 'mov-to-mp4', category: 'Converters Bench', title: 'MOV to MP4',
   desc: 'Convert MOV video to MP4.',
   accept: '.mov', multiple: false, minFiles: 1, hint: 'MOV file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.mov';
+    const outName = 'out.mp4';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-vcodec', 'libx264', '-acodec', 'aac', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp4', blob: new Blob([data.buffer], {type: 'video/mp4'}) }];
+  }
 },
 {
   id: 'mkv-to-mp4', category: 'Converters Bench', title: 'MKV to MP4',
   desc: 'Convert MKV video to MP4.',
   accept: '.mkv', multiple: false, minFiles: 1, hint: 'MKV file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.mkv';
+    const outName = 'out.mp4';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-vcodec', 'libx264', '-acodec', 'aac', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp4', blob: new Blob([data.buffer], {type: 'video/mp4'}) }];
+  }
 },
 {
   id: 'avi-to-mp4', category: 'Converters Bench', title: 'AVI to MP4',
   desc: 'Convert AVI video to MP4.',
   accept: '.avi', multiple: false, minFiles: 1, hint: 'AVI file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.avi';
+    const outName = 'out.mp4';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-vcodec', 'libx264', '-acodec', 'aac', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp4', blob: new Blob([data.buffer], {type: 'video/mp4'}) }];
+  }
 },
 {
   id: 'wav-to-mp3', category: 'Converters Bench', title: 'WAV to MP3',
   desc: 'Convert WAV audio to MP3.',
   accept: '.wav', multiple: false, minFiles: 1, hint: 'WAV file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.wav';
+    const outName = 'out.mp3';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-acodec', 'libmp3lame', '-q:a', '2', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp3', blob: new Blob([data.buffer], {type: 'audio/mp3'}) }];
+  }
 },
 {
   id: 'flac-to-mp3', category: 'Converters Bench', title: 'FLAC to MP3',
   desc: 'Convert FLAC audio to MP3.',
   accept: '.flac', multiple: false, minFiles: 1, hint: 'FLAC file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.flac';
+    const outName = 'out.mp3';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-acodec', 'libmp3lame', '-q:a', '2', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp3', blob: new Blob([data.buffer], {type: 'audio/mp3'}) }];
+  }
 },
 {
   id: 'm4a-to-mp3', category: 'Converters Bench', title: 'M4A to MP3',
   desc: 'Convert M4A audio to MP3.',
   accept: '.m4a', multiple: false, minFiles: 1, hint: 'M4A file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.m4a';
+    const outName = 'out.mp3';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-acodec', 'libmp3lame', '-q:a', '2', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp3', blob: new Blob([data.buffer], {type: 'audio/mp3'}) }];
+  }
 },
 {
   id: 'ogg-to-mp3', category: 'Converters Bench', title: 'OGG to MP3',
   desc: 'Convert OGG audio to MP3.',
   accept: '.ogg', multiple: false, minFiles: 1, hint: 'OGG file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const ffmpeg = await getFFmpeg(progress);
+    const inName = 'in.ogg';
+    const outName = 'out.mp3';
+    ffmpeg.FS('writeFile', inName, await FFmpeg.fetchFile(files[0]));
+    ffmpeg.setProgress(({ ratio }) => progress(10 + Math.round(ratio*85), 'Converting'));
+    await ffmpeg.run('-i', inName, '-acodec', 'libmp3lame', '-q:a', '2', outName);
+    const data = ffmpeg.FS('readFile', outName);
+    ffmpeg.FS('unlink', inName); ffmpeg.FS('unlink', outName);
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.mp3', blob: new Blob([data.buffer], {type: 'audio/mp3'}) }];
+  }
 },
 {
   id: 'docx-to-txt', category: 'Converters Bench', title: 'DOCX to TXT',
   desc: 'Convert DOCX document to plain text.',
   accept: '.docx', multiple: false, minFiles: 1, hint: 'DOCX file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib('JSZip');
+    progress(30, 'Extracting DOCX');
+    const zip = await JSZip.loadAsync(files[0]);
+    const docXml = await zip.file('word/document.xml').async('string');
+    progress(70, 'Parsing text');
+    const text = docXml.replace(/<w:p[^>]*>/g, '\n').replace(/<[^>]+>/g, '');
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.txt', blob: new Blob([text.trim()], {type: 'text/plain'}) }];
+  }
 },
 {
   id: 'docx-to-html', category: 'Converters Bench', title: 'DOCX to HTML',
   desc: 'Convert DOCX document to HTML.',
   accept: '.docx', multiple: false, minFiles: 1, hint: 'DOCX file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib('JSZip');
+    progress(30, 'Extracting DOCX');
+    const zip = await JSZip.loadAsync(files[0]);
+    const docXml = await zip.file('word/document.xml').async('string');
+    progress(70, 'Parsing HTML');
+    const html = docXml.replace(/<w:p[^>]*>/g, '<p>').replace(/<\/w:p>/g, '</p>\n').replace(/<[^>]+>/g, (m) => m.startsWith('<p') || m.startsWith('</p') ? m : '');
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.html', blob: new Blob([html.trim()], {type: 'text/html'}) }];
+  }
 },
 {
   id: 'xlsx-to-csv', category: 'Converters Bench', title: 'XLSX to CSV',
   desc: 'Convert XLSX spreadsheet to CSV.',
   accept: '.xlsx', multiple: false, minFiles: 1, hint: 'XLSX file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib('JSZip');
+    progress(30, 'Extracting XLSX');
+    const zip = await JSZip.loadAsync(files[0]);
+    const sheetXml = await zip.file('xl/worksheets/sheet1.xml').async('string');
+    let sharedStrings = [];
+    if (zip.file('xl/sharedStrings.xml')) {
+      const ssXml = await zip.file('xl/sharedStrings.xml').async('string');
+      sharedStrings = [...ssXml.matchAll(/<t[^>]*>(.*?)<\/t>/g)].map(m => m[1]);
+    }
+    progress(70, 'Parsing CSV');
+    let csv = '';
+    const rows = sheetXml.match(/<row[^>]*>.*?<\/row>/g) || [];
+    for (const row of rows) {
+      const cells = row.match(/<c[^>]*>.*?<\/c>/g) || [];
+      const rowData = cells.map(cell => {
+        const typeMatch = cell.match(/t="([^"]+)"/);
+        const valMatch = cell.match(/<v>(.*?)<\/v>/);
+        let val = valMatch ? valMatch[1] : '';
+        if (typeMatch && typeMatch[1] === 's' && sharedStrings[val]) {
+          val = sharedStrings[val];
+        }
+        return `"${val.replace(/"/g, '""')}"`;
+      });
+      csv += rowData.join(',') + '\n';
+    }
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.csv', blob: new Blob([csv], {type: 'text/csv'}) }];
+  }
 },
 {
   id: 'csv-to-xlsx', category: 'Converters Bench', title: 'CSV to XLSX',
   desc: 'Convert CSV to XLSX spreadsheet.',
   accept: '.csv', multiple: false, minFiles: 1, hint: 'CSV file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib('JSZip');
+    progress(30, 'Parsing CSV');
+    const text = await files[0].text();
+    const rows = text.split('\n').filter(r => r.trim());
+    let sheetData = '';
+    rows.forEach((row, rIdx) => {
+      sheetData += `<row r="${rIdx+1}">`;
+      const cols = row.split(',');
+      cols.forEach((col, cIdx) => {
+        let val = col.replace(/^"(.*)"$/, '$1').replace(/""/g, '"');
+        const ref = String.fromCharCode(65 + cIdx) + (rIdx+1);
+        sheetData += `<c r="${ref}" t="inlineStr"><is><t>${val.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</t></is></c>`;
+      });
+      sheetData += `</row>`;
+    });
+    progress(70, 'Generating XLSX');
+    const zip = new JSZip();
+    zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>');
+    zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>');
+    zip.file('xl/_rels/workbook.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>');
+    zip.file('xl/workbook.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Sheet1" sheetId="1" r:id="rId1"/></sheets></workbook>');
+    zip.file('xl/worksheets/sheet1.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>${sheetData}</sheetData></worksheet>`);
+    const blob = await zip.generateAsync({type: 'blob'});
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '.xlsx', blob }];
+  }
 },
 {
   id: 'pptx-to-jpg', category: 'Converters Bench', title: 'PPTX to JPG',
   desc: 'Convert PPTX slides to JPG.',
   accept: '.pptx', multiple: false, minFiles: 1, hint: 'PPTX file',
-  options: [], run: async (files, opts, progress) => { return []; }
+  options: [], run: async (files, opts, progress) => {
+    const JSZip = await window.ensureLib('JSZip');
+    progress(30, 'Extracting PPTX');
+    const zip = await JSZip.loadAsync(files[0]);
+    const mediaFiles = Object.keys(zip.files).filter(name => name.startsWith('ppt/media/') && (name.endsWith('.jpeg') || name.endsWith('.jpg') || name.endsWith('.png')));
+    progress(70, 'Packing images');
+    const outZip = new JSZip();
+    for (const mf of mediaFiles) {
+      outZip.file(mf.split('/').pop(), await zip.files[mf].async('blob'));
+    }
+    const blob = await outZip.generateAsync({type: 'blob'});
+    progress(100, 'Done');
+    return [{ name: base(files[0].name) + '-images.zip', blob }];
+  }
 }
 
 );

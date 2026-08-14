@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mergio.vercel.app/sitemap.xml
