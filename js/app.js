@@ -347,6 +347,50 @@
       clearTip();
       progress(100, 'Done');
       resultFiles.innerHTML = '';
+
+      // Check if first result is an image and can show before/after comparison slider (TASK 6)
+      const firstResult = results[0];
+      const isImgResult = firstResult && firstResult.blob && firstResult.blob.type.startsWith('image/') && currentFiles[0] && currentFiles[0].type.startsWith('image/');
+
+      if (isImgResult && currentTool.id.includes('image')) {
+        const origUrl = URL.createObjectURL(currentFiles[0]);
+        const resUrl = URL.createObjectURL(firstResult.blob);
+        
+        const compareDiv = document.createElement('div');
+        compareDiv.className = 'compare-container';
+        compareDiv.innerHTML = `
+          <img class="compare-after" src="${resUrl}" alt="After">
+          <div class="compare-before-wrap" id="compareBeforeWrap">
+            <img class="compare-before" src="${origUrl}" alt="Before">
+          </div>
+          <div class="compare-slider-handle" id="compareHandle">
+            <svg viewBox="0 0 24 24"><path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l-3 3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <span class="compare-label lbl-before">Original</span>
+          <span class="compare-label lbl-after">Processed</span>
+        `;
+
+        let isSliding = false;
+        const setPos = (clientX) => {
+          const rect = compareDiv.getBoundingClientRect();
+          const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+          const pct = (x / rect.width) * 100;
+          const wrap = compareDiv.querySelector('#compareBeforeWrap');
+          const handle = compareDiv.querySelector('#compareHandle');
+          if (wrap) wrap.style.width = pct + '%';
+          if (handle) handle.style.left = pct + '%';
+        };
+
+        compareDiv.addEventListener('mousedown', (e) => { isSliding = true; setPos(e.clientX); });
+        window.addEventListener('mousemove', (e) => { if (isSliding) setPos(e.clientX); });
+        window.addEventListener('mouseup', () => { isSliding = false; });
+        compareDiv.addEventListener('touchstart', (e) => { isSliding = true; setPos(e.touches[0].clientX); }, { passive:true });
+        window.addEventListener('touchmove', (e) => { if (isSliding) setPos(e.touches[0].clientX); }, { passive:true });
+        window.addEventListener('touchend', () => { isSliding = false; });
+
+        resultFiles.appendChild(compareDiv);
+      }
+
       results.forEach(r => {
         const url = URL.createObjectURL(r.blob);
         const a = document.createElement('a');
@@ -356,6 +400,11 @@
         a.innerHTML = `<span>${r.name} · ${fmtSize(r.blob.size)}</span><span class="dl-arrow">Download <svg viewBox="0 0 24 24"><use href="#i-download"/></svg></span>`;
         resultFiles.appendChild(a);
       });
+      
+      const rTitle = resultBox.querySelector('.r-title');
+      if (rTitle) {
+        rTitle.innerHTML = `<svg class="success-check-svg" viewBox="0 0 24 24"><circle class="success-check-circle" cx="12" cy="12" r="9"/><path class="success-check-path" d="m8 12.5 2.5 2.5L16 9.5"/></svg> Ready for download`;
+      }
       resultBox.classList.add('show');
     } catch (err){
       console.error(err);
