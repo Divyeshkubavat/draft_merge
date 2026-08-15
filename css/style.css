@@ -256,15 +256,31 @@ header.site.scrolled{ box-shadow:0 2px 16px rgba(20,24,38,0.06); }
 .brand-sub{ font-size:10.5px; color:var(--n-text-faint); letter-spacing:.3px; margin-top:0px; }
 
 nav.top-nav{
-  display:flex; gap:3px; font-size:13.5px;
-  background:rgba(0,0,0,0.035); padding:3px; border-radius:10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 13.5px;
+  background: rgba(0,0,0,0.04);
+  padding: 3px 4px;
+  border-radius: 12px;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+nav.top-nav::-webkit-scrollbar{ display: none; }
 nav.top-nav a{
-  text-decoration:none; color:var(--n-text-soft); padding:7px 13px; border-radius:7px;
-  transition:all .18s cubic-bezier(0.16, 1, 0.3, 1); font-weight:500;
+  text-decoration: none;
+  color: var(--n-text-soft);
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all .18s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 600;
+  font-size: 13px;
+  flex-shrink: 0;
 }
-nav.top-nav a:hover{ color:var(--n-text); background:rgba(255,255,255,0.75); }
-nav.top-nav a.active{ color:#fff; background:var(--accent); box-shadow:0 2px 8px rgba(37,100,207,0.3); }
+nav.top-nav a:hover{ color: var(--n-text); background: rgba(255,255,255,0.85); }
+nav.top-nav a.active{ color: #fff; background: var(--accent); box-shadow: 0 2px 10px rgba(37,100,207,0.35); }
 
 .privacy-pill{
   font-size:11.5px; font-weight:600; color:var(--success);
@@ -1299,51 +1315,61 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 }
 
 /* ============================================================
-   FLOATING MOBILE BOTTOM NAVIGATION
+   FLOATING MOBILE BOTTOM NAVIGATION (All 8 Benches)
    ============================================================ */
 .mobile-bottom-nav {
   display: none;
 }
 @media (max-width: 760px) {
   body {
-    padding-bottom: 84px;
+    padding-bottom: 88px;
   }
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
-    bottom: 14px;
-    left: 14px;
-    right: 14px;
-    background: rgba(255, 255, 255, 0.92);
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    max-width: 520px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(20px) saturate(1.6);
     -webkit-backdrop-filter: blur(20px) saturate(1.6);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 24px;
-    padding: 6px 6px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+    border-radius: 26px;
+    padding: 5px 6px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
     z-index: 380;
-    justify-content: space-around;
-    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 3px;
+    justify-content: flex-start;
+  }
+  .mobile-bottom-nav::-webkit-scrollbar {
+    display: none;
   }
   .mb-nav-link {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 2px;
     text-decoration: none;
     color: var(--n-text-soft);
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 600;
-    padding: 6px 10px;
+    padding: 6px 9px;
     border-radius: 16px;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    flex: 1;
+    flex: 0 0 auto;
+    min-width: 52px;
     text-align: center;
+    white-space: nowrap;
   }
   .mb-nav-link svg {
-    width: 20px;
-    height: 20px;
+    width: 19px;
+    height: 19px;
     stroke-width: 2;
     transition: transform 0.2s ease;
   }
@@ -1353,6 +1379,7 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   .mb-nav-link.active, .mb-nav-link:hover {
     color: var(--accent);
     background: var(--accent-soft);
+    font-weight: 700;
   }
   .mb-nav-link.active svg {
     transform: translateY(-1px);
@@ -1378,10 +1405,11 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 }
 
 
-@media (max-width: 1080px){
+@media (max-width: 1100px){
   .privacy-pill{ display:none; }
-  nav.top-nav{ font-size:12.5px; gap:1px; }
-  nav.top-nav a{ padding:7px 9px; }
+  .header-inner{ padding:10px 16px; gap:12px; }
+  nav.top-nav{ font-size:12.5px; gap:2px; padding:3px; }
+  nav.top-nav a{ padding:6px 9px; font-size:12px; }
 }
 
 /* ---------- whole-window drag feedback ---------- */

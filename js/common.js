@@ -33,14 +33,19 @@
     });
   }
 
-  // ---------- mobile bottom nav active state ----------
+  // ---------- mobile bottom nav active state & auto-center ----------
   const curPath = window.location.pathname;
+  let activeFound = false;
   document.querySelectorAll('.mb-nav-link').forEach(link => {
     const page = link.getAttribute('data-page');
-    if (page === 'home' && (curPath.endsWith('index.html') || curPath === '/' || curPath.endsWith('/'))) {
+    const isHome = page === 'home' && (curPath.endsWith('index.html') || curPath === '/' || curPath.endsWith('/'));
+    const isMatch = isHome || (page && curPath.includes(page));
+    if (isMatch && !activeFound) {
       link.classList.add('active');
-    } else if (page && curPath.includes(page)) {
-      link.classList.add('active');
+      activeFound = true;
+      setTimeout(() => {
+        try { link.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } catch(e) {}
+      }, 100);
     }
   });
 
