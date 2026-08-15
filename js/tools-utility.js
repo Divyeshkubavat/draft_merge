@@ -1,5 +1,7 @@
 /* Utility Bench - QR, barcodes, passwords, hashes, metadata */
 
+window.TOOL_DEFS = window.TOOL_DEFS || [];
+
 function loadImageFromFile(file){
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);

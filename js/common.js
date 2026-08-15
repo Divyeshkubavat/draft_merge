@@ -247,5 +247,112 @@
       return window.FFmpeg;
     }
   };
+
+  // --- Onboarding ---
+  (function initOnboarding() {
+    if (localStorage.getItem('mergio_onboarded')) return;
+    const steps = [
+      { title: 'Search 150+ Tools', desc: 'Press Ctrl+K or type in the search bar to instantly find any tool — from PDF merge to video compression.' },
+      { title: 'Explore by Category', desc: 'Browse seven specialized benches: PDF, Image, Video, Audio, Text, Converters, and Utility.' },
+      { title: 'Your Files Stay Private', desc: 'Every tool runs 100% in your browser. Nothing is uploaded — ever. Your files never leave this tab.' }
+    ];
+    let current = 0;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'onboard-overlay';
+    overlay.innerHTML = `
+      <div class="onboard-card">
+        <h3 class="onboard-title"></h3>
+        <p class="onboard-desc"></p>
+        <div class="onboard-dots">${steps.map((_,i) => `<span data-i="${i}"></span>`).join('')}</div>
+        <div class="onboard-actions">
+          <button class="onboard-skip">Skip</button>
+          <button class="onboard-next">Next</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    
+    function show(i) {
+      overlay.querySelector('.onboard-title').textContent = steps[i].title;
+      overlay.querySelector('.onboard-desc').textContent = steps[i].desc;
+      overlay.querySelectorAll('.onboard-dots span').forEach((d, idx) => d.classList.toggle('active', idx === i));
+      overlay.querySelector('.onboard-next').textContent = i === steps.length - 1 ? 'Get Started' : 'Next';
+    }
+    
+    function close() {
+      overlay.classList.remove('active');
+      localStorage.setItem('mergio_onboarded', '1');
+      setTimeout(() => overlay.remove(), 300);
+    }
+    
+    overlay.querySelector('.onboard-skip').addEventListener('click', close);
+    overlay.querySelector('.onboard-next').addEventListener('click', () => {
+      current++;
+      if (current >= steps.length) return close();
+      show(current);
+    });
+    
+    show(0);
+    requestAnimationFrame(() => overlay.classList.add('active'));
+  })();
+
+  // --- PWA Install Prompt ---
+  (function initPWAInstall() {
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      // Show banner after 2nd visit or after a successful conversion
+      const visits = parseInt(localStorage.getItem('mergio_visits') || '0', 10) + 1;
+      localStorage.setItem('mergio_visits', String(visits));
+      if (visits >= 2 && !localStorage.getItem('mergio_pwa_dismissed')) showInstallBanner();
+    });
+    
+    function showInstallBanner() {
+      if (document.querySelector('.pwa-banner')) return;
+      const banner = document.createElement('div');
+      banner.className = 'pwa-banner';
+      banner.innerHTML = `
+        <div class="pwa-banner-text">
+          <h4>Install Mergio</h4>
+          <p>Add to home screen for offline access to 150+ tools</p>
+        </div>
+        <button class="pwa-install">Install</button>
+        <button class="pwa-dismiss" aria-label="Dismiss">&times;</button>
+      `;
+      document.body.appendChild(banner);
+      requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('show')));
+      
+      banner.querySelector('.pwa-install').addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+        }
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 400);
+      });
+      
+      banner.querySelector('.pwa-dismiss').addEventListener('click', () => {
+        localStorage.setItem('mergio_pwa_dismissed', '1');
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 400);
+      });
+    }
+    window._showInstallBanner = showInstallBanner;
+  })();
+
+  // --- Privacy-first analytics events (lightweight) ---
+  window.mergioTrack = function(event, data) {
+    // Lightweight local tracking - stores in sessionStorage for the history panel
+    // Can be extended to send to Plausible/Umami later
+    try {
+      const log = JSON.parse(sessionStorage.getItem('mergio_events') || '[]');
+      log.push({ event, data, ts: Date.now() });
+      if (log.length > 200) log.splice(0, log.length - 200);
+      sessionStorage.setItem('mergio_events', JSON.stringify(log));
+    } catch(e) {}
+  };
 })();
 

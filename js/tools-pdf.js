@@ -22,6 +22,296 @@ function canvasToBlob(canvas, type, quality){
  return new Promise(resolve => canvas.toBlob(resolve, type, quality));
 }
 
+(function() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .pdf-thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      padding: 16px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: var(--n-bg-alt, #eef1f7);
+      border-radius: var(--radius-md, 10px);
+      border: 1px solid var(--n-border, #e2e5ec);
+      margin: 12px 0;
+    }
+    .pdf-thumb-card {
+      position: relative;
+      background: var(--n-surface, #fff);
+      border-radius: var(--radius-sm, 6px);
+      border: 2px solid var(--n-border, #e2e5ec);
+      padding: 8px;
+      cursor: grab;
+      transition: border-color .15s, opacity .15s, transform .15s;
+      user-select: none;
+    }
+    .pdf-thumb-card:active { cursor: grabbing; }
+    .pdf-thumb-card.dragging { opacity: 0.5; transform: scale(0.95); }
+    .pdf-thumb-card.drag-over { border-color: var(--accent, #2564cf); }
+    .pdf-thumb-card.selected { border-color: var(--accent, #2564cf); background: var(--accent-soft, #eaf1fd); }
+    .pdf-thumb-card.excluded { opacity: 0.35; }
+    .pdf-thumb-card.excluded::after {
+      content: '✕';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: var(--danger, #d13438);
+      font-weight: 700;
+    }
+    .pdf-thumb-card canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }
+    .pdf-thumb-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+    .pdf-thumb-footer span {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--n-text-soft, #4b5160);
+    }
+    .pdf-thumb-actions {
+      display: flex;
+      gap: 4px;
+    }
+    .pdf-thumb-actions button {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: var(--n-bg-alt, #eef1f7);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--n-text-soft, #4b5160);
+      transition: background .15s;
+    }
+    .pdf-thumb-actions button:hover {
+      background: var(--accent-soft, #eaf1fd);
+      color: var(--accent, #2564cf);
+    }
+    .pdf-thumb-status {
+      padding: 8px 16px;
+      font-size: .82rem;
+      color: var(--n-text-soft);
+      text-align: center;
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+async function renderPageThumbnails(file, container, config = {}) {
+  const { mode = 'rearrange' } = config; 
+  const bytes = await fileToArrayBuffer(file);
+  const pdfjsLib = await window.ensureLib("pdfjsLib");
+  const doc = await pdfjsLib.getDocument({ data: bytes.slice(0) }).promise;
+  const total = doc.numPages;
+  
+  container.innerHTML = '';
+  
+  const statusEl = document.createElement('div');
+  statusEl.className = 'pdf-thumb-status';
+  statusEl.textContent = 'Loading pages...';
+  container.appendChild(statusEl);
+
+  const grid = document.createElement('div');
+  grid.className = 'pdf-thumb-grid';
+  
+  const pagesData = [];
+  
+  for (let i = 1; i <= total; i++) {
+    pagesData.push({
+      originalIndex: i - 1,
+      pageNum: i,
+      rotation: 0,
+      selected: mode === 'extract' ? false : true,
+      excluded: false
+    });
+  }
+
+  const renderGrid = async () => {
+    grid.innerHTML = '';
+    for (let i = 0; i < pagesData.length; i++) {
+      const pData = pagesData[i];
+      const card = document.createElement('div');
+      card.className = 'pdf-thumb-card';
+      if (mode === 'extract' && pData.selected) card.classList.add('selected');
+      if (mode === 'delete' && pData.excluded) card.classList.add('excluded');
+      
+      card.draggable = true;
+      card.dataset.index = i;
+      
+      card.addEventListener('dragstart', (e) => {
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', i);
+      });
+      card.addEventListener('dragend', () => card.classList.remove('dragging'));
+      card.addEventListener('dragover', (e) => { e.preventDefault(); card.classList.add('drag-over'); });
+      card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+      card.addEventListener('drop', (e) => {
+        e.preventDefault();
+        card.classList.remove('drag-over');
+        const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+        const toIndex = i;
+        if (fromIndex !== toIndex) {
+          const item = pagesData.splice(fromIndex, 1)[0];
+          pagesData.splice(toIndex, 0, item);
+          renderGrid(); 
+        }
+      });
+      
+      const canvasContainer = document.createElement('div');
+      
+      renderPdfPageToCanvas(doc, pData.pageNum, 0.5).then(canvas => {
+        if (pData.rotation) {
+           canvas.style.transform = `rotate(${pData.rotation}deg)`;
+        }
+        canvasContainer.appendChild(canvas);
+      });
+      
+      card.appendChild(canvasContainer);
+      
+      const footer = document.createElement('div');
+      footer.className = 'pdf-thumb-footer';
+      
+      const label = document.createElement('span');
+      label.textContent = `Page ${pData.pageNum}`;
+      footer.appendChild(label);
+      
+      const actions = document.createElement('div');
+      actions.className = 'pdf-thumb-actions';
+      
+      const rotateBtn = document.createElement('button');
+      rotateBtn.innerHTML = '↻';
+      rotateBtn.type = 'button';
+      rotateBtn.title = 'Rotate 90°';
+      rotateBtn.onclick = (e) => {
+        e.stopPropagation();
+        pData.rotation = (pData.rotation + 90) % 360;
+        renderGrid();
+      };
+      
+      if (mode === 'rearrange') {
+        actions.appendChild(rotateBtn);
+      }
+      
+      if (mode === 'delete') {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.innerHTML = pData.excluded ? '↺' : '✕';
+        toggleBtn.type = 'button';
+        toggleBtn.title = pData.excluded ? 'Restore' : 'Delete';
+        toggleBtn.onclick = (e) => {
+          e.stopPropagation();
+          pData.excluded = !pData.excluded;
+          renderGrid();
+        };
+        actions.appendChild(toggleBtn);
+        card.onclick = () => {
+          pData.excluded = !pData.excluded;
+          renderGrid();
+        };
+      }
+      
+      if (mode === 'extract') {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.innerHTML = pData.selected ? '✓' : '+';
+        toggleBtn.type = 'button';
+        toggleBtn.title = pData.selected ? 'Deselect' : 'Select';
+        toggleBtn.onclick = (e) => {
+          e.stopPropagation();
+          pData.selected = !pData.selected;
+          renderGrid();
+        };
+        actions.appendChild(toggleBtn);
+        card.onclick = () => {
+          pData.selected = !pData.selected;
+          renderGrid();
+        };
+      }
+      
+      footer.appendChild(actions);
+      card.appendChild(footer);
+      grid.appendChild(card);
+    }
+  };
+  
+  await renderGrid();
+  
+  statusEl.textContent = 'Drag to reorder pages. ' + (mode === 'delete' ? 'Click to mark for deletion.' : (mode === 'extract' ? 'Click to select pages to extract.' : ''));
+  container.appendChild(grid);
+  
+  return {
+    getPagesData: () => pagesData
+  };
+}
+
+async function showVisualOrganizerModal(file, title, mode, confirmText) {
+  return new Promise(async (resolve, reject) => {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px);';
+    const modal = document.createElement('div');
+    modal.style.cssText = 'background:var(--n-surface,#fff);padding:24px;border-radius:12px;width:90%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,0.2);';
+    
+    const header = document.createElement('h3');
+    header.textContent = title;
+    header.style.margin = '0 0 15px 0';
+    header.style.fontFamily = 'inherit';
+    modal.appendChild(header);
+
+    const gridContainer = document.createElement('div');
+    gridContainer.style.flex = '1';
+    gridContainer.style.overflow = 'hidden';
+    gridContainer.style.display = 'flex';
+    gridContainer.style.flexDirection = 'column';
+    modal.appendChild(gridContainer);
+    
+    const footer = document.createElement('div');
+    footer.style.cssText = 'display:flex;justify-content:flex-end;gap:10px;margin-top:15px;';
+    
+    const cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.style.cssText = 'padding:8px 16px;border:1px solid var(--n-border,#ccc);background:transparent;border-radius:6px;cursor:pointer;font-family:inherit;';
+    cancelBtn.onclick = () => {
+      document.body.removeChild(overlay);
+      reject(new Error('User cancelled'));
+    };
+    
+    const confirmBtn = document.createElement('button');
+    confirmBtn.textContent = confirmText;
+    confirmBtn.style.cssText = 'padding:8px 16px;border:none;background:var(--accent,#2564cf);color:#fff;border-radius:6px;cursor:pointer;font-weight:600;font-family:inherit;';
+    
+    footer.appendChild(cancelBtn);
+    footer.appendChild(confirmBtn);
+    modal.appendChild(footer);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    try {
+      const visualOrganizer = await renderPageThumbnails(file, gridContainer, { mode });
+      
+      confirmBtn.onclick = () => {
+        document.body.removeChild(overlay);
+        resolve(visualOrganizer.getPagesData());
+      };
+    } catch (e) {
+      document.body.removeChild(overlay);
+      reject(e);
+    }
+  });
+}
+
 window.TOOL_DEFS.push(
 {
  id:'merge-pdf', category:'PDF Bench', title:'Merge PDF',
@@ -492,101 +782,90 @@ window.TOOL_DEFS.push(
    id:'extract-pdf-pages', category:'PDF Bench', title:'Extract PDF Pages',
    desc:'Extract selected page ranges into a new PDF.',
    accept:'.pdf', multiple:false, minFiles:1, hint:'One PDF',
-   options:[ { type:'text', id:'ranges', label:'Pages (e.g. 1, 3-5)', placeholder:'1,3-5' } ],
+   options:[ ],
    run: async (files, opts, progress) => {
-     progress(10, 'Loading PDF');
+     let pagesData;
+     try {
+       pagesData = await showVisualOrganizerModal(files[0], 'Select Pages to Extract', 'extract', 'Extract Selected');
+     } catch (e) {
+       throw new Error('Operation cancelled by user.');
+     }
+     const indices = pagesData.filter(p => p.selected).map(p => p.originalIndex);
+     if (indices.length === 0) throw new Error('No pages selected');
+
+     progress(50, 'Extracting pages');
      const bytes = await fileToArrayBuffer(files[0]);
      const PDFLib = await window.ensureLib("PDFLib");
      const { PDFDocument } = PDFLib;
      const srcDoc = await PDFDocument.load(bytes);
      const outDoc = await PDFDocument.create();
      
-     const total = srcDoc.getPageCount();
-     let indices = [];
-     const parts = (opts.ranges || '').split(',');
-     for (const p of parts) {
-       const trimmed = p.trim();
-       if (!trimmed) continue;
-       if (trimmed.includes('-')) {
-         const [start, end] = trimmed.split('-').map(n => parseInt(n, 10));
-         if (!isNaN(start) && !isNaN(end)) {
-           for (let i = start; i <= end; i++) {
-             if (i >= 1 && i <= total) indices.push(i - 1);
-           }
-         }
-       } else {
-         const n = parseInt(trimmed, 10);
-         if (!isNaN(n) && n >= 1 && n <= total) indices.push(n - 1);
-       }
-     }
+     const pages = await outDoc.copyPages(srcDoc, indices);
+     pages.forEach(p => outDoc.addPage(p));
      
-     if (indices.length > 0) {
-       progress(50, 'Extracting pages');
-       const pages = await outDoc.copyPages(srcDoc, indices);
-       pages.forEach(p => outDoc.addPage(p));
-     }
      progress(90, 'Saving PDF');
      const pdfBytes = await outDoc.save();
      return [{ name: 'extracted.pdf', blob: new Blob([pdfBytes], {type:'application/pdf'}) }];
    }
- },
- {
+ }, {
    id:'delete-pdf-pages', category:'PDF Bench', title:'Delete PDF Pages',
    desc:'Remove specified page numbers from a PDF.',
    accept:'.pdf', multiple:false, minFiles:1, hint:'One PDF',
-   options:[ { type:'text', id:'pages', label:'Pages to remove (e.g. 2,4)', placeholder:'2,4' } ],
+   options:[ ],
    run: async (files, opts, progress) => {
-     progress(10, 'Loading PDF');
+     let pagesData;
+     try {
+       pagesData = await showVisualOrganizerModal(files[0], 'Select Pages to Delete', 'delete', 'Delete Selected');
+     } catch (e) {
+       throw new Error('Operation cancelled by user.');
+     }
+     const indices = pagesData.filter(p => !p.excluded).map(p => p.originalIndex);
+     if (indices.length === 0) throw new Error('Cannot delete all pages');
+
+     progress(50, 'Copying pages');
      const bytes = await fileToArrayBuffer(files[0]);
      const PDFLib = await window.ensureLib("PDFLib");
      const { PDFDocument } = PDFLib;
      const srcDoc = await PDFDocument.load(bytes);
      const outDoc = await PDFDocument.create();
      
-     const total = srcDoc.getPageCount();
-     const toRemove = new Set((opts.pages || '').split(',').map(n => parseInt(n.trim(), 10) - 1));
-     let indices = [];
-     for (let i = 0; i < total; i++) {
-       if (!toRemove.has(i)) indices.push(i);
-     }
-     
-     if (indices.length > 0) {
-       progress(50, 'Copying pages');
-       const pages = await outDoc.copyPages(srcDoc, indices);
-       pages.forEach(p => outDoc.addPage(p));
-     }
+     const pages = await outDoc.copyPages(srcDoc, indices);
+     pages.forEach(p => outDoc.addPage(p));
      
      progress(90, 'Saving PDF');
      const pdfBytes = await outDoc.save();
      return [{ name: 'deleted.pdf', blob: new Blob([pdfBytes], {type:'application/pdf'}) }];
    }
- },
- {
+ }, {
    id:'rearrange-pdf-pages', category:'PDF Bench', title:'Rearrange PDF Pages',
-   desc:'Reorder pages using an index array.',
+   desc:'Reorder pages visually.',
    accept:'.pdf', multiple:false, minFiles:1, hint:'One PDF',
-   options:[ { type:'text', id:'order', label:'New order (e.g. 3,2,1)', placeholder:'3,2,1' } ],
+   options:[ ],
    run: async (files, opts, progress) => {
-     progress(10, 'Loading PDF');
+     let pagesData;
+     try {
+       pagesData = await showVisualOrganizerModal(files[0], 'Rearrange PDF Pages', 'rearrange', 'Confirm Order');
+     } catch (e) {
+       throw new Error('Operation cancelled by user.');
+     }
+     
+     progress(50, 'Rearranging pages');
      const bytes = await fileToArrayBuffer(files[0]);
      const PDFLib = await window.ensureLib("PDFLib");
-     const { PDFDocument } = PDFLib;
+     const { PDFDocument, degrees } = PDFLib;
      const srcDoc = await PDFDocument.load(bytes);
      const outDoc = await PDFDocument.create();
      
-     const total = srcDoc.getPageCount();
-     let indices = [];
-     const parts = (opts.order || '').split(',');
-     for (const p of parts) {
-       const n = parseInt(p.trim(), 10);
-       if (!isNaN(n) && n >= 1 && n <= total) indices.push(n - 1);
-     }
-     
-     if (indices.length > 0) {
-       progress(50, 'Rearranging pages');
-       const pages = await outDoc.copyPages(srcDoc, indices);
-       pages.forEach(p => outDoc.addPage(p));
-     }
+     const indices = pagesData.map(p => p.originalIndex);
+     const pages = await outDoc.copyPages(srcDoc, indices);
+     pages.forEach((p, idx) => {
+       const rot = pagesData[idx].rotation;
+       if (rot) {
+         const current = p.getRotation().angle;
+         p.setRotation(degrees((current + rot) % 360));
+       }
+       outDoc.addPage(p);
+     });
      
      progress(90, 'Saving PDF');
      const pdfBytes = await outDoc.save();
