@@ -33,18 +33,18 @@
     });
   }
 
-  // ---------- mobile bottom nav active state & auto-center ----------
+  // ---------- bench slider active state & auto-center ----------
   const curPath = window.location.pathname;
   let activeFound = false;
-  document.querySelectorAll('.mb-nav-link').forEach(link => {
-    const page = link.getAttribute('data-page');
-    const isHome = page === 'home' && (curPath.endsWith('index.html') || curPath === '/' || curPath.endsWith('/'));
-    const isMatch = isHome || (page && curPath.includes(page));
+  document.querySelectorAll('.bs-item').forEach(item => {
+    const bench = item.getAttribute('data-bench');
+    const isHome = bench === 'home' && (curPath.endsWith('index.html') || curPath === '/' || curPath.endsWith('/'));
+    const isMatch = isHome || (bench && curPath.includes(bench));
     if (isMatch && !activeFound) {
-      link.classList.add('active');
+      item.classList.add('active');
       activeFound = true;
       setTimeout(() => {
-        try { link.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } catch(e) {}
+        try { item.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); } catch(e) {}
       }, 100);
     }
   });
