@@ -207,6 +207,7 @@ body{
   min-height:100vh;
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
+  padding-bottom: 88px;
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -596,6 +597,7 @@ footer .fmark b{ color:var(--n-text-soft); }
 }
 
 @media (max-width:760px){
+  body{ padding-bottom: 80px; }
   .strip-inner{ grid-template-columns:1fr; gap:26px; }
   .ruler-nav{ position:static; overflow-x:auto; flex-wrap:nowrap; padding-bottom:12px; }
   .ruler-tab{ flex-shrink:0; }
@@ -712,16 +714,17 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
     position: relative;
     top: auto;
     right: auto;
-    width: 220px;
-    height: 220px;
+    width: 280px;
+    height: 280px;
     margin: 24px auto 0;
     display: block;
-    transform: scale(0.88);
+    transform: scale(0.79);
+    transform-origin: center top;
   }
 }
 @media (max-width:380px){
   .hero-orbit{
-    transform: scale(0.72);
+    transform: scale(0.68);
     margin-top: 16px;
   }
 }
@@ -1030,11 +1033,17 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   .bench-hero-content{ max-width: 100%; }
   .bench-hero-art{
     display: flex;
-    width: 100%;
-    max-width: 320px;
-    height: 220px;
+    width: 360px;
+    height: 270px;
     margin: 12px auto 0;
-    transform: scale(0.85);
+    transform: scale(0.82);
+    transform-origin: center top;
+  }
+}
+@media (max-width: 400px){
+  .bench-hero-art{
+    transform: scale(0.72);
+    margin: 8px auto 0;
   }
 }
 
@@ -1540,9 +1549,12 @@ body.drag-active .dropzone{
   cursor: pointer;
   color: var(--n-text-soft);
   box-shadow: var(--shadow-3);
-  transition: transform .2s var(--ease), background .15s, border-color .15s, box-shadow .2s;
+  opacity: 0.88;
+  transition: opacity .2s var(--ease), transform .2s var(--ease), background .15s, border-color .15s, box-shadow .2s;
 }
-.theme-toggle:hover{
+.theme-toggle:hover,
+.theme-toggle:focus-visible{
+  opacity: 1;
   background: var(--n-surface);
   color: var(--accent);
   border-color: var(--accent);
@@ -1962,10 +1974,15 @@ body.drag-active .dropzone{
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow-3);
-  transition: transform .2s var(--ease), background .15s;
+  opacity: 0.88;
+  transition: opacity .2s var(--ease), transform .2s var(--ease), background .15s, box-shadow .2s;
   font-size: 1.2rem;
 }
-.history-toggle:hover { transform: scale(1.08); }
+.history-toggle:hover,
+.history-toggle:focus-visible {
+  opacity: 1;
+  transform: scale(1.08);
+}
 .history-toggle .badge {
   position: absolute;
   top: -4px;
