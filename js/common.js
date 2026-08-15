@@ -17,6 +17,17 @@
     const onScroll = () => siteHeader.classList.toggle('scrolled', window.scrollY > 4);
     window.addEventListener('scroll', onScroll, { passive:true });
     onScroll();
+
+    // ---------- keep --header-h in sync with the real header height ----------
+    const setHeaderHeightVar = () => {
+      document.documentElement.style.setProperty('--header-h', siteHeader.offsetHeight + 'px');
+    };
+    setHeaderHeightVar();
+    window.addEventListener('resize', setHeaderHeightVar, { passive:true });
+    window.addEventListener('orientationchange', setHeaderHeightVar);
+    if ('ResizeObserver' in window){
+      new ResizeObserver(setHeaderHeightVar).observe(siteHeader);
+    }
   }
 
   // ---------- brand click: scroll-top on home, navigate elsewhere ----------
