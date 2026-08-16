@@ -106,8 +106,64 @@
       <a href="utility.html" data-transition>Utility</a>
     </nav>
     <div class="privacy-pill">runs on your device</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
+      <span class="menu-toggle-bar"></span>
+      <span class="menu-toggle-bar"></span>
+      <span class="menu-toggle-bar"></span>
+    </button>
   </div>
 </header>
+
+<div class="drawer-scrim" id="drawerScrim"></div>
+<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-brand">
+      <div class="brand-mark"><img src="assets/apple-touch-icon.png" alt="Mergio Logo"></div>
+      <div>
+        <div class="brand-text">Mergio</div>
+        <div class="brand-sub">a file workshop</div>
+      </div>
+    </div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      <span>Home</span>
+    </a>
+    <a href="pdf.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></span>
+      <span>PDF</span><span class="dl-badge">17</span>
+    </a>
+    <a href="image.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></span>
+      <span>Image</span><span class="dl-badge">22</span>
+    </a>
+    <a href="video.html" class="drawer-link active" data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-video"/></svg></span>
+      <span>Video</span><span class="dl-badge">23</span>
+    </a>
+    <a href="text.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-ocr"/></svg></span>
+      <span>Text</span><span class="dl-badge">2</span>
+    </a>
+    <a href="audio.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
+      <span>Audio</span><span class="dl-badge">8</span>
+    </a>
+    <a href="converters.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></span>
+      <span>Converters</span><span class="dl-badge">28</span>
+    </a>
+    <a href="utility.html" class="drawer-link " data-transition>
+      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg></span>
+      <span>Utility</span><span class="dl-badge">10</span>
+    </a>
+  </div>
+  <div class="drawer-foot">
+    <div class="privacy-pill" style="display:inline-flex;">runs on your device</div>
+  </div>
+</nav>
 
 <div class="bench-slider-wrapper" id="benchSliderWrapper">
   <div class="bench-slider" id="benchSlider">

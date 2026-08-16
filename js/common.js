@@ -30,6 +30,46 @@
     }
   }
 
+  // ---------- mobile slide-in drawer ----------
+  (function(){
+    const toggle = document.getElementById('menuToggle');
+    const drawer = document.getElementById('mobileDrawer');
+    const scrim  = document.getElementById('drawerScrim');
+    const closeBtn = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !scrim) return;
+
+    const openDrawer = () => {
+      drawer.classList.add('open');
+      scrim.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('drawer-open');
+    };
+    const closeDrawer = () => {
+      drawer.classList.remove('open');
+      scrim.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('drawer-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+    closeBtn && closeBtn.addEventListener('click', closeDrawer);
+    scrim.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+    });
+    drawer.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+    // close drawer automatically if the viewport is resized back to desktop width
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && drawer.classList.contains('open')) closeDrawer();
+    }, { passive: true });
+  })();
+
   // ---------- brand click: scroll-top on home, navigate elsewhere ----------
   const logoHome = document.getElementById('logoHome');
   if (logoHome){
