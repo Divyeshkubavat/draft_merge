@@ -290,39 +290,6 @@ nav.top-nav a.active{ color: #fff; background: var(--accent); box-shadow: 0 2px 
 .privacy-pill:hover{ transform:translateY(-1px); }
 .privacy-pill::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px rgba(16,124,16,0.15); }
 
-/* ============================= HERO ============================= */
-.hero{
-  scroll-margin-top:90px; max-width:1220px; margin:0 auto; padding:48px 28px 20px; position:relative; }
-.hero-eyebrow{
-  font-size:12.5px; font-weight:600; letter-spacing:.3px;
-  color:var(--accent); margin-bottom:14px; display:inline-flex; align-items:center; gap:9px;
-  background:var(--accent-soft); padding:6px 14px 6px 12px; border-radius:20px;
-}
-.hero-eyebrow::before{ content:"●"; font-size:8px; color:var(--accent); }
-
-h1.hero-title{
-  font-weight:700; font-size:clamp(32px,5vw,58px);
-  line-height:1.08; letter-spacing:-1.2px; max-width:840px; color:var(--n-text);
-}
-h1.hero-title .accent{
-  background:linear-gradient(92deg,#2564cf,#8764b8 55%,#e3008c);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-
-.hero-desc{
-  font-size:16px; color:var(--n-text-soft); max-width:580px; margin-top:16px; line-height:1.6;
-}
-
-.hero-stats{ display:flex; gap:14px; margin-top:18px; max-width:720px; flex-wrap:wrap; }
-.hero-stat{
-  flex:1; min-width:140px; padding:12px 16px; background:var(--n-surface);
-  border:1px solid var(--n-border); border-radius:var(--radius-md); box-shadow:var(--shadow-1);
-  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
-}
-.hero-stat:hover{ transform:translateY(-2px); box-shadow:var(--shadow-2); }
-.hero-stat .num{ font-size:24px; font-weight:700; color:var(--n-text); letter-spacing:-0.5px; }
-.hero-stat .lbl{ font-size:11.5px; color:var(--n-text-faint); margin-top:2px; font-weight:500; }
-
 /* ============================= RULER NAV (segmented pivot) ============================= */
 .ruler-nav{
   max-width:1220px; margin:34px auto 0; padding:0 28px 6px;
@@ -704,26 +671,48 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 /* ============================================================
    3D ORBITAL WORKBENCH HUB (Matches Reference Design)
    ============================================================ */
+/* ============================================================
+   3D ORBITAL WORKBENCH HUB (Matches Reference Design)
+   ============================================================ */
 .hero{
   overflow: visible;
   position: relative;
-  max-width: 1320px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 36px 28px 20px;
+  padding: 32px 28px 16px;
   display: grid;
-  grid-template-columns: minmax(440px, 1fr) minmax(520px, 1.15fr);
+  grid-template-columns: minmax(440px, 1fr) minmax(480px, 1.05fr);
   gap: 36px;
   align-items: center;
 }
 .hero-content{
-  max-width: 580px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
 }
+.hero-eyebrow{
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-soft);
+  padding: 5px 12px;
+  border-radius: 20px;
+  align-self: flex-start;
+}
+.hero-eyebrow::before{ content: "●"; font-size: 7px; color: var(--accent); }
+
 .hero-title{
-  font-size: clamp(34px, 4.2vw, 54px);
+  font-size: clamp(32px, 3.8vw, 48px);
   font-weight: 800;
   line-height: 1.12;
-  letter-spacing: -1.4px;
+  letter-spacing: -1.2px;
   color: var(--n-text);
+  margin-top: 2px;
 }
 .hero-title .accent{
   background: linear-gradient(92deg, #2564cf, #8764b8 55%, #e3008c);
@@ -732,15 +721,37 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   color: transparent;
 }
 .hero-desc{
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--n-text-soft);
-  margin-top: 16px;
-  line-height: 1.65;
-  max-width: 540px;
+  margin-top: 14px;
+  line-height: 1.6;
+  max-width: 520px;
 }
+
+.hero-trust-pills{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.trust-pill{
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--n-text-soft);
+  background: var(--n-bg-alt);
+  border: 1px solid var(--n-border);
+  padding: 5px 12px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.trust-pill svg{ width: 14px; height: 14px; color: var(--accent); }
+
 .central-search-box{
   max-width: 520px;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 /* Stat Cards with Colored Icon Boxes (Matches Reference Image) */
@@ -748,18 +759,18 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 18px;
   max-width: 520px;
 }
 .hero-stat{
-  padding: 14px 14px 12px;
+  padding: 12px 14px 11px;
   background: var(--n-surface);
   border: 1px solid var(--n-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-1);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   transition: transform .2s var(--ease), box-shadow .2s var(--ease);
 }
 .hero-stat:hover{
@@ -767,37 +778,37 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   box-shadow: var(--shadow-2);
 }
 .stat-ico{
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
-.stat-ico svg{ width: 17px; height: 17px; }
+.stat-ico svg{ width: 16px; height: 16px; }
 .stat-purple .stat-ico{ background: #f3ebfc; color: #7a4fd6; }
 .stat-green .stat-ico{ background: #e8f7f0; color: #1f9e6d; }
 .stat-orange .stat-ico{ background: #fdf1e6; color: #e0793c; }
 .hero-stat .num{
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--n-text);
   letter-spacing: -0.5px;
 }
 .hero-stat .lbl{
-  font-size: 11px;
+  font-size: 10.8px;
   color: var(--n-text-faint);
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 /* --- 3D Orbital Hub Stage (Right Column) --- */
 .hero-hub-stage{
   position: relative;
   width: 100%;
-  max-width: 560px;
-  height: 540px;
+  max-width: 480px;
+  height: 440px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -832,16 +843,19 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 /* 3D Center Mergio Cube */
 .hub-center-cube{
   position: absolute;
-  width: 96px;
-  height: 96px;
-  border-radius: 26px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 82px;
+  height: 82px;
+  border-radius: 22px;
   background: linear-gradient(145deg, #ffffff, #f2f5fb);
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 20px 40px -10px rgba(37, 100, 207, 0.22),
-    0 10px 20px -5px rgba(0, 0, 0, 0.08),
+    0 16px 36px -8px rgba(37, 100, 207, 0.22),
+    0 8px 16px -4px rgba(0, 0, 0, 0.08),
     inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.04);
+    inset 0 -2px 4px rgba(0, 0, 0, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -850,11 +864,11 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .hub-center-cube:hover{
-  transform: scale(1.08) rotate(-2deg);
+  transform: translate(-50%, -50%) scale(1.08) rotate(-2deg);
 }
 .hub-center-logo{
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -865,21 +879,21 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   object-fit: contain;
 }
 @keyframes hubCenterFloat{
-  0%, 100%{ transform: translateY(0) scale(1); }
-  50%{ transform: translateY(-6px) scale(1.02); }
+  0%, 100%{ transform: translate(-50%, -50%) scale(1); }
+  50%{ transform: translate(-50%, -54%) scale(1.02); }
 }
 
-/* 7 Orbital Bench Cards */
+/* 7 Orbital Bench Cards - Symmetrical Coordinates */
 .hub-card{
   position: absolute;
-  width: 124px;
-  padding: 12px 10px 11px;
+  width: 112px;
+  padding: 10px 8px 9px;
   background: var(--n-surface);
   border: 1px solid var(--n-border);
-  border-radius: 18px;
+  border-radius: 16px;
   box-shadow:
-    0 12px 28px -6px rgba(20, 24, 38, 0.10),
-    0 4px 12px -2px rgba(20, 24, 38, 0.05),
+    0 10px 24px -5px rgba(20, 24, 38, 0.09),
+    0 3px 10px -2px rgba(20, 24, 38, 0.04),
     inset 0 1px 1px rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
@@ -888,44 +902,45 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   text-decoration: none;
   color: inherit;
   z-index: 5;
+  transform: translate(-50%, -50%);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   backdrop-filter: blur(8px);
 }
 .hub-card:hover{
-  transform: translateY(-6px) scale(1.06) !important;
+  transform: translate(-50%, -56%) scale(1.06) !important;
   box-shadow:
-    0 20px 38px -8px var(--hub-glow, rgba(37, 100, 207, 0.25)),
-    0 6px 16px -2px rgba(0, 0, 0, 0.08);
+    0 18px 34px -6px var(--hub-glow, rgba(37, 100, 207, 0.25)),
+    0 5px 14px -2px rgba(0, 0, 0, 0.08);
   border-color: var(--hub-color, var(--accent));
   z-index: 20;
 }
 
 .hub-card-icon{
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   background: var(--hub-soft, var(--accent-soft));
   color: var(--hub-color, var(--accent));
-  box-shadow: 0 4px 10px -2px var(--hub-glow, rgba(0, 0, 0, 0.06));
+  box-shadow: 0 3px 8px -2px var(--hub-glow, rgba(0, 0, 0, 0.06));
 }
-.hub-card-icon svg{ width: 19px; height: 19px; }
+.hub-card-icon svg{ width: 17px; height: 17px; }
 
 .hub-card-title{
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--n-text);
   letter-spacing: -0.2px;
   line-height: 1.2;
 }
 .hub-card-desc{
-  font-size: 9.5px;
+  font-size: 8.8px;
   color: var(--n-text-faint);
-  margin-top: 3px;
-  line-height: 1.25;
+  margin-top: 2px;
+  line-height: 1.2;
   white-space: nowrap;
 }
 
@@ -933,24 +948,23 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   display: flex;
   align-items: center;
   gap: 3px;
-  margin-top: 7px;
+  margin-top: 5px;
 }
 .hub-card-dots span{
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--hub-color, var(--accent));
   opacity: 0.35;
   transition: opacity 0.2s, transform 0.2s;
 }
-.hub-card-dots span:nth-child(1){ width: 14px; border-radius: 4px; opacity: 0.85; }
+.hub-card-dots span:nth-child(1){ width: 12px; border-radius: 3px; opacity: 0.85; }
 .hub-card:hover .hub-card-dots span{ opacity: 1; }
 
-/* The 7 Card Positions & Colors (Matches Reference Image) */
+/* Symmetrical Coordinates centered around (240px, 220px) */
 .hub-card-pdf{
-  top: 6px;
   left: 50%;
-  transform: translateX(-50%);
+  top: 36px;
   --hub-color: #e53e3e;
   --hub-soft: #feebc8;
   --hub-glow: rgba(229, 62, 62, 0.28);
@@ -959,8 +973,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-pdf .hub-card-dots span{ background: #e53e3e; }
 
 .hub-card-video{
-  top: 64px;
-  right: 18px;
+  left: 390px;
+  top: 104px;
   --hub-color: #805ad5;
   --hub-soft: #ede9fe;
   --hub-glow: rgba(128, 90, 213, 0.28);
@@ -969,9 +983,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-video .hub-card-dots span{ background: #805ad5; }
 
 .hub-card-audio{
-  top: 50%;
-  right: -8px;
-  transform: translateY(-50%);
+  left: 420px;
+  top: 220px;
   --hub-color: #38a169;
   --hub-soft: #f0fff4;
   --hub-glow: rgba(56, 161, 105, 0.28);
@@ -980,8 +993,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-audio .hub-card-dots span{ background: #16a34a; }
 
 .hub-card-converters{
-  bottom: 64px;
-  right: 14px;
+  left: 390px;
+  top: 336px;
   --hub-color: #0284c7;
   --hub-soft: #e0f2fe;
   --hub-glow: rgba(2, 132, 199, 0.28);
@@ -990,9 +1003,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-converters .hub-card-dots span{ background: #0284c7; }
 
 .hub-card-utility{
-  bottom: 0px;
   left: 50%;
-  transform: translateX(-50%);
+  top: 404px;
   --hub-color: #d97706;
   --hub-soft: #fef3c7;
   --hub-glow: rgba(217, 119, 6, 0.28);
@@ -1001,8 +1013,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-utility .hub-card-dots span{ background: #d97706; }
 
 .hub-card-text{
-  bottom: 74px;
-  left: 18px;
+  left: 90px;
+  top: 336px;
   --hub-color: #0d9488;
   --hub-soft: #ccfbf1;
   --hub-glow: rgba(13, 148, 136, 0.28);
@@ -1011,8 +1023,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 .hub-card-text .hub-card-dots span{ background: #0d9488; }
 
 .hub-card-image{
-  top: 64px;
-  left: 18px;
+  left: 90px;
+  top: 104px;
   --hub-color: #4f46e5;
   --hub-soft: #e0e7ff;
   --hub-glow: rgba(79, 70, 229, 0.28);
@@ -1022,9 +1034,9 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
 
 /* Bottom Floating Trust Banner (Matches Reference Image) */
 .hero-bottom-trust-banner{
-  max-width: 720px;
-  margin: 16px auto 0;
-  padding: 10px 24px;
+  max-width: 680px;
+  margin: 32px auto 44px;
+  padding: 9px 22px;
   background: var(--n-surface);
   border: 1px solid var(--n-border);
   border-radius: 30px;
@@ -1032,8 +1044,8 @@ nav.top-nav a.active:hover{ color:#fff; background:var(--accent-hov); }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  font-size: 12.5px;
+  gap: 18px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--n-text-soft);
   flex-wrap: wrap;

@@ -399,10 +399,99 @@
     window._showInstallBanner = showInstallBanner;
   })();
 
+  // --- Conversion History Panel (Global across all pages) ---
+  window.historyManager = {
+    items: JSON.parse(sessionStorage.getItem('mergio_history') || '[]'),
+    add(item) {
+      this.items.unshift({
+        ...item,
+        id: Date.now(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      });
+      if (this.items.length > 20) this.items.pop();
+      try {
+        sessionStorage.setItem('mergio_history', JSON.stringify(this.items.map(e => ({...e, blobUrl: null}))));
+      } catch(e) {}
+      this.render();
+    },
+    clear() {
+      this.items = [];
+      try {
+        sessionStorage.removeItem('mergio_history');
+      } catch(e) {}
+      this.render();
+    },
+    render() {
+      const list = document.querySelector('.history-list');
+      const badge = document.querySelector('.history-toggle .badge');
+      if (!list) return;
+      
+      if (badge) {
+        badge.textContent = this.items.length;
+        badge.style.display = this.items.length ? 'flex' : 'none';
+      }
+      
+      if (!this.items.length) {
+        list.innerHTML = '<div class="history-empty">No conversions yet.<br>Process a file to see it here.</div>';
+        return;
+      }
+      
+      list.innerHTML = this.items.map((it, i) => `
+        <div class="history-item" data-i="${i}">
+          <div class="hi-icon">
+            <svg viewBox="0 0 24 24"><use href="#${it.icon || 'i-convert'}"/></svg>
+          </div>
+          <div class="hi-info">
+            <div class="hi-name" title="${it.name || 'File'}">${it.name || 'File'}</div>
+            <div class="hi-meta">${it.tool || 'Tool'} • ${it.time || ''}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  };
+
+  function initGlobalHistoryPanel() {
+    if (document.querySelector('.history-toggle')) return;
+
+    const toggle = document.createElement('button');
+    toggle.className = 'history-toggle';
+    toggle.setAttribute('aria-label', 'Conversion history');
+    toggle.setAttribute('title', 'Recent conversions');
+    toggle.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span class="badge" style="display:none"></span>';
+    
+    const panel = document.createElement('div');
+    panel.className = 'history-panel';
+    panel.innerHTML = `
+      <div class="history-header">
+        <h4>Recent Conversions</h4>
+        <button class="clear-btn">Clear All</button>
+      </div>
+      <div class="history-list"></div>
+    `;
+    
+    document.body.appendChild(toggle);
+    document.body.appendChild(panel);
+    
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      panel.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!panel.contains(e.target) && !toggle.contains(e.target)) panel.classList.remove('open');
+    });
+    panel.querySelector('.clear-btn').addEventListener('click', () => window.historyManager.clear());
+    
+    window.historyManager.render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobalHistoryPanel);
+  } else {
+    initGlobalHistoryPanel();
+  }
+
   // --- Privacy-first analytics events (lightweight) ---
   window.mergioTrack = function(event, data) {
-    // Lightweight local tracking - stores in sessionStorage for the history panel
-    // Can be extended to send to Plausible/Umami later
     try {
       const log = JSON.parse(sessionStorage.getItem('mergio_events') || '[]');
       log.push({ event, data, ts: Date.now() });
