@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5861204654158749" crossorigin="anonymous"></script>
@@ -540,4 +542,7 @@
 <script src="js/tools-converters.js"></script>
 <script src="js/tools-utility.js"></script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('index.html', indexHtml, 'utf8');
+console.log('Successfully wrote 3D orbital workbench index.html');

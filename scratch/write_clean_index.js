@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5861204654158749" crossorigin="anonymous"></script>
@@ -73,14 +75,7 @@
 <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
 <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
 <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-<symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
-<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2.5 0 0 1 5 0c0 2-3 2-3 4h3"/></symbol>
-<symbol id="i-user-check" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-<symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><polyline points="9 12 11 14 15 10"/></symbol>
-<symbol id="i-apps" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/></symbol>
-<symbol id="i-pdf-tag" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h2a1.5 1.5 0 0 0 0-3H9v6"/></symbol>
-<symbol id="i-text-bench" viewBox="0 0 24 24"><path d="M4 6h16M12 6v12M8 18h8M4 11h4M4 14h4"/></symbol>
+<symbol id="i-equalizer" viewBox="0 0 24 24"><path d="M4 21V14M4 10V3M12 21V12M12 8V3M20 21V16M20 12V3"/><path d="M2 14h4M10 8h4M18 16h4"/></symbol>
 </defs>
 </svg></div>
 
@@ -164,154 +159,99 @@
 </nav>
 
 <section class="hero" id="main">
-  <!-- Left Column: Hero Headline & Central Search -->
   <div class="hero-content">
     <div class="hero-eyebrow reveal">150+ tools | zero uploads</div>
-    <h1 class="hero-title reveal">Every file has a<br>job to get done.<br><span class="accent">This is the bench</span><br>you do it on.</h1>
-    <p class="hero-desc reveal">Merge a PDF, shrink a photo, clip a video, convert an audio track, format JSON, or generate a QR code. No sign-up, no daily limit, no watermark — and your files never leave this browser tab.</p>
-
-    <div class="hero-trust-pills reveal">
-      <span class="trust-pill"><svg class="pill-ico" viewBox="0 0 24 24"><use href="#i-shield"/></svg> Runs 100% in browser</span>
-      <span class="trust-pill"><svg class="pill-ico" viewBox="0 0 24 24"><use href="#i-bolt"/></svg> Zero uploads</span>
-      <span class="trust-pill"><svg class="pill-ico" viewBox="0 0 24 24"><use href="#i-user-check"/></svg> No sign-up</span>
-    </div>
+    <h1 class="hero-title reveal">Every file has a job to<br> get done. <span class="accent">This is the bench</span><br>you do it on.</h1>
+    <p class="hero-desc reveal">Merge a PDF, shrink a photo, clip a video, convert an audio track, format JSON, or generate a QR code. No sign-up, no daily limit, no watermark | and your files never leave this browser tab.</p>
 
     <div class="central-search-box reveal">
       <div class="cs-input-wrapper">
         <svg class="cs-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="centralSearchInput" placeholder="Search 150+ tools (e.g. compress pdf, mp4 to mp3, remove bg)..." autocomplete="off">
-        <button id="csClearBtn" class="cs-clear hidden" aria-label="Clear search"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+        <input type="text" id="centralSearchInput" placeholder="Search 150+ tools (e.g. compress pdf, remove bg, qr code, mp4 to mp3)..." autocomplete="off">
+        <button id="csClearBtn" class="cs-clear hidden" aria-label="Clear search"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
       </div>
       <div id="searchResultsGrid" class="search-results-grid hidden"></div>
     </div>
 
-    <!-- 3 Stat Cards with Colored Icons (Matches Reference) -->
+    <div class="hero-trust-pills reveal">
+      <span class="trust-pill"><svg viewBox="0 0 24 24" class="pill-ico"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/></svg> Runs 100% in browser</span>
+      <span class="trust-pill"><svg viewBox="0 0 24 24" class="pill-ico"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg> Zero uploads</span>
+      <span class="trust-pill"><svg viewBox="0 0 24 24" class="pill-ico"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg> No sign-up or watermark</span>
+    </div>
     <div class="hero-stats reveal">
-      <div class="hero-stat stat-purple">
-        <div class="stat-ico"><svg viewBox="0 0 24 24"><use href="#i-tools"/></svg></div>
-        <div class="num" data-count-to="150" data-suffix="+">150+</div>
-        <div class="lbl">Browser-based tools</div>
-      </div>
-      <div class="hero-stat stat-green">
-        <div class="stat-ico"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg></div>
-        <div class="num" data-count-to="100" data-suffix="%">100%</div>
-        <div class="lbl">Private & secure</div>
-      </div>
-      <div class="hero-stat stat-orange">
-        <div class="stat-ico"><svg viewBox="0 0 24 24"><use href="#i-coin"/></svg></div>
-        <div class="num" data-count-to="0" data-prefix="$">$0</div>
-        <div class="lbl">Free forever & no ads</div>
-      </div>
+      <div class="hero-stat"><div class="num" data-count-to="150" data-suffix="+">150+</div><div class="lbl">Browser-based tools</div></div>
+      <div class="hero-stat"><div class="num" data-count-to="100" data-suffix="%">100%</div><div class="lbl">Private & client-side</div></div>
+      <div class="hero-stat"><div class="num" data-count-to="0" data-prefix="$">0</div><div class="lbl">Free forever & no ads wall</div></div>
     </div>
   </div>
 
-  <!-- Right Column: 3D Orbital Workbench Hub (Matches Reference) -->
-  <div class="hero-hub-stage reveal" aria-label="Mergio 3D Workbench Hub">
-    <!-- SVG Concentric Orbit Rings and Connector Arrows -->
-    <svg class="hub-svg-backdrop" viewBox="0 0 560 540" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="280" cy="270" r="85" class="hub-orbit-ring hub-orbit-ring-1" />
-      <circle cx="280" cy="270" r="165" class="hub-orbit-ring hub-orbit-ring-2" />
-      <circle cx="280" cy="270" r="235" class="hub-orbit-ring hub-orbit-ring-3" />
-      
-      <!-- Connectors from Center (280, 270) to 7 Cards -->
-      <!-- PDF (Top: 280, 80) -->
-      <line x1="280" y1="210" x2="280" y2="90" class="hub-connector-line" />
-      <!-- Video (Top-Right: 430, 130) -->
-      <line x1="330" y1="230" x2="415" y2="155" class="hub-connector-line" />
-      <!-- Audio (Right: 470, 270) -->
-      <line x1="340" y1="270" x2="450" y2="270" class="hub-connector-line" />
-      <!-- Converters (Bottom-Right: 430, 410) -->
-      <line x1="330" y1="310" x2="415" y2="385" class="hub-connector-line" />
-      <!-- Utility (Bottom: 280, 460) -->
-      <line x1="280" y1="330" x2="280" y2="450" class="hub-connector-line" />
-      <!-- Text (Bottom-Left: 130, 410) -->
-      <line x1="230" y1="310" x2="145" y2="385" class="hub-connector-line" />
-      <!-- Image (Top-Left: 130, 130) -->
-      <line x1="230" y1="230" x2="145" y2="155" class="hub-connector-line" />
-    </svg>
+  <div class="hero-showcase reveal" aria-label="Mergio Studio Processing Hub">
+    <div class="hsc-header">
+      <div class="hsc-dots">
+        <span class="hsc-dot red"></span>
+        <span class="hsc-dot yellow"></span>
+        <span class="hsc-dot green"></span>
+      </div>
+      <div class="hsc-status">
+        <span class="hsc-live-dot"></span> WebAssembly Engine
+      </div>
+      <span class="hsc-badge">Studio Hub</span>
+    </div>
 
-    <!-- 3D Center Mergio Cube -->
-    <div class="hub-center-cube" title="Mergio Client-Side Engine">
-      <div class="hub-center-logo">
-        <svg viewBox="0 0 100 100" fill="none">
-          <defs>
-            <linearGradient id="hubMergioGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#2564cf" />
-              <stop offset="50%" stop-color="#8764b8" />
-              <stop offset="100%" stop-color="#e3008c" />
-            </linearGradient>
-          </defs>
-          <path d="M22 78V26l28 32 28-32v52h-14V46L50 62 36 46v32H22z" fill="url(#hubMergioGrad)" stroke="url(#hubMergioGrad)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
-        </svg>
+    <div class="hsc-body">
+      <!-- Job 1: PDF -->
+      <div class="hsc-job job-pdf">
+        <div class="hsc-job-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></div>
+        <div class="hsc-job-info">
+          <div class="hsc-job-name">financial_report.pdf</div>
+          <div class="hsc-job-meta">14.8 MB → 3.6 MB • Compressed</div>
+        </div>
+        <div class="hsc-job-tag tag-green">−75% Size</div>
+      </div>
+
+      <!-- Job 2: Video Audio Extraction -->
+      <div class="hsc-job job-video">
+        <div class="hsc-job-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></div>
+        <div class="hsc-job-info">
+          <div class="hsc-job-name">keynote_presentation.mp4</div>
+          <div class="hsc-job-meta">Extracted to MP3 • 320 kbps</div>
+        </div>
+        <div class="hsc-job-tag tag-purple">
+          <span class="hsc-bars">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          Audio Ready
+        </div>
+      </div>
+
+      <!-- Job 3: HEIC to WebP -->
+      <div class="hsc-job job-image">
+        <div class="hsc-job-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></div>
+        <div class="hsc-job-info">
+          <div class="hsc-job-name">photo_raw_hdr.heic</div>
+          <div class="hsc-job-meta">Converted to WebP • Lossless</div>
+        </div>
+        <div class="hsc-job-tag tag-orange">100% Quality</div>
+      </div>
+
+      <!-- Quick Action Shortcuts -->
+      <div class="hsc-quick-actions">
+        <span class="hsc-qa-label">Quick Launch:</span>
+        <div class="hsc-qa-chips">
+          <a href="pdf.html" class="hsc-chip chip-pdf" data-transition><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg> PDF Tools</a>
+          <a href="image.html" class="hsc-chip chip-image" data-transition><svg viewBox="0 0 24 24"><use href="#i-image"/></svg> Image Lab</a>
+          <a href="video.html" class="hsc-chip chip-video" data-transition><svg viewBox="0 0 24 24"><use href="#i-video"/></svg> Video Clip</a>
+          <a href="converters.html" class="hsc-chip chip-convert" data-transition><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg> Converters</a>
+        </div>
       </div>
     </div>
 
-    <!-- 1. PDF Card (Top) -->
-    <a href="pdf.html" class="hub-card hub-card-pdf" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-pdf-tag"/></svg></div>
-      <div class="hub-card-title">PDF</div>
-      <div class="hub-card-desc">Merge, split, compress</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 2. Video Card (Top-Right) -->
-    <a href="video.html" class="hub-card hub-card-video" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-video"/></svg></div>
-      <div class="hub-card-title">Video</div>
-      <div class="hub-card-desc">Cut, convert, compress</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 3. Audio Card (Right) -->
-    <a href="audio.html" class="hub-card hub-card-audio" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></div>
-      <div class="hub-card-title">Audio</div>
-      <div class="hub-card-desc">Convert, extract, trim</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 4. Converters Card (Bottom-Right) -->
-    <a href="converters.html" class="hub-card hub-card-converters" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></div>
-      <div class="hub-card-title">Converters</div>
-      <div class="hub-card-desc">All-in-one converters</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 5. Utility Card (Bottom) -->
-    <a href="utility.html" class="hub-card hub-card-utility" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-apps"/></svg></div>
-      <div class="hub-card-title">Utility</div>
-      <div class="hub-card-desc">QR, hash, units & more</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 6. Text Card (Bottom-Left) -->
-    <a href="text.html" class="hub-card hub-card-text" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-text-bench"/></svg></div>
-      <div class="hub-card-title">Text</div>
-      <div class="hub-card-desc">Format, count, transform</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
-
-    <!-- 7. Image Card (Top-Left) -->
-    <a href="image.html" class="hub-card hub-card-image" data-transition>
-      <div class="hub-card-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></div>
-      <div class="hub-card-title">Image</div>
-      <div class="hub-card-desc">Convert, resize, compress</div>
-      <div class="hub-card-dots"><span></span><span></span><span></span></div>
-    </a>
+    <div class="hsc-footer">
+      <svg viewBox="0 0 24 24" class="hsc-shield-icon"><use href="#i-shield"/></svg>
+      <span>0 KB Uploaded • Processing 100% Local in Browser Memory</span>
+    </div>
   </div>
 </section>
-
-<!-- Bottom Floating Trust Banner (Matches Reference) -->
-<div class="hero-bottom-trust-banner reveal">
-  <span class="hbt-item hbt-green"><svg viewBox="0 0 24 24"><use href="#i-shield"/></svg> Processing in your browser</span>
-  <span class="hbt-divider">|</span>
-  <span class="hbt-item hbt-blue"><svg viewBox="0 0 24 24"><use href="#i-lock"/></svg> Files never leave your device</span>
-  <span class="hbt-divider">|</span>
-  <span class="hbt-item hbt-cyan"><svg viewBox="0 0 24 24"><use href="#i-shield-check"/></svg> 100% safe & private</span>
-</div>
 
 <section class="how-it-works reveal">
   <h2>How it works</h2>
@@ -540,4 +480,7 @@
 <script src="js/tools-converters.js"></script>
 <script src="js/tools-utility.js"></script>
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync('index.html', indexHtml, 'utf8');
+console.log('Clean index.html written successfully!');
