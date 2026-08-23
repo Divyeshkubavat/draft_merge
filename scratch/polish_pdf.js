@@ -1,340 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5861204654158749" crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/coi-serviceworker/coi-serviceworker.min.js"></script>
-<meta name="theme-color" content="#f6f7fb">
-<title>PDF Tools Online Free — Merge, Split, Compress PDF | Mergio</title>
-<meta name="description" content="Free online PDF tools: merge, split, compress, convert, rotate, add page numbers, extract pages, protect and unlock PDFs. 100% browser-based, no upload needed.">
-<meta name="keywords" content="merge PDF, split PDF, compress PDF, PDF to Word, PDF to JPG, Word to PDF, PPT to PDF, PDF to Excel, rotate PDF, unlock PDF, protect PDF, Mergio">
-<link rel="canonical" href="https://mergio.vercel.app/pdf">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mergio.vercel.app/pdf">
-<meta property="og:title" content="Free Online PDF Tools — Mergio">
-<meta property="og:description" content="30+ PDF tools in your browser. Merge, split, compress, convert, protect and edit PDFs without uploading files.">
-<meta property="og:site_name" content="Mergio">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Online PDF Tools — Mergio">
-<meta name="twitter:description" content="30+ PDF tools in your browser. Merge, split, compress, convert, protect and edit PDFs without uploading files.">
-<meta name="robots" content="index, follow">
-<link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
-</head>
-<body data-bench="pdf">
-  <a href="#main" class="skip-link">Skip to main content</a>
-<div id="pageLoadBar"></div>
-<div id="pageTransition">
-  <div class="pt-loader">
-    <div class="pt-logo"><img src="assets/apple-touch-icon.png" alt="Mergio"></div>
-    <div class="pt-brand">Mergio</div>
-    <div class="pt-bar"><div class="pt-bar-fill"></div></div>
-  </div>
-</div>
+const fs = require('fs');
+const path = require('path');
 
-<div style="display:none !important; width:0 !important; height:0 !important; overflow:hidden !important; position:absolute !important;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
-<defs>
-<symbol id="i-merge" viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V3M9 21v-6M15 21v-6M12 21v-4"/><path d="m3 6 3-3 3 3M18 6l3-3 3 3"/></symbol>
-<symbol id="i-split" viewBox="0 0 24 24"><path d="M12 3v6M8 21l4-4 4 4M8 21v-3a4 4 0 0 1 4-4 4 4 0 0 1 4 4v3"/><path d="m9 6 3-3 3 3"/></symbol>
-<symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 21v-5h5"/></symbol>
-<symbol id="i-compress" viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3M16 3v3a2 2 0 0 0 2 2h3M8 21v-3a2 2 0 0 0-2-2H3M16 21v-3a2 2 0 0 1 2-2h3"/></symbol>
-<symbol id="i-pdf-jpg" viewBox="0 0 24 24"><rect x="4" y="3" width="12" height="16" rx="2"/><path d="M7 8h6M7 12h4"/><circle cx="17.5" cy="16.5" r="4.5"/><path d="m20.5 19.5-2-2"/></symbol>
-<symbol id="i-jpg-pdf" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="2"/><circle cx="7" cy="7" r="1.4"/><path d="m4 13 3-3 2 2 3-4 3 3"/><path d="M18 12v9M18 21l-3-3M18 21l3-3"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m3.5 17 5.5-5.5a2 2 0 0 1 2.8 0L18 17.5"/></symbol>
-<symbol id="i-resize" viewBox="0 0 24 24"><path d="M4 14v6h6M20 10V4h-6M20 4l-7 7M4 20l7-7"/></symbol>
-<symbol id="i-crop" viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14M18 22V8a2 2 0 0 0-2-2H2"/></symbol>
-<symbol id="i-convert" viewBox="0 0 24 24"><path d="M17 3 21 7l-4 4"/><path d="M3 11V9a2 2 0 0 1 2-2h16"/><path d="M7 21 3 17l4-4"/><path d="M21 13v2a2 2 0 0 1-2 2H3"/></symbol>
-<symbol id="i-flip" viewBox="0 0 24 24"><path d="M12 3v18M7 7l-4 5 4 5M17 7l4 5-4 5"/></symbol>
-<symbol id="i-watermark" viewBox="0 0 24 24"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
-<symbol id="i-stack" viewBox="0 0 24 24"><rect x="3" y="10" width="8" height="8" rx="1.5"/><rect x="8" y="6" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/></symbol>
-<symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="2.5"/><path d="m16.5 10 5-3v10l-5-3z"/></symbol>
-<symbol id="i-trim" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="6" cy="18" r="2.6"/><path d="m8.5 7.5 11 9M20 4 8.5 16.5"/></symbol>
-<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
-<symbol id="i-gif" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M8 9.5v5M12.2 14.5V9.5l1.8 3 1.8-3v5M18.5 9.5h-2v5M16.5 12h1.6"/></symbol>
-<symbol id="i-mute" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9H3Z"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
-<symbol id="i-ocr" viewBox="0 0 24 24"><path d="M4 7V5a1 1 0 0 1 1-1h2M4 17v2a1 1 0 0 0 1 1h2M20 7V5a1 1 0 0 0-1-1h-2M20 17v2a1 1 0 0 1-1 1h-2"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
-<symbol id="i-text-extract" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
-<symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
-<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5"/><path d="M4 20h16"/></symbol>
-<symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-<symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9.5"/></symbol>
-<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
-<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
-<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
-<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
-<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-<symbol id="i-page-num" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 14v3M11 17h2M9 8h6M9 11h4"/></symbol>
-<symbol id="i-word" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8l2 8 2-5 2 5 2-8"/></symbol>
-<symbol id="i-excel" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 15h16M10 3v18M16 3v18"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1"/></symbol>
-<symbol id="i-unlock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0"/><circle cx="12" cy="16" r="1"/></symbol>
-<symbol id="i-html" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></symbol>
-<symbol id="i-ppt" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="11" r="4"/><path d="M12 11v6"/></symbol>
+const root = path.join(__dirname, '..');
+const filePath = path.join(root, 'pdf.html');
+let html = fs.readFileSync(filePath, 'utf8');
 
-<symbol id="i-pdf-extract" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/></symbol>
-<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
-</defs>
-</svg></div>
-
-<header class="site" id="siteHeader">
- <div class="header-inner">
- <a class="brand" id="logoHome" href="index.html" data-transition>
- <div class="brand-mark"><img src="assets/apple-touch-icon.png" alt="Mergio Logo"></div>
- <div>
- <div class="brand-text">Mergio</div>
- <div class="brand-sub">a file workshop</div>
- </div>
- </a>
- <nav class="top-nav">
-      <a href="index.html" data-transition>Home</a>
-      <a href="pdf.html" class="active" data-transition>PDF</a>
-      <a href="image.html" data-transition>Image</a>
-      <a href="video.html" data-transition>Video</a>
-      <a href="text.html" data-transition>Text</a>
-      <a href="audio.html" data-transition>Audio</a>
-      <a href="converters.html" data-transition>Converters</a>
-      <a href="utility.html" data-transition>Utility</a>
-    </nav>
-    <div class="privacy-pill">runs on your device</div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileDrawer">
-      <span class="menu-toggle-bar"></span>
-      <span class="menu-toggle-bar"></span>
-      <span class="menu-toggle-bar"></span>
-    </button>
-    
- </div>
-</header>
-
-<div class="drawer-scrim" id="drawerScrim"></div>
-<nav class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-  <div class="drawer-head">
-    <div class="drawer-brand">
-      <div class="brand-mark"><img src="assets/apple-touch-icon.png" alt="Mergio Logo"></div>
-      <div>
-        <div class="brand-text">Mergio</div>
-        <div class="brand-sub">a file workshop</div>
-      </div>
-    </div>
-    <button class="drawer-close" id="drawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
-  </div>
-  <div class="drawer-links">
-    <a href="index.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-home"/></svg></span>
-      <span>Home</span>
-    </a>
-    <a href="pdf.html" class="drawer-link active" data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></span>
-      <span>PDF</span><span class="dl-badge">32</span>
-    </a>
-    <a href="image.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></span>
-      <span>Image</span><span class="dl-badge">22</span>
-    </a>
-    <a href="video.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-video"/></svg></span>
-      <span>Video</span><span class="dl-badge">23</span>
-    </a>
-    <a href="text.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-ocr"/></svg></span>
-      <span>Text</span><span class="dl-badge">2</span>
-    </a>
-    <a href="audio.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
-      <span>Audio</span><span class="dl-badge">8</span>
-    </a>
-    <a href="converters.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></span>
-      <span>Converters</span><span class="dl-badge">28</span>
-    </a>
-    <a href="utility.html" class="drawer-link " data-transition>
-      <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg></span>
-      <span>Utility</span><span class="dl-badge">10</span>
-    </a>
-  </div>
-  <div class="drawer-foot">
-    <div class="privacy-pill" style="display:inline-flex;">runs on your device</div>
-  </div>
-</nav>
-
-
-<div class="bench-slider-wrapper" id="benchSliderWrapper">
-  <div class="bench-slider" id="benchSlider">
-    <a href="index.html" class="bs-item" data-bench="home" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-      <span class="bs-label">Home</span>
-    </a>
-    <a href="pdf.html" class="bs-item" data-bench="pdf" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></span>
-      <span class="bs-label">PDF</span>
-      <span class="bs-badge">32</span>
-    </a>
-    <a href="image.html" class="bs-item" data-bench="image" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></span>
-      <span class="bs-label">Image</span>
-      <span class="bs-badge">22</span>
-    </a>
-    <a href="video.html" class="bs-item" data-bench="video" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-video"/></svg></span>
-      <span class="bs-label">Video</span>
-      <span class="bs-badge">23</span>
-    </a>
-    <a href="text.html" class="bs-item" data-bench="text" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-ocr"/></svg></span>
-      <span class="bs-label">Text</span>
-      <span class="bs-badge">2</span>
-    </a>
-    <a href="audio.html" class="bs-item" data-bench="audio" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
-      <span class="bs-label">Audio</span>
-      <span class="bs-badge">8</span>
-    </a>
-    <a href="converters.html" class="bs-item" data-bench="converters" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></span>
-      <span class="bs-label">Converters</span>
-      <span class="bs-badge">28</span>
-    </a>
-    <a href="utility.html" class="bs-item" data-bench="utility" data-transition>
-      <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-spark"/></svg></span>
-      <span class="bs-label">Utility</span>
-      <span class="bs-badge">10</span>
-    </a>
-  </div>
-</div>
-
-<section class="bench-hero cat-pdf" id="main" style="bc-color:var(c-pdf);bc-soft:var(c-pdf-soft);">
-  <div class="bench-hero-content">
-<div class="crumbs reveal"><a href="index.html" data-transition>Home</a> <svg viewBox="0 0 24 24" style="width:11px;height:11px;opacity:.5"><use href="#i-arrow-right"/></svg> <span>PDF Bench</span></div>
- <div class="bench-hero-top reveal">
- <div class="bh-icon"><svg class="icon"><use href="#i-merge"/></svg></div>
- <div>
- <h1>PDF Bench</h1>
- <div class="bh-tag">32 tools built for one job: making PDFs behave.</div>
- </div>
- </div>
- <p class="bench-hero-desc reveal">Whether you're stitching a stack of scanned pages into one file, breaking a report apart, or getting a signed contract down to an email-friendly size the PDF Bench handles it without ever touching a server. Drop a file in, pick your settings, and the finished PDF downloads straight back to your device.</p>
- <div class="bench-badges reveal"><span class="bench-badge">32 tools</span><span class="bench-badge">Runs on your device</span><span class="bench-badge">No file size limit</span></div>
-  </div>
-
-  <div class="bench-hero-art reveal" aria-hidden="true">
-    <div class="bha-glow"></div>
-    <div class="bha-ring bha-ring-1"></div>
-    <div class="bha-ring bha-ring-2"></div>
-    <div class="bha-center-card">
-      <div class="bha-center-icon"><svg><use href="#i-merge"/></svg></div>
-    </div>
-    <div class="bha-chip bha-chip-1"><span class="bha-dot"></span> Merge PDF</div>
-    <div class="bha-chip bha-chip-2"><span class="bha-dot"></span> Compress</div>
-    <div class="bha-chip bha-chip-3"><span class="bha-dot"></span> Split Pages</div>
-    <div class="bha-chip bha-chip-4"><span class="bha-dot"></span> Visual Organize</div>
-  </div>
-</section>
-
-<div class="bench-highlights reveal-stagger">
- <div class="bh-card"><h4>Built for real documents</h4><p>Merge statements, split multi-page scans, or flatten a folder of photos into a single shareable PDF.</p></div>
- <div class="bh-card"><h4>Compression that respects quality</h4><p>Compress re-encodes image-heavy pages so scanned PDFs shrink dramatically without turning to mush.</p></div>
- <div class="bh-card"><h4>Two-way with images</h4><p>Go from PDF to JPG for quick previews, or from a stack of JPGs straight back into one clean PDF.</p></div>
-</div>
-
-<div class="tools-heading reveal">
- <h2>Tools in this bench</h2>
- <span>32 tools · click any card to open it</span>
-</div>
-<section class="category-section cat-pdf" id="cat-pdf">
-
- <div class="tool-grid reveal-stagger">
- <div class="tool-card" data-tool="merge-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-merge"/></svg></div><h3>Merge PDF</h3><p>Combine several PDFs into one, in the order you choose.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="split-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-split"/></svg></div><h3>Split PDF</h3><p>Break a PDF into single-page files, delivered as a zip.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="rotate-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-rotate"/></svg></div><h3>Rotate PDF</h3><p>Turn every page 90°, 180° or 270° and re-save.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="compress-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-compress"/></svg></div><h3>Compress PDF</h3><p>Shrink scanned or image-heavy PDFs by re-encoding pages.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="pdf-to-jpg" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-jpg"/></svg></div><h3>PDF to JPG</h3><p>Export every page as a JPG image, zipped together.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="jpg-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-jpg-pdf"/></svg></div><h3>JPG/PNG to PDF</h3><p>Turn a stack of photos into one clean PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="add-page-numbers" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-page-num"/></svg></div><h3>Add Page Numbers</h3><p>Stamp page numbers on every page of a PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="word-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-word"/></svg></div><h3>Word to PDF</h3><p>Convert a DOCX document into a PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="pdf-to-word" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-word"/></svg></div><h3>PDF to Word</h3><p>Extract text from a PDF into a text document.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="pdf-to-excel" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-excel"/></svg></div><h3>PDF to Excel</h3><p>Pull text from a PDF and save it as a CSV file.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="excel-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-excel"/></svg></div><h3>Excel to PDF</h3><p>Convert a CSV spreadsheet into a formatted PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="unlock-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-unlock"/></svg></div><h3>Unlock PDF</h3><p>Remove password protection from a PDF you own.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="protect-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-lock"/></svg></div><h3>Protect PDF</h3><p>Add restrictive permissions to a PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="pdf-to-png" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-jpg"/></svg></div><h3>PDF to PNG</h3><p>Export every page as a PNG image, zipped together.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="png-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-jpg-pdf"/></svg></div><h3>PNG to PDF</h3><p>Turn a stack of PNG images into a single PDF.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="ppt-to-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-ppt"/></svg></div><h3>PPT to PDF</h3><p>Convert PowerPoint slides to a PDF document.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- <div class="tool-card" data-tool="pdf-to-html" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-html"/></svg></div><h3>PDF to HTML</h3><p>Convert PDF content into an HTML document.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
- 
-<div class="tool-card" data-tool="extract-pdf-pages" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Extract PDF Pages</h3><p>Extract selected page ranges.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="delete-pdf-pages" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Delete PDF Pages</h3><p>Remove specified pages.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="rearrange-pdf-pages" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Rearrange PDF Pages</h3><p>Reorder page index array.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="duplicate-pdf-pages" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Duplicate PDF Pages</h3><p>Copy and append pages.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="pdf-ocr" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-ocr"/></svg></div><h3>PDF OCR</h3><p>Render and OCR text.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="extract-pdf-images" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-image"/></svg></div><h3>Extract PDF Images</h3><p>Extract embedded images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="sign-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Sign PDF</h3><p>Stamp signature image.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="fill-pdf-forms" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Fill PDF Forms</h3><p>Fill form fields.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="compare-pdfs" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Compare PDFs</h3><p>Compare text content.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="repair-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Repair PDF</h3><p>Rebuild xref table.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="flatten-pdf" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Flatten PDF</h3><p>Render pages to images.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="edit-pdf-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Edit PDF Metadata</h3><p>Set Title, Author, Subject.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="remove-pdf-metadata" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>Remove PDF Metadata</h3><p>Strip document metadata.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="pdf-to-markdown" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>PDF to Markdown</h3><p>Extract text as Markdown.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-<div class="tool-card" data-tool="pdf-to-json" tabindex="0"><div class="tile"><svg class="icon"><use href="#i-pdf-extract"/></svg></div><h3>PDF to JSON</h3><p>Extract text as JSON.</p><div class="go">Open bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></div></div>
-
-  </div>
-
-</section>
-
-<div class="bench-crosslink reveal"><span></span><a href="image.html" data-transition>Image Bench <svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a></div>
-
-<div class="workspace-overlay hidden" id="workspaceOverlay">
-  <div class="workspace" id="workspace">
-    <button class="close-btn" id="closeWorkspace" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
-
-    <div class="ws-head">
-      <div class="tile" id="wsTile"><svg class="icon"><use href="#i-merge"/></svg></div>
-      <div>
-        <div class="ws-eyebrow" id="wsEyebrow">Bench</div>
-        <h2 id="wsTitle">Tool title</h2>
-        <p class="ws-desc" id="wsDesc">Tool description.</p>
-      </div>
-    </div>
-
-    <div class="ws-body">
-      <div class="dropzone" id="dropzone">
-        <div class="dz-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
-        <div class="dz-text"><b>Click to choose files</b> or drag them here</div>
-        <div class="dz-hint" id="dzHint">Accepted files</div>
-        <input type="file" id="fileInput" style="display:none" multiple>
-      </div>
-
-      <div class="file-list" id="fileList"></div>
-
-      <div class="opt-row" id="optRow"></div>
-
-      <button class="run-btn" id="runBtn" disabled><span class="spinner"></span><span id="runBtnLabel">Add a file first</span></button>
-
-      <div class="status-box" id="statusBox">
-        <div class="status-line"><span class="status-left"><span class="proc-orbit" aria-hidden="true"></span><span id="statusText">Working…</span></span><span id="statusPct">0%</span></div>
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="status-tip" id="statusTip"></div>
-      </div>
-
-      <div class="error-box" id="errorBox"><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg><span id="errorText"></span></div>
-
-      <div class="result-box" id="resultBox">
-        <div class="r-title"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg> Ready</div>
-        <div class="r-files" id="resultFiles"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="trust-line">
-  <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
-</div>
-
-<section class="tool-seo-content">
-  <h2>PDF Tools Guide</h2>
-<article class="tool-guide" id="merge-pdf-guide">
+const guides = `
+  <article class="tool-guide" id="merge-pdf-guide">
     <h3>Merge PDF — Combine Multiple PDFs into One Document</h3>
     <p>Combining contracts, reports, and invoices into a single organized file saves time and prevents lost attachments. Mergio's Merge PDF tool stitches together multi-page documents directly inside your browser tab without any server uploads, preserving vector text, embedded fonts, and original image resolutions.</p>
     <h4>How to merge PDFs</h4>
@@ -963,67 +635,68 @@
       <p>Yes, the output is standard RFC 8259 JSON compatible with all programming languages.</p>
     </details>
   </article>
-</section>
+`;
 
-<footer class="site-footer">
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h4>Product</h4>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="pdf.html">PDF Tools</a></li>
-        <li><a href="image.html">Image Tools</a></li>
-        <li><a href="video.html">Video Tools</a></li>
-        <li><a href="audio.html">Audio Tools</a></li>
-      </ul>
+const wsIndex = html.indexOf('<div class="workspace-overlay hidden" id="workspaceOverlay">');
+const footerIndex = html.indexOf('<footer class="site-footer">');
+
+const beforeOverlay = html.substring(0, wsIndex);
+const footerAndAfter = html.substring(footerIndex);
+
+const cleanWorkspace = `<div class="workspace-overlay hidden" id="workspaceOverlay">
+  <div class="workspace" id="workspace">
+    <button class="close-btn" id="closeWorkspace" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-close"/></svg></button>
+
+    <div class="ws-head">
+      <div class="tile" id="wsTile"><svg class="icon"><use href="#i-merge"/></svg></div>
+      <div>
+        <div class="ws-eyebrow" id="wsEyebrow">Bench</div>
+        <h2 id="wsTitle">Tool title</h2>
+        <p class="ws-desc" id="wsDesc">Tool description.</p>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>More Tools</h4>
-      <ul>
-        <li><a href="text.html">Text Tools</a></li>
-        <li><a href="converters.html">Converters</a></li>
-        <li><a href="utility.html">Utility</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <div class="footer-brand">
-        <strong>Mergio</strong>
-        <p>Every file has a job to get done.<br>This is the bench you do it on.</p>
-        <span class="footer-trust">🔒 Your files never leave this browser tab</span>
+
+    <div class="ws-body">
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
+        <div class="dz-text"><b>Click to choose files</b> or drag them here</div>
+        <div class="dz-hint" id="dzHint">Accepted files</div>
+        <input type="file" id="fileInput" style="display:none" multiple>
+      </div>
+
+      <div class="file-list" id="fileList"></div>
+
+      <div class="opt-row" id="optRow"></div>
+
+      <button class="run-btn" id="runBtn" disabled><span class="spinner"></span><span id="runBtnLabel">Add a file first</span></button>
+
+      <div class="status-box" id="statusBox">
+        <div class="status-line"><span class="status-left"><span class="proc-orbit" aria-hidden="true"></span><span id="statusText">Working…</span></span><span id="statusPct">0%</span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="status-tip" id="statusTip"></div>
+      </div>
+
+      <div class="error-box" id="errorBox"><svg viewBox="0 0 24 24"><use href="#i-alert"/></svg><span id="errorText"></span></div>
+
+      <div class="result-box" id="resultBox">
+        <div class="r-title"><svg viewBox="0 0 24 24"><use href="#i-check-circle"/></svg> Ready</div>
+        <div class="r-files" id="resultFiles"></div>
       </div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 Mergio. All rights reserved. Built for the desk, not the cloud.</p>
-  </div>
-</footer>
+</div>
 
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <svg class="sun-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
+<div class="trust-line">
+  <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.4/dist/tesseract.min.js"></script>
-  <script src="js/i18n.js"></script>
-<script src="js/common.js"></script>
-<script src="js/tools-pdf.js"></script>
-<script src="js/app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').catch(() => {});
-}
-</script>
-</body>
-</html>
+<section class="tool-seo-content">
+  <h2>PDF Tools Guide</h2>
+${guides.trim()}
+</section>
+
+`;
+
+const finalPdf = beforeOverlay + cleanWorkspace + footerAndAfter;
+fs.writeFileSync(filePath, finalPdf, 'utf8');
+console.log('pdf.html polished successfully!');
