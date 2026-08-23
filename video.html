@@ -329,14 +329,18 @@
   <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
 </div>
 
-<section class="tool-seo-content reveal">
-  <h2>How to Use the Video Tools</h2>\n
+<section class="tool-seo-content">
+  <h2>How to Use the Video Tools</h2>
+
   <article class="tool-guide" id="compress-video-guide">
     <h3>Compress Video</h3>
     <p>Need to send a bulky recording over email or post it on social media without hitting size limits? The compression tool reduces file sizes substantially by re-encoding the footage at a lower bitrate. It’s perfect when you have massive screen recordings or high-resolution camera footage that needs to be scaled down for the web.</p>
     <h4>How to use Compress Video:</h4>
     <ol>
-      <li>Drag your oversized video onto the target area.</li>\n      <li>Choose a compression level (low, medium, or high).</li>\n      <li>Click 'Compress' to start the local FFmpeg WASM encoding.</li>\n      <li>Download the smaller, web-friendly output.</li>
+      <li>Drag your oversized video onto the target area.</li>
+      <li>Choose a compression level (low, medium, or high).</li>
+      <li>Click 'Compress' to start the local FFmpeg WASM encoding.</li>
+      <li>Download the smaller, web-friendly output.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> If your file is still too large, consider changing the format to WebM alongside compressing it.
@@ -344,18 +348,23 @@
     <details class="tool-faq">
       <summary>Will compression ruin my video quality?</summary>
       <p>There is a slight trade-off between file size and quality, but the medium setting usually retains excellent visual fidelity while shrinking the file.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Is there a limit to how large the input video can be?</summary>
       <p>Since everything runs locally in your browser memory, it depends on your device's available RAM. For best results, keep inputs under 2GB.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="convert-video-guide">
     <h3>Convert Format</h3>
     <p>Sometimes a platform demands a specific file extension. This utility allows you to switch between popular formats like MP4, WebM, and MOV natively in your browser. It utilizes the FFmpeg WASM library to restructure the media container and encode the underlying streams correctly.</p>
     <h4>How to use Convert Format:</h4>
     <ol>
-      <li>Select the clip you need to convert.</li>\n      <li>Pick the destination format from the dropdown menu.</li>\n      <li>Initiate the conversion process.</li>\n      <li>Save the newly formatted file to your drive.</li>
+      <li>Select the clip you need to convert.</li>
+      <li>Pick the destination format from the dropdown menu.</li>
+      <li>Initiate the conversion process.</li>
+      <li>Save the newly formatted file to your drive.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> WebM is fantastic for web usage due to its efficiency, but MP4 offers the broadest compatibility across devices.
@@ -363,18 +372,23 @@
     <details class="tool-faq">
       <summary>Does converting format reduce quality?</summary>
       <p>Not necessarily. If you choose a high bitrate, the quality remains nearly identical to the original.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I convert MOV to MP4 for Windows?</summary>
       <p>Yes, MP4 is highly compatible across all operating systems and is the recommended output format.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="trim-video-guide">
     <h3>Trim Video</h3>
     <p>When you only want to showcase a specific highlight from a long presentation or gaming session, trimming is the way to go. By specifying start and end points, you slice out just the relevant segment. It processes incredibly fast because it only acts on the selected duration of your original file.</p>
     <h4>How to use Trim Video:</h4>
     <ol>
-      <li>Upload the lengthy video into the trimmer.</li>\n      <li>Use the slider to define the precise start and end timestamps.</li>\n      <li>Hit the 'Trim' button to cut the video.</li>\n      <li>Export the highlighted section as a new file.</li>
+      <li>Upload the lengthy video into the trimmer.</li>
+      <li>Use the slider to define the precise start and end timestamps.</li>
+      <li>Hit the 'Trim' button to cut the video.</li>
+      <li>Export the highlighted section as a new file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Make sure your start point is slightly before the action begins so nothing gets cut off.
@@ -382,18 +396,23 @@
     <details class="tool-faq">
       <summary>Is trimming exact to the millisecond?</summary>
       <p>The tool trims as close as possible to the specified keyframes, usually within a fraction of a second.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Does trimming re-encode the entire file?</summary>
       <p>No, it typically only re-encodes the segments near the cut points, making it much faster than a full render.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="video-to-mp3-guide">
     <h3>Video to MP3</h3>
     <p>Extracting the soundtrack from a lecture or a music clip is a breeze with this feature. It rips the audio track directly from the video file and exports it as a standalone MP3. This means you can listen to essential talks as podcasts without needing the visual element.</p>
     <h4>How to use Video to MP3:</h4>
     <ol>
-      <li>Import the video containing the desired audio.</li>\n      <li>Verify the audio extraction settings.</li>\n      <li>Click to separate the audio track.</li>\n      <li>Download the resulting MP3 file.</li>
+      <li>Import the video containing the desired audio.</li>
+      <li>Verify the audio extraction settings.</li>
+      <li>Click to separate the audio track.</li>
+      <li>Download the resulting MP3 file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> This is perfect for turning long YouTube video downloads into convenient audio podcasts for your commute.
@@ -401,18 +420,23 @@
     <details class="tool-faq">
       <summary>What bitrate is the MP3 exported at?</summary>
       <p>The MP3 is typically exported at 192kbps or 320kbps depending on your selection, ensuring high quality.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I extract audio from an MKV file?</summary>
       <p>If your browser supports reading the MKV container, the FFmpeg engine can extract the audio just fine.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="video-to-gif-guide">
     <h3>Video to GIF</h3>
     <p>If you want to create a looping animation for a blog post or chat message, converting a short video snippet into a GIF is highly effective. The browser-based engine handles the frame extraction and palette generation. The result is a lightweight, infinitely looping animated image.</p>
     <h4>How to use Video to GIF:</h4>
     <ol>
-      <li>Add the video clip you want to animate.</li>\n      <li>Select the framerate and dimensions for the GIF.</li>\n      <li>Generate the looping animation.</li>\n      <li>Save the GIF image.</li>
+      <li>Add the video clip you want to animate.</li>
+      <li>Select the framerate and dimensions for the GIF.</li>
+      <li>Generate the looping animation.</li>
+      <li>Save the GIF image.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Keep GIFs under 10 seconds and at a lower resolution (like 480p) for optimal web performance.
@@ -420,18 +444,23 @@
     <details class="tool-faq">
       <summary>Why is the GIF file size larger than the video?</summary>
       <p>GIF is an older format without advanced compression. Reducing the framerate or resolution helps keep the size down.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I choose which part of the video to make a GIF?</summary>
       <p>It's best to trim the video first using the Trim tool, then upload that trimmed clip here.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="mute-video-guide">
     <h3>Mute Video</h3>
     <p>Removing background noise, accidental chatter, or copyrighted music from your clip is essential before public sharing. The mute function strips the audio channel completely, leaving you with a silent visual track. It ensures your footage focuses solely on the visual action.</p>
     <h4>How to use Mute Video:</h4>
     <ol>
-      <li>Load the noisy video into the workspace.</li>\n      <li>Confirm you want to remove all audio streams.</li>\n      <li>Process the file to strip the sound.</li>\n      <li>Download the silenced video.</li>
+      <li>Load the noisy video into the workspace.</li>
+      <li>Confirm you want to remove all audio streams.</li>
+      <li>Process the file to strip the sound.</li>
+      <li>Download the silenced video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Muting a video is extremely fast because it doesn't require re-encoding the video frames.
@@ -439,18 +468,23 @@
     <details class="tool-faq">
       <summary>Does muting affect the video quality?</summary>
       <p>No, the video stream is simply copied over without the audio stream, so visual quality is perfectly preserved.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I mute only a specific section?</summary>
       <p>This tool mutes the entire file. For partial muting, you'd need the advanced Video Editor.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="video-editor-guide">
     <h3>Video Editor</h3>
     <p>For more granular control, the visual editor lets you manipulate your file with a timeline interface. You can set precise in and out markers before committing to an export. It gives you the flexibility to review your edits visually without firing up a heavy desktop application.</p>
     <h4>How to use Video Editor:</h4>
     <ol>
-      <li>Open your clip in the visual editing interface.</li>\n      <li>Use the timeline to adjust your segments.</li>\n      <li>Preview your changes right in the browser.</li>\n      <li>Export the finalized edit.</li>
+      <li>Open your clip in the visual editing interface.</li>
+      <li>Use the timeline to adjust your segments.</li>
+      <li>Preview your changes right in the browser.</li>
+      <li>Export the finalized edit.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Use the keyboard arrow keys to step through frames for more precise editing.
@@ -458,18 +492,23 @@
     <details class="tool-faq">
       <summary>Is the editor entirely local?</summary>
       <p>Yes, despite having timeline controls, all editing logic runs in your browser via WebAssembly.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I add multiple video tracks?</summary>
       <p>Currently, the editor focuses on single-track manipulation for quick, focused edits.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="add-image-to-video-guide">
     <h3>Add Image to Video</h3>
     <p>Branding your content with a custom logo or watermark keeps your intellectual property secure when distributed. This function overlays any image asset over your video stream. Using WebAssembly to composite the layers, it bakes the graphic permanently into the frames.</p>
     <h4>How to use Add Image to Video:</h4>
     <ol>
-      <li>Upload your base video file.</li>\n      <li>Upload the transparent PNG or JPG you wish to overlay.</li>\n      <li>Position the image on the video canvas.</li>\n      <li>Render and download the combined video.</li>
+      <li>Upload your base video file.</li>
+      <li>Upload the transparent PNG or JPG you wish to overlay.</li>
+      <li>Position the image on the video canvas.</li>
+      <li>Render and download the combined video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Ensure your watermark isn't too large; placing it in the bottom corner is the industry standard.
@@ -477,18 +516,23 @@
     <details class="tool-faq">
       <summary>Does the overlay image need to be transparent?</summary>
       <p>It doesn't have to be, but a transparent PNG works best for logos and watermarks.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I animate the watermark?</summary>
       <p>This tool currently applies static images uniformly across the video's duration.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="resize-video-guide">
     <h3>Resize Video</h3>
     <p>Changing the dimensions of your footage is crucial when adapting content for different platforms like Instagram stories or widescreen displays. Scaling the video alters its resolution width and height to fit your desired aspect ratio. The internal encoder smoothly interpolates the pixels for a crisp result.</p>
     <h4>How to use Resize Video:</h4>
     <ol>
-      <li>Provide the video you need scaled.</li>\n      <li>Enter the new width and height in pixels.</li>\n      <li>Select whether to preserve the aspect ratio.</li>\n      <li>Resize and save your clip.</li>
+      <li>Provide the video you need scaled.</li>
+      <li>Enter the new width and height in pixels.</li>
+      <li>Select whether to preserve the aspect ratio.</li>
+      <li>Resize and save your clip.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> For Instagram, target 1080x1920. For standard HD YouTube videos, use 1920x1080.
@@ -496,18 +540,23 @@
     <details class="tool-faq">
       <summary>Will resizing cause the video to look stretched?</summary>
       <p>Not if you check the 'preserve aspect ratio' option, which will add black bars if necessary instead of stretching.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I upscale a low-res video?</summary>
       <p>Yes, but upscaling cannot add missing detail, so the result might look slightly blurry.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="screen-recorder-guide">
     <h3>Screen Recorder</h3>
     <p>Capturing your display for tutorials, software demonstrations, or bug reports is directly supported here. It hooks into the native screen capture API of your modern browser to record windows or entire desktops. You immediately get a WebM file ready for playback or further editing.</p>
     <h4>How to use Screen Recorder:</h4>
     <ol>
-      <li>Click the record button to prompt your browser's sharing dialog.</li>\n      <li>Choose a specific window, tab, or your entire screen.</li>\n      <li>Perform your demonstration.</li>\n      <li>Stop recording and download the generated file.</li>
+      <li>Click the record button to prompt your browser's sharing dialog.</li>
+      <li>Choose a specific window, tab, or your entire screen.</li>
+      <li>Perform your demonstration.</li>
+      <li>Stop recording and download the generated file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Recording just a specific tab uses less processing power than recording a 4K desktop.
@@ -515,18 +564,23 @@
     <details class="tool-faq">
       <summary>Does it record system audio?</summary>
       <p>Yes, on most modern browsers you can check a box in the sharing dialog to include system audio.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Where is the recording saved before downloading?</summary>
       <p>It is stored temporarily in your browser's memory using Blob objects.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="add-text-to-video-guide">
     <h3>Add Text to Video</h3>
     <p>Inserting titles, captions, or contextual notes makes your videos much more informative. This feature burns text directly into the video frames, so it’s permanently visible regardless of the player. It is especially useful for creating quick social media clips with engaging headlines.</p>
     <h4>How to use Add Text to Video:</h4>
     <ol>
-      <li>Drag in the video you want to annotate.</li>\n      <li>Type your text and customize the font, size, and color.</li>\n      <li>Position the text overlay on the preview.</li>\n      <li>Render the video with the baked-in text.</li>
+      <li>Drag in the video you want to annotate.</li>
+      <li>Type your text and customize the font, size, and color.</li>
+      <li>Position the text overlay on the preview.</li>
+      <li>Render the video with the baked-in text.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Use a contrasting stroke or drop shadow on your text so it remains readable against varying backgrounds.
@@ -534,18 +588,23 @@
     <details class="tool-faq">
       <summary>Is the text accessible to screen readers?</summary>
       <p>No, because the text is 'burned' into the video pixels, it acts as an image. Use subtitles for accessibility.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I add multiple lines of text?</summary>
       <p>Yes, you can use line breaks to create blocks of text.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="loop-video-guide">
     <h3>Loop Video</h3>
     <p>If you have a very short animation or clip that needs to run continuously in a presentation, multiplying it is an easy fix. The loop tool concatenates the same file back-to-back multiple times. You end up with a longer, self-repeating sequence in a single file.</p>
     <h4>How to use Loop Video:</h4>
     <ol>
-      <li>Upload the short clip you want to repeat.</li>\n      <li>Specify how many times it should loop.</li>\n      <li>Process the file to append the copies.</li>\n      <li>Download the extended video.</li>
+      <li>Upload the short clip you want to repeat.</li>
+      <li>Specify how many times it should loop.</li>
+      <li>Process the file to append the copies.</li>
+      <li>Download the extended video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Ensure the start and end frames of your clip look similar for a seamless, unnoticeable loop point.
@@ -553,18 +612,23 @@
     <details class="tool-faq">
       <summary>Is there a pause between loops?</summary>
       <p>No, the tool joins the end of the video perfectly to the beginning of the next iteration.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Does looping increase the file size?</summary>
       <p>Yes, because the final file is physically longer and contains more data.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="text-to-speech-guide">
     <h3>Text to Speech</h3>
     <p>Generating a voiceover from written scripts is an excellent way to narrate without a microphone. It utilizes the browser's built-in Web Speech API to synthesize spoken words and saves them as an audio track. You can then pair this generated dialogue with any visual content.</p>
     <h4>How to use Text to Speech:</h4>
     <ol>
-      <li>Paste your script into the text area.</li>\n      <li>Select a voice profile and adjust the speaking rate.</li>\n      <li>Preview the audio generation.</li>\n      <li>Export the speech as an audio file.</li>
+      <li>Paste your script into the text area.</li>
+      <li>Select a voice profile and adjust the speaking rate.</li>
+      <li>Preview the audio generation.</li>
+      <li>Export the speech as an audio file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Use punctuation carefully; commas and periods add natural pauses to the generated speech.
@@ -572,18 +636,23 @@
     <details class="tool-faq">
       <summary>Are the voices realistic?</summary>
       <p>The voices depend on the synthesis engine built into your specific browser and OS.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I use this commercially?</summary>
       <p>Since it uses system voices, commercial rights depend on your operating system's terms of service.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="remove-logo-from-video-guide">
     <h3>Remove Logo</h3>
     <p>Sometimes you need to obscure a localized watermark or sensitive timestamp on your footage. The removal tool applies a targeted blur over the defined rectangular coordinate space. It’s a handy way to clean up visual distractions before repurposing stock or archival clips.</p>
     <h4>How to use Remove Logo:</h4>
     <ol>
-      <li>Upload the video containing the watermark.</li>\n      <li>Draw a box over the logo in the preview area.</li>\n      <li>Apply the blur filter.</li>\n      <li>Save the clean video.</li>
+      <li>Upload the video containing the watermark.</li>
+      <li>Draw a box over the logo in the preview area.</li>
+      <li>Apply the blur filter.</li>
+      <li>Save the clean video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Make the bounding box as tight to the logo as possible to minimize the blurred area on your footage.
@@ -591,18 +660,23 @@
     <details class="tool-faq">
       <summary>Does this completely recreate the pixels behind the logo?</summary>
       <p>No, it uses a blurring algorithm to interpolate surrounding pixels, obscuring the logo heavily.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I remove a moving logo?</summary>
       <p>Currently, the tool applies a static rectangular blur across the entire duration of the clip.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="change-video-volume-guide">
     <h3>Change Volume</h3>
     <p>When the dialogue is too quiet or the background music is overwhelmingly loud, adjusting the audio gain is necessary. This function scales the audio track's amplitude up or down based on your multiplier. It helps normalize the listening experience across different clips.</p>
     <h4>How to use Change Volume:</h4>
     <ol>
-      <li>Select the video with the unbalanced audio.</li>\n      <li>Set the percentage to increase or decrease the volume.</li>\n      <li>Process the audio adjustments.</li>\n      <li>Download the newly leveled video.</li>
+      <li>Select the video with the unbalanced audio.</li>
+      <li>Set the percentage to increase or decrease the volume.</li>
+      <li>Process the audio adjustments.</li>
+      <li>Download the newly leveled video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Aim to increase volume only when the highest peaks in your audio aren't already hitting the maximum limit.
@@ -610,18 +684,23 @@
     <details class="tool-faq">
       <summary>Will increasing volume cause distortion?</summary>
       <p>If you boost it too high beyond the digital ceiling, it will clip and distort. Increase it in small increments.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I completely silence it here?</summary>
       <p>Yes, setting the volume to 0% works, though the Mute tool is faster for that specific task.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="merge-videos-guide">
     <h3>Merge Videos</h3>
     <p>Piecing together multiple recordings into a cohesive narrative doesn't require a timeline editor. The merge capability stitches several clips end-to-end into a single continuous file. As long as they share similar codecs, the concatenation happens seamlessly in the browser.</p>
     <h4>How to use Merge Videos:</h4>
     <ol>
-      <li>Select and upload multiple video files.</li>\n      <li>Drag and drop to rearrange their playback order.</li>\n      <li>Click merge to concatenate them.</li>\n      <li>Export the combined video file.</li>
+      <li>Select and upload multiple video files.</li>
+      <li>Drag and drop to rearrange their playback order.</li>
+      <li>Click merge to concatenate them.</li>
+      <li>Export the combined video file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Ensure all clips are the same format (e.g., all MP4s) before merging to avoid encoding errors.
@@ -629,18 +708,23 @@
     <details class="tool-faq">
       <summary>Do all videos need to be the same resolution?</summary>
       <p>For the best results, yes. If they differ, the tool will attempt to scale them to match the first video.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Is there a limit on how many videos I can merge?</summary>
       <p>The only limit is your browser's memory capacity. Sticking to 5-10 short clips works best.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="crop-video-guide">
     <h3>Crop Video</h3>
     <p>Eliminating black bars or focusing on a specific subject in the frame is achieved by cropping. You define the exact X and Y coordinates and the new dimensions, and the tool trims the spatial edges. It effectively re-frames your composition without stretching the remaining pixels.</p>
     <h4>How to use Crop Video:</h4>
     <ol>
-      <li>Load the video into the crop interface.</li>\n      <li>Draw a bounding box to highlight the area to keep.</li>\n      <li>Confirm the crop dimensions.</li>\n      <li>Render and download the cropped video.</li>
+      <li>Load the video into the crop interface.</li>
+      <li>Draw a bounding box to highlight the area to keep.</li>
+      <li>Confirm the crop dimensions.</li>
+      <li>Render and download the cropped video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Cropping is the best way to convert a widescreen YouTube video into a vertical format for TikTok or Shorts.
@@ -648,18 +732,23 @@
     <details class="tool-faq">
       <summary>Does cropping reduce the resolution?</summary>
       <p>Yes, because you are physically removing pixels from the edges, the overall resolution of the output file will be smaller.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I crop a landscape video into portrait?</summary>
       <p>Absolutely, just adjust the bounding box to a vertical aspect ratio like 9:16.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="change-video-speed-guide">
     <h3>Change Speed</h3>
     <p>Creating a time-lapse effect or a dramatic slow-motion sequence is straightforward by altering the playback rate. Speeding up or slowing down the video modifies the presentation timestamp of the frames. Note that this typically alters the audio pitch or drops the audio entirely depending on the rate.</p>
     <h4>How to use Change Speed:</h4>
     <ol>
-      <li>Upload your clip.</li>\n      <li>Select a speed multiplier (e.g., 0.5x for slow mo, 2x for fast forward).</li>\n      <li>Process the speed alteration.</li>\n      <li>Download the modified file.</li>
+      <li>Upload your clip.</li>
+      <li>Select a speed multiplier (e.g., 0.5x for slow mo, 2x for fast forward).</li>
+      <li>Process the speed alteration.</li>
+      <li>Download the modified file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> If you don't want the distorted audio, it's often better to check the option to mute the video when changing speed.
@@ -667,18 +756,23 @@
     <details class="tool-faq">
       <summary>Does slowing down a video make it choppy?</summary>
       <p>If your original video is 30fps and you slow it to 0.5x, it plays at 15fps, which may appear slightly choppy. 60fps footage is better for slow motion.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>What happens to the audio?</summary>
       <p>The audio will pitch down (sound deeper) when slowed, and pitch up (sound like a chipmunk) when sped up.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="rotate-video-guide">
     <h3>Rotate Video</h3>
     <p>Fixing footage shot in the wrong orientation, like a sideways smartphone video, is a common chore. The rotation utility pivots the entire frame by 90 or 180 degrees. It physically rewrites the video stream so it plays back correctly on all standard media players.</p>
     <h4>How to use Rotate Video:</h4>
     <ol>
-      <li>Import the incorrectly oriented video.</li>\n      <li>Click the rotation buttons to pivot it 90 degrees at a time.</li>\n      <li>Save the changes.</li>\n      <li>Download the corrected video.</li>
+      <li>Import the incorrectly oriented video.</li>
+      <li>Click the rotation buttons to pivot it 90 degrees at a time.</li>
+      <li>Save the changes.</li>
+      <li>Download the corrected video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> If the video is upside down, rotate it 180 degrees to preserve its original aspect ratio.
@@ -686,18 +780,23 @@
     <details class="tool-faq">
       <summary>Does rotating change the aspect ratio?</summary>
       <p>Yes, rotating a 1920x1080 landscape video by 90 degrees turns it into a 1080x1920 portrait video.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Why does my video look fine on my phone but sideways here?</summary>
       <p>Smartphones sometimes use metadata to tell players to rotate the video. This tool permanently bakes that rotation into the pixels.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="stabilize-video-guide">
     <h3>Stabilize Video</h3>
     <p>Shaky handheld camera work can be jarring to watch. The stabilization process analyzes frame-to-frame motion and applies counter-movements to smooth out the jitter. It usually crops in slightly on the edges to hide the motion compensation boundaries.</p>
     <h4>How to use Stabilize Video:</h4>
     <ol>
-      <li>Upload the shaky footage.</li>\n      <li>Allow the tool to analyze the motion vectors.</li>\n      <li>Apply the stabilization filter.</li>\n      <li>Download the smoothed video.</li>
+      <li>Upload the shaky footage.</li>
+      <li>Allow the tool to analyze the motion vectors.</li>
+      <li>Apply the stabilization filter.</li>
+      <li>Download the smoothed video.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Keep your stabilization expectations realistic; it improves handheld footage but can't replicate a gimbal.
@@ -705,18 +804,23 @@
     <details class="tool-faq">
       <summary>Why did my video get cropped after stabilizing?</summary>
       <p>To counteract camera shake, the software has to move the frame around. It crops the edges so you don't see black borders dancing around the frame.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Does this work for extremely shaky footage?</summary>
       <p>It works best on micro-jitters. Wild, sweeping shaky camera movements might result in weird warping artifacts.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="add-audio-to-video-guide">
     <h3>Add Audio to Video</h3>
     <p>Replacing a noisy background track with a clean musical score elevates the production value of your clip. This feature multiplexes a new audio file into your existing video container. It effectively swaps out the original sound for your chosen narration or soundtrack.</p>
     <h4>How to use Add Audio to Video:</h4>
     <ol>
-      <li>Provide the primary video file.</li>\n      <li>Upload the MP3 or WAV file for the new soundtrack.</li>\n      <li>Merge the two streams together.</li>\n      <li>Download the complete multimedia file.</li>
+      <li>Provide the primary video file.</li>
+      <li>Upload the MP3 or WAV file for the new soundtrack.</li>
+      <li>Merge the two streams together.</li>
+      <li>Download the complete multimedia file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> If you want to keep the original audio and just add background music, use the Video Editor instead to mix tracks.
@@ -724,18 +828,23 @@
     <details class="tool-faq">
       <summary>What if the audio is longer than the video?</summary>
       <p>The tool will typically truncate the audio stream to match the length of the video stream.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Does this remove the original audio?</summary>
       <p>Yes, this tool is designed to replace the existing audio track entirely.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="flip-video-guide">
     <h3>Flip Video</h3>
     <p>Creating a mirror image of your clip is useful for stylistic effects or correcting reversed webcam recordings. Flipping horizontally reverses the left and right sides of the frame. It processes the pixel data across the entire video duration uniformly.</p>
     <h4>How to use Flip Video:</h4>
     <ol>
-      <li>Load the video you want to mirror.</li>\n      <li>Select whether to flip horizontally or vertically.</li>\n      <li>Process the effect.</li>\n      <li>Save the mirrored result.</li>
+      <li>Load the video you want to mirror.</li>
+      <li>Select whether to flip horizontally or vertically.</li>
+      <li>Process the effect.</li>
+      <li>Save the mirrored result.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Horizontal flipping is the perfect fix if your webcam recorded you with a mirrored perspective and you want to correct it.
@@ -743,18 +852,23 @@
     <details class="tool-faq">
       <summary>Is flipping different from rotating?</summary>
       <p>Yes, rotating turns the image, while flipping mirrors it. Flipping text will make it appear backwards.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Why would I flip vertically?</summary>
       <p>Vertical flipping is rarely used for standard correction, but it can create interesting abstract reflections for creative projects.</p>
     </details>
   </article>
-\n
+
+
   <article class="tool-guide" id="video-recorder-guide">
     <h3>Video Recorder</h3>
     <p>Filming a quick personal message or a vlog entry can be done without external software. The recorder accesses your connected webcam and microphone to capture live input. It instantly wraps the recorded stream into a downloadable file when you hit stop.</p>
     <h4>How to use Video Recorder:</h4>
     <ol>
-      <li>Grant browser permissions for camera and microphone access.</li>\n      <li>Click record to start capturing.</li>\n      <li>Click stop when finished.</li>\n      <li>Download the captured WebM file.</li>
+      <li>Grant browser permissions for camera and microphone access.</li>
+      <li>Click record to start capturing.</li>
+      <li>Click stop when finished.</li>
+      <li>Download the captured WebM file.</li>
     </ol>
     <div class="tool-tip-box">
       <strong>Pro Tip:</strong> Ensure you are in a well-lit room before recording, as browser-based recording lacks advanced exposure controls.
@@ -762,12 +876,14 @@
     <details class="tool-faq">
       <summary>What resolution does it record in?</summary>
       <p>It typically records in your webcam's native resolution, often 720p or 1080p.</p>
-    </details>\n    <details class="tool-faq">
+    </details>
+    <details class="tool-faq">
       <summary>Can I record on my phone?</summary>
       <p>Yes, if you use a mobile browser that supports the MediaRecorder API, it will utilize your phone's front or back camera.</p>
     </details>
   </article>
-\n</section>
+
+</section>
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-col">
