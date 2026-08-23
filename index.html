@@ -437,9 +437,43 @@
 
 <section class="content-section reveal">
   <h2>Why use Mergio for your PDF, image, video, and audio files?</h2>
-  <p>Most online file converters ask you to upload your PDF, photo, video, or audio file to a remote server, wait in a queue, then download the result | often behind a paywall or a daily limit. Mergio works differently. Every tool on this site, from merging PDFs to compressing a video or converting an audio track, runs entirely inside your own browser tab using your device's processing power. Your file is never transmitted anywhere, which means there's no upload wait, no privacy risk, and no server-side storage of your documents, photos, or recordings.</p>
-  <p>The seven benches cover the file types people convert most often. The PDF bench handles merging, splitting, compressing, signing, OCR, and form tools. The Image bench covers background removal, resizing, cropping, and format conversion between JPG, PNG, WebP, and HEIC. The Video bench compresses and converts between MP4, WebM, and MOV, and can trim clips or extract audio. The Audio bench trims, normalizes, and converts between MP3, WAV, and other formats. The Text bench includes OCR, JSON formatting, Markdown conversion, and Base64 encoding. The Converters bench moves files between document, spreadsheet, and image formats such as DOCX, XLSX, and SVG. The Utility bench rounds things out with QR code and barcode generation, password tools, and file hashing.</p>
-  <p>Because everything runs locally, Mergio has no account system, no upload cap, and no watermark added to your exported files. It's free to use for as many files as you need, whether that's a single PDF merge or a batch of video conversions. If you want to understand how in-browser file processing works under the hood, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_API" target="_blank" rel="noopener">MDN File API documentation</a> is a good starting point.</p>
+  <p>Most online file converters follow the same model: upload your document to a remote server, wait in a queue while it processes, download the result — often behind a paywall, daily limit, or watermark. Your private contracts, medical records, financial statements, and personal photos pass through someone else's infrastructure, get stored on disks you don't control, and may be retained for days or indefinitely. Mergio takes a fundamentally different approach.</p>
+  <p>Every one of Mergio's 150+ tools runs entirely inside your browser tab. When you drop a PDF into the Merge tool, the file is read by the browser's native File API, processed in-memory using JavaScript libraries like PDF-lib and PDF.js, and the output is generated as a local Blob URL. At no point does any network request carry your file data to an external server. The same is true whether you're compressing a video (processed via FFmpeg compiled to WebAssembly), removing an image background (processed via Canvas pixel manipulation), or running OCR on a scanned document (processed via Tesseract.js running a trained model locally). This isn't marketing language — you can verify it yourself by opening your browser's Network tab during any operation.</p>
+  <p>The practical benefit is immediate: no upload wait on slow connections, no risk of a server breach exposing your files, and no artificial limits on how many files you process per day. A freelance graphic designer can batch-compress 50 client photos in a row. A law office can merge and sign sensitive contracts without sending them to a third party. A student can convert lecture recordings between audio formats without creating yet another account on yet another SaaS tool.</p>
+  <p>Mergio is organized into seven specialized benches, each focused on a file type:</p>
+  <ul style="padding-left:22px;margin:12px 0 16px;font-size:14px;color:var(--n-text-soft);line-height:1.7;">
+    <li><strong>PDF Bench</strong> (32 tools) — merge, split, compress, sign, OCR, form filling, page extraction, metadata editing, format conversion to JPG/PNG/Word/Excel/Markdown/JSON</li>
+    <li><strong>Image Bench</strong> (22 tools) — compress, resize, crop, convert formats, remove backgrounds, blur, watermark, make collages and memes, extract EXIF data</li>
+    <li><strong>Video Bench</strong> (23 tools) — compress, trim, convert, extract audio, add text/images/subtitles, record screen, change speed, merge clips</li>
+    <li><strong>Audio Bench</strong> (17 tools) — trim, change pitch/speed/volume, join tracks, remove vocals, reduce noise, normalize, compress, record</li>
+    <li><strong>Text Bench</strong> (22 tools) — OCR (image and PDF), convert between TXT/PDF/Word/HTML/Markdown, format JSON/XML, encode/decode Base64 and URLs</li>
+    <li><strong>Converters Bench</strong> (28 tools) — move files between formats: HEIC↔JPG, WebP↔PNG, SVG↔PNG, GIF↔MP4, MOV/MKV/AVI→MP4, WAV/FLAC/M4A→MP3, DOCX↔TXT, XLSX↔CSV, EPUB→Text</li>
+    <li><strong>Utility Bench</strong> (10 tools) — generate QR codes and barcodes, create secure passwords, compute file hashes (SHA-256), inspect file metadata, pick and convert colors</li>
+  </ul>
+  <p>Because everything runs locally in your browser, there's no account to create, no software to install, and no watermark stamped on your output. If you want to understand how browser-based file processing works, the <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_API" target="_blank" rel="noopener">MDN File API documentation</a> and the <a href="https://ffmpegwasm.netlify.app/" target="_blank" rel="noopener">FFmpeg.wasm project page</a> are good starting points.</p>
+</section>
+
+<section class="content-section reveal">
+  <h2>How it works under the hood</h2>
+  <p>Mergio doesn't use a single processing engine — each bench leverages the browser technology best suited to that file type. Here's a closer look at the technical stack behind each category:</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">PDF processing: PDF-lib + PDF.js</h3>
+  <p>PDF creation, merging, splitting, metadata editing, form filling, and signing use <strong>PDF-lib</strong>, an open-source library that manipulates PDF document structures (cross-reference tables, page trees, content streams) directly in memory. PDF rendering — needed for compression, OCR, thumbnail previews, and image export — uses <strong>PDF.js</strong> (Mozilla's browser-based PDF renderer) to paint each page onto an HTML5 Canvas, which can then be re-encoded at a target quality level or fed into Tesseract for text recognition.</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">Image processing: Canvas API + ImageData</h3>
+  <p>Every image tool draws the source image onto an off-screen <strong>HTML5 Canvas</strong>, then reads or writes pixel data through the <strong>ImageData</strong> interface. Compression works by re-encoding the canvas to JPEG or WebP at a user-specified quality factor. Filters like blur, sharpen, and grayscale apply convolution matrices or per-pixel color math. Background removal uses tolerance-based flood fill on the alpha channel. Format conversion exploits the browser's built-in <code>canvas.toBlob()</code> with target MIME types.</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">Video and audio processing: FFmpeg WebAssembly</h3>
+  <p>Video and audio tools use <strong>FFmpeg compiled to WebAssembly</strong> via the <code>@ffmpeg/ffmpeg</code> library. This gives Mergio access to the same codec library used by professional video editors — H.264 encoding via libx264, MP3 encoding via libmp3lame, and dozens of audio/video filters — all running inside a browser Web Worker. The WASM binary (~25 MB) is downloaded once on first use and cached by the service worker. Because FFmpeg runs in a worker thread, the browser UI stays responsive during encoding. Cross-Origin Isolation headers (<code>Cross-Origin-Embedder-Policy</code> and <code>Cross-Origin-Opener-Policy</code>) enable SharedArrayBuffer, which FFmpeg needs for multi-threaded operation.</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">OCR: Tesseract.js</h3>
+  <p><strong>Tesseract.js</strong> runs a trained LSTM neural network model entirely in the browser using WebAssembly. When you use the Image-to-Text or PDF OCR tool, the image or rendered PDF page is passed to Tesseract's recognition engine, which identifies text regions, segments characters, and produces a UTF-8 text output with confidence scores. The English language model (~4 MB) is loaded on demand.</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">Document and spreadsheet conversion: JSZip + OpenXML</h3>
+  <p>DOCX, XLSX, and PPTX files are ZIP archives containing XML documents. Mergio uses <strong>JSZip</strong> to unpack these archives in the browser, parse the XML content (paragraphs, cells, shared string tables), and either extract the text or rebuild the archive in a different format. Creating an XLSX from CSV, for example, involves constructing a complete OpenXML workbook package with content types, relationships, and worksheet XML — all generated client-side.</p>
+
+  <h3 style="font-size:15px;font-weight:700;margin:18px 0 6px;">Security tools: Web Crypto API</h3>
+  <p>The Password Generator uses <strong><code>crypto.getRandomValues()</code></strong>, a cryptographically secure pseudorandom number generator (CSPRNG) built into every modern browser. File hashing uses <strong><code>crypto.subtle.digest()</code></strong> to compute SHA-256 and SHA-1 checksums at hardware-accelerated speed. These are the same primitives used by HTTPS and password managers — not a JavaScript <code>Math.random()</code> wrapper.</p>
 </section>
 
 <section class="faq-section reveal">
@@ -447,19 +481,43 @@
   <div class="faq-grid reveal-stagger">
     <div class="faq-item">
       <h3>Is Mergio really free to merge, compress, and convert files?</h3>
-      <p>Yes. All 150+ tools across the PDF, image, video, audio, text, converter, and utility benches are free, with no sign-up and no daily limit.</p>
+      <p>Yes. All 150+ tools across the PDF, image, video, audio, text, converter, and utility benches are free, with no sign-up and no daily limit. There are no premium tiers, no "credits," and no features locked behind a paywall.</p>
     </div>
     <div class="faq-item">
       <h3>Are my files uploaded to a server?</h3>
-      <p>No. Every PDF, image, video, and audio tool on Mergio processes your file directly in your browser tab. Files never leave your device.</p>
+      <p>No. Every tool processes your file directly in your browser tab using client-side JavaScript, WebAssembly, and the Canvas API. No file data is transmitted over the network. You can verify this by opening your browser's Developer Tools → Network tab while using any tool — you'll see zero outgoing file uploads.</p>
     </div>
     <div class="faq-item">
       <h3>What file formats does Mergio support?</h3>
-      <p>Mergio supports common PDF, JPG, PNG, WebP, HEIC, MP4, WebM, MOV, MP3, WAV, DOCX, XLSX, JSON, and CSV formats, among others, across its seven tool benches.</p>
+      <p>Mergio handles PDF, JPG, JPEG, PNG, WebP, HEIC, SVG, GIF, MP4, WebM, MOV, MKV, AVI, MP3, WAV, OGG, AAC, FLAC, M4A, TXT, MD, HTML, JSON, XML, CSV, DOCX, XLSX, PPTX, EPUB, ZIP, TTF, OTF, and WOFF — spanning documents, images, video, audio, data files, archives, and fonts.</p>
     </div>
     <div class="faq-item">
       <h3>Do I need to install anything?</h3>
-      <p>No installation is required. Mergio runs entirely in a modern desktop browser. Large video jobs benefit from extra memory, so a desktop browser works best for those.</p>
+      <p>No installation required. Mergio runs in any modern browser — Chrome 90+, Edge 90+, Firefox 90+, or Safari 15+. It also works as a Progressive Web App (PWA): click your browser's install prompt to add it to your home screen or desktop for faster access.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does browser-based file processing work?</h3>
+      <p>When you drop a file into a Mergio tool, the browser's File API reads it into an ArrayBuffer in memory. Processing engines like PDF-lib (for PDFs), the Canvas API (for images), or FFmpeg WebAssembly (for video/audio) transform the data entirely on your device. The result is offered as a downloadable Blob URL. No server round-trip occurs at any point.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the maximum file size Mergio can handle?</h3>
+      <p>There's no artificial limit. The practical ceiling depends on your device's available RAM and browser tab memory allocation — typically 500 MB to 2 GB on modern desktops. For very large video files (over 1 GB), close other tabs and applications to free memory. Image and PDF tools generally handle files up to several hundred megabytes without issues.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does Mergio work offline?</h3>
+      <p>Partially. Mergio is a Progressive Web App with a service worker that caches the interface. Once the processing libraries (FFmpeg WASM, Tesseract.js models) have been downloaded on first use, most tools work offline. However, the initial library download requires an internet connection.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How does Mergio compare to iLovePDF, Smallpdf, or CloudConvert?</h3>
+      <p>Those services upload your files to remote servers for processing. Mergio processes everything locally in your browser — meaning zero upload wait time, zero privacy exposure, and zero daily usage caps. The trade-off is that processing speed depends on your own device rather than a data center, so heavy video encoding may be slower on older hardware.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I use Mergio on my phone?</h3>
+      <p>Yes, all tools work on mobile browsers. Lightweight tasks like image conversion, PDF merging, and text formatting run smoothly. CPU-intensive tools like video compression and OCR work best on desktop browsers with more processing power and memory. Mobile browsers also have tighter memory limits (~300-500 MB per tab).</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is Mergio open source?</h3>
+      <p>Mergio's processing relies on several open-source libraries: PDF-lib (MIT license), PDF.js (Apache 2.0), FFmpeg (LGPL/GPL), Tesseract.js (Apache 2.0), and JSZip (MIT). The Mergio interface and integration layer are proprietary, but the core engines are community-maintained open-source projects.</p>
     </div>
   </div>
 </section>

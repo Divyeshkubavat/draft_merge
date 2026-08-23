@@ -141,7 +141,7 @@
     </a>
     <a href="audio.html" class="drawer-link active" data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
-      <span>Audio</span><span class="dl-badge">8</span>
+      <span>Audio</span><span class="dl-badge">17</span>
     </a>
     <a href="converters.html" class="drawer-link " data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></span>
@@ -187,7 +187,7 @@
     <a href="audio.html" class="bs-item" data-bench="audio" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
       <span class="bs-label">Audio</span>
-      <span class="bs-badge">8</span>
+      <span class="bs-badge">17</span>
     </a>
     <a href="converters.html" class="bs-item" data-bench="converters" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-convert"/></svg></span>
@@ -209,7 +209,7 @@
     <div class="bh-icon"><svg class="icon"><use href="#i-music"/></svg></div>
     <div>
       <h1>Audio Bench</h1>
-      <div class="bh-tag">Eight tools for editing, recording, and transforming audio.</div>
+      <div class="bh-tag">Seventeen tools for editing, recording, and transforming audio.</div>
     </div>
   </div>
   <p class="bench-hero-desc reveal">Trim a podcast clip, boost the bass, reverse a sound effect, or join multiple tracks into one. The Audio Bench runs a real audio engine (ffmpeg) entirely inside your browser tab the first tool you open downloads a ~25MB engine once per visit, then every tool after that runs instantly.</p>
@@ -309,14 +309,526 @@
   </div>
 </div>
 
-<div class="strip">
-  <div class="strip-inner reveal-stagger">
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
-    <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
-  </div>
+<div class="trust-line">
+  <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
 </div>
 
+
+<section class="tool-seo-content reveal">
+  <h2>Understanding the Audio Tools</h2>
+  <div class="tool-guides">
+    <article class="tool-guide" id="trim-audio-guide">
+      <h3>Trim Audio</h3>
+      <p>Cut an audio file down to just the segment you need. This is perfect for extracting a podcast clip, creating a custom ringtone, or removing dead air from the beginning of a recording.</p>
+      
+      <h4>How to use Trim Audio</h4>
+      <ol>
+        <li>Drag and drop your audio file into the workspace.</li>
+        <li>Adjust the start time and duration to highlight the section you want.</li>
+        <li>Click 'Run' to process the audio and download the trimmed version.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Does this reduce the audio quality?</summary>
+        <p>No, the tool re-encodes the segment with FFmpeg WASM but maintains the original format's bitrate as closely as possible.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Can I trim long podcast episodes?</summary>
+        <p>Yes, as long as your browser has enough memory, you can load and trim large files.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>What formats can I trim?</summary>
+        <p>You can trim MP3, WAV, OGG, AAC, FLAC, and other common audio formats.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> If you know the exact timestamps, entering them manually is faster than dragging sliders.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="change-pitch-guide">
+      <h3>Change Pitch</h3>
+      <p>Alter the pitch of an audio file without affecting its playback speed. This effect is commonly used for vocal tuning, creating funny character voices, or transposing a backing track to match a singer's range.</p>
+      
+      <h4>How to use Change Pitch</h4>
+      <ol>
+        <li>Upload the audio file you want to pitch shift.</li>
+        <li>Use the slider to select how many semitones to shift up or down.</li>
+        <li>Process the file and download the pitch-altered result.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>How does this not change the speed?</summary>
+        <p>We use an advanced FFmpeg WASM filter called rubberband (or similar stretching algorithms) that adjusts frequencies independently of time.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will this make vocals sound like a chipmunk?</summary>
+        <p>If you shift the pitch significantly higher, yes! Small shifts are better for natural key changes.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Is there a limit to how much I can pitch shift?</summary>
+        <p>While the slider gives a specific range, extreme values will degrade audio quality and create artifacts.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> For natural-sounding key changes in music, try to keep pitch adjustments within 1 to 3 semitones.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="voice-recorder-guide">
+      <h3>Voice Recorder</h3>
+      <p>Record audio directly from your microphone and save it instantly. Great for quickly capturing voice memos, podcast intros, or scratch vocal tracks without needing dedicated software.</p>
+      
+      <h4>How to use Voice Recorder</h4>
+      <ol>
+        <li>Click the 'Record' button and grant your browser microphone permissions.</li>
+        <li>Speak into your microphone. You'll see a visualization if audio is detected.</li>
+        <li>Click 'Stop' when finished, and download your recording.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Is my voice recording sent to a server?</summary>
+        <p>No, the recording happens entirely locally using the browser's MediaRecorder API. Your voice never leaves your device.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>What format does it save as?</summary>
+        <p>It typically saves in a standard web audio format like WebM or OGG, depending on your browser, which you can later convert to MP3.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Why isn't it picking up my microphone?</summary>
+        <p>Ensure you've granted microphone permissions in your browser settings and that the correct input device is selected.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Use a dedicated USB microphone and record in a quiet room for the best audio quality.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="change-volume-guide">
+      <h3>Change Volume</h3>
+      <p>Increase or decrease the overall volume of an audio file. This tool is useful when you have a quiet recording that needs a boost, or a blaring track that needs to be tamed before adding it to a video project.</p>
+      
+      <h4>How to use Change Volume</h4>
+      <ol>
+        <li>Select your audio file from your device.</li>
+        <li>Set the desired volume multiplier (e.g., 2.0x for double volume, 0.5x for half).</li>
+        <li>Run the tool and save the volume-adjusted file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Will boosting the volume cause distortion?</summary>
+        <p>If you increase the volume too much, the audio peaks will hit the maximum limit and clip, causing distortion. Increase in small increments.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Can this fix audio that is only quiet in some parts?</summary>
+        <p>This tool applies a static volume change to the entire file. For uneven audio, a compressor or normalizer is better.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>How is the volume change processed?</summary>
+        <p>FFmpeg WASM applies a volume filter multiplier directly to the audio stream.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> If you want to maximize volume without clipping, use the Normalize Audio tool instead.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="equalizer-guide">
+      <h3>Equalizer</h3>
+      <p>Shape the tone of your audio by adjusting specific frequency bands. You can boost the bass for electronic music, enhance the treble for vocal clarity, or use presets to fit different genres.</p>
+      
+      <h4>How to use Equalizer</h4>
+      <ol>
+        <li>Upload the audio track you want to EQ.</li>
+        <li>Choose an equalizer preset or manually adjust the frequency bands.</li>
+        <li>Process the audio and download your sculpted track.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>What is an equalizer actually doing?</summary>
+        <p>An equalizer cuts or boosts the volume of specific frequency ranges (like bass, mids, or treble) without affecting the rest of the sound.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Are there built-in presets?</summary>
+        <p>Yes, we provide several common presets like Bass Boost, Treble Boost, and Voice Enhancement.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Is this a graphic or parametric EQ?</summary>
+        <p>This tool acts as a graphic equalizer, using FFmpeg WASM's multi-band EQ filter.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> When trying to make vocals clearer, cutting muddy lower-mid frequencies (around 250Hz-500Hz) often works better than just boosting the highs.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="audio-joiner-guide">
+      <h3>Audio Joiner</h3>
+      <p>Merge multiple audio files sequentially into a single, continuous track. This is ideal for stringing together podcast segments, creating a seamless music mix, or combining multiple voice memos.</p>
+      
+      <h4>How to use Audio Joiner</h4>
+      <ol>
+        <li>Drag and drop two or more audio files into the dropzone.</li>
+        <li>Reorder the files by dragging them if necessary.</li>
+        <li>Click 'Run' to concatenate the files and download the merged audio.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Do the files need to be the same format?</summary>
+        <p>Our FFmpeg WASM engine handles different formats and sample rates, converting them to match during the joining process.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Is there a gap between the joined tracks?</summary>
+        <p>No, the files are appended back-to-back with zero gap. If you want a gap, you'll need to insert a silent audio file.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>How many files can I join at once?</summary>
+        <p>You can join as many as you want, but processing time will increase with total duration and file count.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> For the fastest processing, ensure all your input files have the same sample rate and channel count before joining.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="change-speed-guide">
+      <h3>Change Speed</h3>
+      <p>Speed up or slow down your audio playback without altering the pitch. Use this to quickly listen to long lectures, create slow-motion sound effects, or match a track to a specific tempo.</p>
+      
+      <h4>How to use Change Speed</h4>
+      <ol>
+        <li>Upload the audio file you need to re-time.</li>
+        <li>Select the desired playback speed multiplier (e.g., 1.5x for faster, 0.8x for slower).</li>
+        <li>Run the process and download the speed-adjusted file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Does changing speed affect the pitch?</summary>
+        <p>No, this tool uses a time-stretching algorithm in FFmpeg WASM (atempo filter) to change the duration while keeping the original pitch intact.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Can I make a song twice as fast?</summary>
+        <p>Yes, you can select a 2.0x speed multiplier to double the tempo.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will the audio sound glitchy if I slow it down too much?</summary>
+        <p>Extreme slow-downs can introduce stuttering artifacts because the algorithm has to invent audio data to fill the stretched time.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> For podcasts and spoken word, a speed of 1.2x to 1.5x is usually comprehensible while saving significant listening time.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="reverse-audio-guide">
+      <h3>Reverse Audio</h3>
+      <p>Play an audio file completely backwards from end to start. This fun effect is great for finding hidden messages in songs, creating unsettling horror sound effects, or generating unique sweep transitions.</p>
+      
+      <h4>How to use Reverse Audio</h4>
+      <ol>
+        <li>Select the audio file you wish to reverse.</li>
+        <li>Wait a moment for the tool to process the reversal.</li>
+        <li>Download the backward audio track.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>How does audio reversal work?</summary>
+        <p>FFmpeg WASM loads the entire audio stream into memory and reverses the sequence of the audio samples.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Can I reverse long songs?</summary>
+        <p>Yes, but reversing requires loading the entire file into memory at once, so very large files might take longer or hit browser memory limits.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does reversing reduce quality?</summary>
+        <p>No, the audio samples are simply played in reverse order, preserving the original fidelity.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Reverse a cymbal crash to create an excellent 'riser' or 'swoosh' transition effect for video editing.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="compress-audio-guide">
+      <h3>Compress Audio</h3>
+      <p>Reduce the file size of your audio by lowering its bitrate. This is essential when you need to email an audio file, upload it to a platform with strict size limits, or save storage space.</p>
+      
+      <h4>How to use Compress Audio</h4>
+      <ol>
+        <li>Upload your large audio file.</li>
+        <li>Select a target bitrate (e.g., 128kbps, 64kbps). Lower bitrates mean smaller files but lower quality.</li>
+        <li>Process and download the compressed file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>How much smaller will my file be?</summary>
+        <p>It depends on the original bitrate and your target. Converting a 320kbps MP3 to 128kbps will reduce the file size by roughly 60%.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will I lose audio quality?</summary>
+        <p>Yes, compression is a 'lossy' process. However, 128kbps is generally considered near CD-quality for casual listening.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does this work for WAV files?</summary>
+        <p>Yes! Converting a large uncompressed WAV file to a compressed MP3 or AAC will result in massive space savings.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> For spoken word or podcasts, you can often compress down to 64kbps mono without a noticeable loss in vocal clarity.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="remove-vocals-guide">
+      <h3>Remove Vocals</h3>
+      <p>Attempt to isolate the instrumental backing track by removing center-panned vocals. This is perfect for creating DIY karaoke tracks, analyzing the instrumentation of a song, or sampling beats.</p>
+      
+      <h4>How to use Remove Vocals</h4>
+      <ol>
+        <li>Upload a stereo music track containing vocals.</li>
+        <li>Click 'Run' to apply the phase cancellation algorithm.</li>
+        <li>Download your instrumental-focused track.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Why can I still hear some vocals?</summary>
+        <p>This tool uses phase cancellation (inverting one stereo channel and summing it with the other). If the vocals have stereo reverb or aren't perfectly centered, remnants will remain.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does this work on mono audio files?</summary>
+        <p>No, this technique relies entirely on the differences between the left and right stereo channels. It will silence a mono track completely.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Is this AI-based vocal removal?</summary>
+        <p>No, this uses traditional FFmpeg WASM phase cancellation techniques. It is fast and runs locally, but isn't as perfect as deep learning source separation.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Songs from the 1960s and 70s often have vocals panned hard to one side, making this traditional center-cancellation method less effective for that era.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="extract-vocals-guide">
+      <h3>Extract Vocals</h3>
+      <p>Isolate the vocal frequencies from a mixed track by applying targeted bandpass filters. This helps bring out the vocal performance for remixing, a cappella creation, or critical listening.</p>
+      
+      <h4>How to use Extract Vocals</h4>
+      <ol>
+        <li>Upload the song you want to extract vocals from.</li>
+        <li>Run the tool to isolate the vocal frequency range.</li>
+        <li>Download the filtered audio file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Will I get a perfect studio a cappella?</summary>
+        <p>No. This tool isolates the frequency range where vocals typically live. You will still hear instruments that share those same frequencies (like snare drums and guitars).</p>
+      </details>
+      <details class="tool-faq">
+        <summary>How does it work?</summary>
+        <p>It uses FFmpeg WASM to apply bandpass filters, cutting away extreme highs (cymbals) and deep lows (bass) to leave the vocal range intact.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Can I use this for speech recognition preparation?</summary>
+        <p>Yes, isolating vocal frequencies can sometimes improve the accuracy of transcription software by reducing low-end rumble.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Pair this extracted vocal track with heavy equalization or noise gates in your DAW to further isolate the voice.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="noise-reducer-guide">
+      <h3>Noise Reducer</h3>
+      <p>Clean up your audio by suppressing constant background hums, hisses, or fan noises. Ideal for restoring old recordings, cleaning up podcast dialogue, or fixing audio shot in noisy environments.</p>
+      
+      <h4>How to use Noise Reducer</h4>
+      <ol>
+        <li>Upload your noisy audio file.</li>
+        <li>Select the strength of the noise reduction.</li>
+        <li>Process the file to suppress the background noise and download.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Can this remove sudden noises like dog barks?</summary>
+        <p>No, this tool uses FFT-based noise reduction which is designed to remove constant, steady-state background noise (like air conditioning hum or tape hiss).</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will it make my voice sound weird?</summary>
+        <p>Applying heavy noise reduction can cause 'watery' or robotic artifacts. It's often better to leave a tiny bit of noise than to over-process the audio.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Is this processed locally?</summary>
+        <p>Yes, the FFmpeg WASM afftdn (audio fast Fourier transform denoise) filter runs entirely in your browser.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> For the cleanest results, always try to record a few seconds of 'room tone' (just the background noise) at the beginning of your recordings.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="fade-audio-guide">
+      <h3>Fade Audio</h3>
+      <p>Apply smooth volume transitions at the beginning and end of your track. Adding a fade-in and fade-out prevents jarring abrupt starts and stops, giving your audio a professional, polished feel.</p>
+      
+      <h4>How to use Fade Audio</h4>
+      <ol>
+        <li>Upload your audio track.</li>
+        <li>Specify the duration in seconds for the fade-in and the fade-out.</li>
+        <li>Run the process and download the smoothed file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Can I fade just the end of the song?</summary>
+        <p>Yes, simply set the fade-in duration to 0 seconds and only specify a fade-out duration.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does this alter the audio quality?</summary>
+        <p>No, it merely applies a mathematical volume envelope to the specified sections via FFmpeg WASM.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>What type of fade curve is used?</summary>
+        <p>By default, this tool applies a linear fade, which provides a steady, predictable decrease or increase in volume.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> A quick 0.5-second fade-in and fade-out is a great practice for all trimmed audio clips to prevent 'pops' or 'clicks' at the zero-crossing.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="normalize-audio-guide">
+      <h3>Normalize Audio</h3>
+      <p>Automatically adjust the volume of your audio so that the loudest peak hits a specific maximum level. This ensures consistent volume across different tracks without causing distortion.</p>
+      
+      <h4>How to use Normalize Audio</h4>
+      <ol>
+        <li>Upload the audio file that is too quiet or uneven.</li>
+        <li>Click process to scan for the highest peak and adjust the overall gain.</li>
+        <li>Download the optimized audio file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>What is the difference between Normalize and Volume Change?</summary>
+        <p>Volume Change blindly multiplies the volume by a set amount. Normalize scans the file first to find the absolute loudest part, and then turns the volume up exactly as much as possible without distorting.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will this fix quiet parts and loud parts in the same song?</summary>
+        <p>No, peak normalization turns the entire song up by the same amount. To fix dynamic range (quiet and loud parts), you need a compressor.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>What level does it normalize to?</summary>
+        <p>The tool normalizes the peak volume to 0dBFS (the maximum digital limit) or slightly below it.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Always normalize your finalized podcasts and music tracks before publishing to ensure they are competitively loud.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="remove-audio-metadata-guide">
+      <h3>Remove Metadata</h3>
+      <p>Strip all hidden ID3 tags, cover art, and personal metadata from your audio files. This is essential for privacy before sharing files or when cleaning up a messy music library.</p>
+      
+      <h4>How to use Remove Metadata</h4>
+      <ol>
+        <li>Upload your MP3, FLAC, or WAV file.</li>
+        <li>Run the tool to discard all non-audio data.</li>
+        <li>Download the clean, stripped audio file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>What kind of data is removed?</summary>
+        <p>It removes ID3 tags (Artist, Album, Title), embedded album artwork, copyright info, and software encoder tags.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does removing metadata change the audio quality?</summary>
+        <p>Not at all. The actual audio stream is simply copied over into a new file without the metadata header using FFmpeg WASM.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will this reduce the file size?</summary>
+        <p>Slightly. If the file had a large embedded high-resolution album cover, removing it will noticeably shrink the file size.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Use this tool to clean files before uploading them to streaming platforms that require strict, clean header formats.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="audio-to-text-guide">
+      <h3>Audio to Text</h3>
+      <p>Transcribe the spoken words in your audio file into a readable text document. Great for generating meeting minutes, extracting quotes from interviews, or creating video subtitles.</p>
+      
+      <h4>How to use Audio to Text</h4>
+      <ol>
+        <li>Upload a clear audio file containing speech.</li>
+        <li>Wait while the local recognition engine processes the audio.</li>
+        <li>Copy the extracted text or download it as a text file.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Does this tool upload my audio to the cloud for transcription?</summary>
+        <p>No, it utilizes a client-side recognition process. While more limited than massive cloud AI, it ensures complete privacy.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>What languages are supported?</summary>
+        <p>Currently, the primary focus is on English transcription, depending on the browser's built-in Web Speech API or local fallback engines.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Why is the transcription inaccurate?</summary>
+        <p>Client-side transcription works best with clear, slow speech and minimal background noise. Accents and overlapping talkers can reduce accuracy.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Run your audio through the Noise Reducer tool first to improve transcription accuracy significantly.
+      </div>
+    </article>
+
+    <article class="tool-guide" id="mp3-tag-editor-guide">
+      <h3>MP3 Tag Editor</h3>
+      <p>Edit the ID3 metadata tags of your MP3 files directly in your browser. Add or fix the Title, Artist, Album, and Genre information so your tracks look perfect in music players.</p>
+      
+      <h4>How to use MP3 Tag Editor</h4>
+      <ol>
+        <li>Upload an MP3 file.</li>
+        <li>Fill in the input fields for Title, Artist, Album, and other metadata.</li>
+        <li>Click save and download the correctly tagged MP3.</li>
+      </ol>
+      
+      <h4>Frequently Asked Questions</h4>
+      <details class="tool-faq">
+        <summary>Can I add album artwork?</summary>
+        <p>This specific tool focuses on text-based ID3 metadata fields like Title and Artist. Cover art injection is not currently supported in this module.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Will this work on WAV files?</summary>
+        <p>WAV files don't handle metadata as robustly as MP3s. This tool is optimized specifically for writing ID3 tags to MP3 files.</p>
+      </details>
+      <details class="tool-faq">
+        <summary>Does editing tags require re-encoding the audio?</summary>
+        <p>No, the FFmpeg WASM engine strictly updates the header tags and copies the original audio stream, preserving 100% of the original quality.</p>
+      </details>
+      
+      <div class="tool-tip-box">
+        <strong>Pro Tip:</strong> Keep your tag formatting consistent (e.g., casing, genre names) so that your music library sorts them correctly.
+      </div>
+    </article>
+
+  </div>
+</section>
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-col">

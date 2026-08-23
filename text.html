@@ -132,7 +132,7 @@
     </a>
     <a href="text.html" class="drawer-link active" data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-ocr"/></svg></span>
-      <span>Text</span><span class="dl-badge">2</span>
+      <span>Text</span><span class="dl-badge">22</span>
     </a>
     <a href="audio.html" class="drawer-link " data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
@@ -177,7 +177,7 @@
     <a href="text.html" class="bs-item" data-bench="text" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-ocr"/></svg></span>
       <span class="bs-label">Text</span>
-      <span class="bs-badge">2</span>
+      <span class="bs-badge">22</span>
     </a>
     <a href="audio.html" class="bs-item" data-bench="audio" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-music"/></svg></span>
@@ -204,11 +204,11 @@
  <div class="bh-icon"><svg class="icon"><use href="#i-ocr"/></svg></div>
  <div>
  <h1>Text Bench</h1>
- <div class="bh-tag">Two tools for getting text back out of an image or a scan.</div>
+ <div class="bh-tag">22 tools for extracting, formatting, counting, and converting text directly in your browser.</div>
  </div>
  </div>
  <p class="bench-hero-desc reveal">Got a screenshot, a photo of a whiteboard, or a scanned page and need the actual words? The Text Bench runs real OCR (via Tesseract) to read text out of images, and can pull the existing text layer straight out of a text-based PDF both fully client-side.</p>
- <div class="bench-badges reveal"><span class="bench-badge">2 tools</span><span class="bench-badge">OCR included</span><span class="bench-badge">Works offline after first load</span></div>
+ <div class="bench-badges reveal"><span class="bench-badge">22 tools</span><span class="bench-badge">OCR included</span><span class="bench-badge">Works offline after first load</span></div>
   </div>
 
   <div class="bench-hero-art reveal" aria-hidden="true">
@@ -232,7 +232,7 @@
 
 <div class="tools-heading reveal">
  <h2>Tools in this bench</h2>
- <span>2 tools · click any card to open it</span>
+ <span>22 tools · click any card to open it</span>
 </div>
 <section class="category-section cat-text" id="cat-text">
 
@@ -310,14 +310,457 @@
  </div>
 </div>
 
-<div class="strip">
- <div class="strip-inner reveal-stagger">
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
- </div>
+<div class="trust-line">
+  <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
 </div>
 
+<section class="tool-seo-content reveal">
+  <h2>Mergio Text Tools Guide</h2>
+
+  <article class="tool-guide" id="extract-text-image-guide">
+    <h3>Image to Text (OCR)</h3>
+    <p>Extracting text from photos or scanned documents shouldn't require installing bulky software. Our Image to Text tool leverages Tesseract.js (WebAssembly) to read printed or typed text directly within your browser. This is exceptionally useful for digitizing physical notes, recovering text from screenshots, or extracting information from infographics without manually typing everything out.</p>
+    <h4>How to extract text from an image</h4>
+    <ol>
+      <li>Select the Image to Text (OCR) tool from the Text Bench.</li>
+      <li>Drop your JPG, PNG, or WebP image file into the designated area.</li>
+      <li>Wait a few seconds while the Tesseract OCR engine processes the image locally.</li>
+      <li>Download the resulting .txt file containing your digitized text.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does this tool work on handwritten notes?</summary>
+      <p>Tesseract OCR is primarily trained on printed and typed fonts. While it might pick up some very neat handwriting, it works best with clear, standard typography.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Is my image uploaded to a server for OCR?</summary>
+      <p>No. Mergio runs the OCR engine locally via WebAssembly, meaning your images remain securely on your device.</p>
+    </details>
+    <div class="tool-tip-box">For optimal OCR accuracy, ensure your image has good lighting, high contrast between text and background, and is relatively straight.</div>
+  </article>
+
+  <article class="tool-guide" id="extract-text-pdf-guide">
+    <h3>PDF to Text</h3>
+    <p>Grabbing text out of a multi-page PDF can be a frustrating experience when dealing with messy formatting and copy-paste limitations. Our PDF to Text extractor utilizes PDF.js to directly read the internal text layer of your document. It pulls out clean, unformatted text from every page sequentially, making it perfect for preparing PDF reports for data analysis or transferring content to a word processor.</p>
+    <h4>How to extract text from a PDF</h4>
+    <ol>
+      <li>Open the PDF to Text tool from the menu.</li>
+      <li>Drag and drop your PDF file into the workspace.</li>
+      <li>The tool will iterate through all pages and compile the text.</li>
+      <li>Save the output as a clean text file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Why did it output "(no text layer found)"?</summary>
+      <p>This means your PDF is likely a scanned image rather than a digitally created document. To extract text from a scanned PDF, convert the pages to images first, then use our Image to Text (OCR) tool.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Will this preserve my PDF's tables and layout?</summary>
+      <p>No, this tool specifically strips away formatting to provide raw, unstyled text. It extracts words in the order they are encoded in the PDF.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="text-to-pdf-guide">
+    <h3>Text to PDF</h3>
+    <p>Sometimes you need to lock down a simple text document into a universally readable format. The Text to PDF converter relies on PDF-lib to generate standard PDF files instantly from plain text. Whether you're saving code snippets, generating simple invoices, or preparing reading materials, this utility ensures your text displays exactly the same on any operating system or device.</p>
+    <h4>How to convert a text file to PDF</h4>
+    <ol>
+      <li>Select the Text to PDF tool in the Text Bench.</li>
+      <li>Upload your plain .txt file.</li>
+      <li>The PDF generator will automatically paginate and format the text.</li>
+      <li>Download your newly created PDF document.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Can I customize the font or margins?</summary>
+      <p>Currently, the tool uses a standard Helvetica font at 12pt with uniform margins for quick, reliable conversions. We focus on speed and compatibility.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Does it handle special characters?</summary>
+      <p>It handles standard ASCII and common Latin characters. Highly specialized unicode symbols might be stripped or replaced by spaces to maintain PDF compatibility.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="text-to-word-guide">
+    <h3>Text to Word</h3>
+    <p>Moving from raw notes to a professional document usually involves opening a heavy word processor. Our Text to Word tool skips that step by assembling a standard DOCX file using JSZip directly in your browser. It wraps your plain text in Office Open XML formatting, making it ideal for converting drafts, raw data dumps, or simple text notes into a format ready for formal editing.</p>
+    <h4>How to convert text to Word</h4>
+    <ol>
+      <li>Click on the Text to Word tool.</li>
+      <li>Provide a standard .txt file.</li>
+      <li>The application packages the text into a DOCX XML structure.</li>
+      <li>Download the .docx file and open it in Microsoft Word or compatible software.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Will this tool create rich formatting like bold or italics?</summary>
+      <p>No, this tool converts plain text. Since plain text contains no formatting metadata, the resulting Word document will contain unformatted paragraphs.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Do I need Microsoft Word installed to use this tool?</summary>
+      <p>You don't need Word to create the file—Mergio generates the DOCX structure independently. However, you will need a compatible word processor to open the final file.</p>
+    </details>
+    <div class="tool-tip-box">HTML entities like &lt; and &amp; are automatically safely escaped during the conversion to prevent corrupting the Word document structure.</div>
+  </article>
+
+  <article class="tool-guide" id="text-to-html-guide">
+    <h3>Text to HTML</h3>
+    <p>Web developers and content creators frequently need to transform raw copy into basic web-ready markup. The Text to HTML utility quickly wraps your paragraphs in standard HTML tags, giving you a structured document ready for web deployment. It's a massive time-saver when prepping blog posts, documentation, or email newsletter copy that needs to be inserted into a CMS.</p>
+    <h4>How to format text into HTML</h4>
+    <ol>
+      <li>Navigate to the Text to HTML converter.</li>
+      <li>Upload your plain text file.</li>
+      <li>The tool will wrap paragraphs and escape special characters.</li>
+      <li>Save the resulting .html file to your device.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does it generate a full HTML document?</summary>
+      <p>Yes! It generates a complete HTML5 skeleton, including the DOCTYPE, head, and body tags, with your text wrapped in paragraph elements.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Are line breaks preserved?</summary>
+      <p>The tool treats empty lines as paragraph boundaries, wrapping blocks of text in separate &lt;p&gt; tags for semantic structure.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="text-to-markdown-guide">
+    <h3>Text to Markdown</h3>
+    <p>Markdown has become the standard for writing technical documentation, readme files, and notes. Our Text to Markdown converter helps you transition raw text files into a clean Markdown structure by normalizing spacing and paragraph breaks. If you're moving old text archives into modern note-taking apps like Obsidian or Notion, this tool streamlines the preparation phase.</p>
+    <h4>How to format text into Markdown</h4>
+    <ol>
+      <li>Choose the Text to Markdown tool.</li>
+      <li>Upload a standard .txt file.</li>
+      <li>The script standardizes paragraph spacing.</li>
+      <li>Download the prepared .md file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does this auto-detect headings or lists?</summary>
+      <p>No, because plain text lacks reliable semantic markers, the tool focuses on ensuring clean paragraph separation that conforms to Markdown standards.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Why use this instead of just renaming the file extension?</summary>
+      <p>While you can just rename a file, this tool actively parses and normalizes double line breaks, ensuring strict compatibility with Markdown parsers that require specific spacing.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="markdown-to-html-guide">
+    <h3>Markdown to HTML</h3>
+    <p>Taking a Markdown document and turning it into a web page shouldn't require a complex build pipeline. The Markdown to HTML converter acts as a lightweight parser, transforming headings, bold text, links, and images into valid HTML elements. It's an excellent utility for previewing documentation, generating quick static pages, or converting readmes for platforms that only accept HTML.</p>
+    <h4>How to convert Markdown to HTML</h4>
+    <ol>
+      <li>Select the Markdown to HTML tool.</li>
+      <li>Drag and drop your .md file into the browser.</li>
+      <li>The tool parses syntax like `#`, `**`, and `[]()`.</li>
+      <li>Download the standalone .html file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Which Markdown syntax is supported?</summary>
+      <p>The parser handles standard headings (H1-H3), blockquotes, bold, italics, images, and standard hyperlink structures.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Is CSS styling included in the output?</summary>
+      <p>The output is pure, semantic HTML without any embedded CSS styles. This makes it a perfect clean slate to drop into your existing web projects.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="markdown-to-pdf-guide">
+    <h3>Markdown to PDF</h3>
+    <p>Sharing technical specs or documentation in Markdown isn't always ideal if the recipient doesn't have a Markdown viewer. Our Markdown to PDF tool parses your .md file, strips the syntax characters, and renders the clean text into a standard PDF document. This is highly useful for generating quick manuals, submitting assignments, or archiving documentation in a universally accessible format.</p>
+    <h4>How to save Markdown as a PDF</h4>
+    <ol>
+      <li>Open the Markdown to PDF tool.</li>
+      <li>Upload your Markdown (.md) document.</li>
+      <li>The processor cleans the syntax and paginates the text.</li>
+      <li>Download your formatted PDF file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Will images from my Markdown file appear in the PDF?</summary>
+      <p>No, this tool specifically converts the text content of your Markdown file. Image links and formatting syntax are stripped away to produce a clean text-based PDF.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Are bold and italic text styles preserved?</summary>
+      <p>To ensure maximum compatibility and speed via PDF-lib, the tool currently renders all text in a standard, unstyled font, removing the markdown asterisks in the process.</p>
+    </details>
+    <div class="tool-tip-box">Keep in mind that highly complex Markdown tables might lose their intended visual structure, as the tool prioritizes raw text flow.</div>
+  </article>
+
+  <article class="tool-guide" id="word-counter-guide">
+    <h3>Word Counter</h3>
+    <p>Meeting a strict word limit for an essay, article, or manuscript is a fundamental part of writing. The Word Counter tool performs a deep analysis of your text file, calculating total words, characters, sentences, and paragraphs. It even provides an estimated reading time based on a standard 200 words-per-minute pace, making it invaluable for speechwriters, bloggers, and students.</p>
+    <h4>How to count words in a document</h4>
+    <ol>
+      <li>Select the Word Counter tool from the list.</li>
+      <li>Drop your text document into the dropzone.</li>
+      <li>Review the instant analysis report generated by the tool.</li>
+      <li>Download the summary text file for your records.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>How does the tool define a word?</summary>
+      <p>The counter uses regular expressions to identify discrete blocks of alphanumeric characters surrounded by word boundaries (spaces or punctuation).</p>
+    </details>
+    <details class="tool-faq">
+      <summary>How is reading time calculated?</summary>
+      <p>Estimated reading time is calculated by dividing the total word count by an average reading speed of 200 words per minute, rounded up to the nearest whole minute.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="character-counter-guide">
+    <h3>Character Counter</h3>
+    <p>Whether you're crafting social media posts, writing meta descriptions for SEO, or dealing with strict database limits, knowing your exact character count is crucial. The Character Counter provides a granular breakdown of your text file, distinguishing between total characters, characters without spaces, vowels, consonants, and numerical digits.</p>
+    <h4>How to count characters in a file</h4>
+    <ol>
+      <li>Open the Character Counter tool.</li>
+      <li>Provide a standard text file.</li>
+      <li>The script will analyze the composition of the text.</li>
+      <li>Download the detailed statistical report.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Are line breaks counted as characters?</summary>
+      <p>Yes, in the 'Total Characters' metric, whitespace characters including line breaks and tabs are counted. The 'Characters (no spaces)' metric ignores them.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Why would I need to count vowels and consonants?</summary>
+      <p>This granular breakdown is often utilized in linguistics, cryptography, or when creating specific types of puzzles and word games.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="case-converter-guide">
+    <h3>Case Converter</h3>
+    <p>Fixing text that was accidentally typed with caps lock on, or standardizing a list of names, can be incredibly tedious. The Case Converter tool instantly transforms the capitalization of your entire text file. With options for Uppercase, Lowercase, Title Case, and Sentence Case, this utility is perfect for data cleansing, formatting headlines, or prepping text for database entry.</p>
+    <h4>How to change text capitalization</h4>
+    <ol>
+      <li>Click on the Case Converter tool.</li>
+      <li>Select your desired case type (e.g., Title Case) from the options.</li>
+      <li>Upload your text file.</li>
+      <li>Download the freshly formatted text file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>How does Sentence Case work?</summary>
+      <p>Sentence Case capitalizes the very first letter of the document and any letter that immediately follows a period, exclamation mark, or question mark.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Will Title Case capitalize small words like 'and' or 'the'?</summary>
+      <p>Currently, the Title Case option capitalizes the first letter of *every* word, which is useful for data uniformity but may require manual tweaking for strict editorial style guides.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="remove-duplicate-lines-guide">
+    <h3>Remove Duplicates</h3>
+    <p>When merging email lists, aggregating log files, or combining data sets, duplicate entries are a common headache. The Remove Duplicate Lines tool filters your text file, ensuring every line is entirely unique. By utilizing native JavaScript Sets, it can process thousands of lines instantly, giving you a clean, deduplicated file ready for use in spreadsheets or databases.</p>
+    <h4>How to remove duplicate lines from a file</h4>
+    <ol>
+      <li>Select the Remove Duplicates tool.</li>
+      <li>Upload a text file containing line-separated data.</li>
+      <li>The tool will instantly identify and remove exact matching lines.</li>
+      <li>Download the deduplicated text file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does it preserve the original order of the lines?</summary>
+      <p>Yes. The tool keeps the first instance of a line and removes any subsequent identical lines, maintaining the general flow of your document.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Is it case-sensitive?</summary>
+      <p>Yes. A line reading "apple" and a line reading "Apple" are treated as distinct entries and neither will be removed.</p>
+    </details>
+    <div class="tool-tip-box">Ensure there are no trailing spaces on your lines, as "word" and "word " are technically considered unique.</div>
+  </article>
+
+  <article class="tool-guide" id="find-replace-guide">
+    <h3>Find and Replace</h3>
+    <p>Executing a mass string replacement across a large configuration file or manuscript can crash lightweight text editors. The Find and Replace tool handles bulk substitutions effortlessly in the browser. Whether you're updating API endpoints, changing character names in a story, or fixing recurring typos, this tool processes replacements swiftly across entire documents.</p>
+    <h4>How to batch find and replace text</h4>
+    <ol>
+      <li>Open the Find and Replace tool.</li>
+      <li>Enter your target string in the "Find" field and the new string in "Replace".</li>
+      <li>Upload your text file.</li>
+      <li>Download the updated file with all substitutions made.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does this tool support Regular Expressions?</summary>
+      <p>No, to prevent accidental formatting errors for standard users, the tool treats your input as literal text and automatically escapes regex control characters.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Will it replace parts of words?</summary>
+      <p>Yes. If you find "cat" and replace it with "dog", a word like "category" will become "dogegory". Use descriptive find strings to avoid unintended replacements.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="json-formatter-guide">
+    <h3>JSON Formatter</h3>
+    <p>Raw, unformatted JSON data returned from an API or exported from a database is nearly impossible for a human to read. The JSON Formatter takes minified or messy JSON files and applies proper indentation and line breaks. This tool is an essential daily utility for software developers and data analysts who need to debug payloads or inspect data structures.</p>
+    <h4>How to beautify a JSON file</h4>
+    <ol>
+      <li>Select the JSON Formatter from the Text Bench.</li>
+      <li>Upload your unformatted .json file.</li>
+      <li>The parser will structure the data with 2-space indentation.</li>
+      <li>Save the newly formatted file to your system.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>What happens if my JSON is invalid?</summary>
+      <p>If the file contains syntax errors and cannot be parsed, the tool will simply return the original text without formatting it.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Does it organize the keys alphabetically?</summary>
+      <p>No, the formatter preserves the original order of the keys in your JSON object, altering only the whitespace for readability.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="json-minifier-guide">
+    <h3>JSON Minifier</h3>
+    <p>When deploying configuration files or transferring data over a network, every byte counts. The JSON Minifier strips out all unnecessary whitespace, line breaks, and indentation from your JSON files. This creates a compact, single-line file that reduces payload size and optimizes loading times for web applications and APIs.</p>
+    <h4>How to compress a JSON file</h4>
+    <ol>
+      <li>Open the JSON Minifier tool.</li>
+      <li>Upload a formatted .json file.</li>
+      <li>The tool removes all extraneous characters.</li>
+      <li>Download the minified version of your file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Will minifying my JSON alter the data?</summary>
+      <p>No, minification only affects structural whitespace (spaces, tabs, and newlines outside of string values). The actual data remains exactly the same.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Why would I want my JSON to be unreadable?</summary>
+      <p>Minification isn't for humans; it's for computers. A minified file takes up less disk space and transfers faster over the internet, which is critical for high-performance applications.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="xml-formatter-guide">
+    <h3>XML Formatter</h3>
+    <p>XML files are notorious for becoming convoluted, especially when generated by enterprise software or legacy systems. The XML Formatter brings order to the chaos by adding logical indentation and line breaks to your markup. Whether you're configuring a server, modifying an RSS feed, or debugging SOAP responses, this tool makes your XML human-readable again.</p>
+    <h4>How to format an XML file</h4>
+    <ol>
+      <li>Navigate to the XML Formatter tool.</li>
+      <li>Upload your raw .xml file.</li>
+      <li>The script will recursively apply indentation based on node depth.</li>
+      <li>Download the beautifully structured XML document.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does it validate the XML structure?</summary>
+      <p>The formatter applies visual structure based on opening and closing tags, but it is not a strict validator. It will format well-formed XML accurately.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Does it support self-closing tags?</summary>
+      <p>Yes, the algorithm recognizes self-closing tags and prevents them from incrementing the indentation level for subsequent lines.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="csv-to-json-guide">
+    <h3>CSV to JSON</h3>
+    <p>Converting spreadsheet data into a format that web applications can consume is a routine programming task. The CSV to JSON converter translates comma-separated values into a structured JSON array, using the first row of your CSV as the object keys. It's the fastest way to turn Excel exports or database dumps into API-ready data blocks.</p>
+    <h4>How to convert a CSV file to JSON</h4>
+    <ol>
+      <li>Select the CSV to JSON tool.</li>
+      <li>Drop your .csv file into the workspace.</li>
+      <li>The tool parses the headers and maps the data into objects.</li>
+      <li>Download the formatted .json file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Does my CSV need a header row?</summary>
+      <p>Yes! The tool explicitly relies on the very first row of your CSV file to act as the keys for the generated JSON objects.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>What happens if a field is empty?</summary>
+      <p>Empty fields in the CSV will be mapped as empty strings in the resulting JSON file, preserving the structure of the data.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="json-to-csv-guide">
+    <h3>JSON to CSV</h3>
+    <p>When non-technical stakeholders need to view API data, handing them a JSON file rarely works out well. The JSON to CSV tool flattens JSON arrays into a standard comma-separated spreadsheet format. It handles the escaping of internal commas and quotes automatically, ensuring the output file opens cleanly in Excel, Google Sheets, or Numbers.</p>
+    <h4>How to convert a JSON file to CSV</h4>
+    <ol>
+      <li>Open the JSON to CSV converter.</li>
+      <li>Upload a .json file containing an array of objects.</li>
+      <li>The tool extracts keys for headers and flattens the values.</li>
+      <li>Download your spreadsheet-ready .csv file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>What if my JSON has nested objects?</summary>
+      <p>This tool is designed for flat JSON structures. If your data contains deeply nested objects or arrays, they will be converted to string representations, so flatten your data first if possible.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>How does it handle text that contains commas?</summary>
+      <p>The tool automatically detects fields containing commas, quotes, or newlines and wraps those specific values in double quotes, conforming to standard CSV specifications.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="base64-encoder-guide">
+    <h3>Base64 Encoder</h3>
+    <p>Embedding small files directly into HTML/CSS or transmitting data safely through text-based protocols requires specific encoding. The Base64 Encoder takes the raw bytes of your text file and translates them into an ASCII string. This tool is vital for web developers creating data URIs, or system admins handling basic authentication credentials.</p>
+    <h4>How to encode a text file to Base64</h4>
+    <ol>
+      <li>Select the Base64 Encoder tool.</li>
+      <li>Upload the text file you wish to encode.</li>
+      <li>The tool reads the file into an array buffer and encodes it.</li>
+      <li>Download the resulting .txt file containing the Base64 string.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Is Base64 encoding a form of encryption?</summary>
+      <p>No. Base64 is merely a data format translation to ensure data integrity during transmission. It provides zero security and can be easily decoded by anyone.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Will this increase the file size?</summary>
+      <p>Yes, Base64 encoding generally increases the size of the original data by about 33%, due to how it maps 3 bytes of data into 4 ASCII characters.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="base64-decoder-guide">
+    <h3>Base64 Decoder</h3>
+    <p>When you encounter a long, cryptic string of alphanumeric characters ending in equals signs, you're likely looking at Base64 data. Our Base64 Decoder reverses this process, taking the encoded string and reconstructing the original binary data. It's a fundamental tool for unpacking API payloads, recovering embedded web assets, or investigating email source code.</p>
+    <h4>How to decode a Base64 string</h4>
+    <ol>
+      <li>Choose the Base64 Decoder tool from the bench.</li>
+      <li>Upload a text file containing only the Base64 string.</li>
+      <li>The application decodes the string back into raw bytes.</li>
+      <li>Download the resulting binary file (save it with the appropriate extension).</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Why does the output have a .bin extension?</summary>
+      <p>Because the decoder doesn't know what type of file was originally encoded (text, image, zip), it outputs a raw binary stream. You can simply rename the extension if you know what it should be.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>What happens if the string is invalid?</summary>
+      <p>If the input contains invalid characters not found in the Base64 index, the decoding process will fail and return an empty file.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="url-encoder-guide">
+    <h3>URL Encoder</h3>
+    <p>URLs have strict rules about which characters they can contain. Spaces, ampersands, and other special symbols must be escaped before being used in query strings or routing. The URL Encoder safely translates your text into a percent-encoded format, ensuring web servers and browsers route your requests without throwing 400 Bad Request errors.</p>
+    <h4>How to URL encode a text string</h4>
+    <ol>
+      <li>Navigate to the URL Encoder tool.</li>
+      <li>Upload a text file containing the string you want to encode.</li>
+      <li>The tool applies strict URI component encoding.</li>
+      <li>Download the safely encoded text file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>What exactly does this tool encode?</summary>
+      <p>It uses standard encodeURIComponent, meaning it encodes almost all characters (including /, ?, and &) except for alphabetic, decimal digits, and - _ . ! ~ * ' ( ).</p>
+    </details>
+    <details class="tool-faq">
+      <summary>Can I use this for entire URLs?</summary>
+      <p>It is best used for the parameters (query strings) of a URL. Encoding an entire URL will break the protocol identifier.</p>
+    </details>
+  </article>
+
+  <article class="tool-guide" id="url-decoder-guide">
+    <h3>URL Decoder</h3>
+    <p>Analyzing web traffic logs or debugging complex API calls often leaves you staring at strings filled with percent signs and hex numbers. The URL Decoder instantly translates percent-encoded strings back into readable text. It takes the guesswork out of reading UTM parameters, affiliate links, or complex database queries passed through web requests.</p>
+    <h4>How to decode a URL string</h4>
+    <ol>
+      <li>Select the URL Decoder tool.</li>
+      <li>Upload the text file containing the encoded string.</li>
+      <li>The application parses the percent-encoding.</li>
+      <li>Download the human-readable text file.</li>
+    </ol>
+    <details class="tool-faq">
+      <summary>Will this tool fix broken links?</summary>
+      <p>No, it simply translates valid percent-encoded characters back to their standard text equivalents for readability.</p>
+    </details>
+    <details class="tool-faq">
+      <summary>What happens if there's an invalid percentage sequence?</summary>
+      <p>If the string contains a malformed sequence, the decoder will gracefully handle the error and return the original text untouched.</p>
+    </details>
+  </article>
+</section>
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-col">

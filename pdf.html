@@ -127,7 +127,7 @@
     </a>
     <a href="pdf.html" class="drawer-link active" data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></span>
-      <span>PDF</span><span class="dl-badge">17</span>
+      <span>PDF</span><span class="dl-badge">32</span>
     </a>
     <a href="image.html" class="drawer-link " data-transition>
       <span class="dl-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></span>
@@ -169,7 +169,7 @@
     <a href="pdf.html" class="bs-item" data-bench="pdf" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-merge"/></svg></span>
       <span class="bs-label">PDF</span>
-      <span class="bs-badge">17</span>
+      <span class="bs-badge">32</span>
     </a>
     <a href="image.html" class="bs-item" data-bench="image" data-transition>
       <span class="bs-icon"><svg viewBox="0 0 24 24"><use href="#i-image"/></svg></span>
@@ -211,11 +211,11 @@
  <div class="bh-icon"><svg class="icon"><use href="#i-merge"/></svg></div>
  <div>
  <h1>PDF Bench</h1>
- <div class="bh-tag">Seventeen tools built for one job: making PDFs behave.</div>
+ <div class="bh-tag">32 tools built for one job: making PDFs behave.</div>
  </div>
  </div>
  <p class="bench-hero-desc reveal">Whether you're stitching a stack of scanned pages into one file, breaking a report apart, or getting a signed contract down to an email-friendly size the PDF Bench handles it without ever touching a server. Drop a file in, pick your settings, and the finished PDF downloads straight back to your device.</p>
- <div class="bench-badges reveal"><span class="bench-badge">17 tools</span><span class="bench-badge">Runs on your device</span><span class="bench-badge">No file size limit</span></div>
+ <div class="bench-badges reveal"><span class="bench-badge">32 tools</span><span class="bench-badge">Runs on your device</span><span class="bench-badge">No file size limit</span></div>
   </div>
 
   <div class="bench-hero-art reveal" aria-hidden="true">
@@ -240,7 +240,7 @@
 
 <div class="tools-heading reveal">
  <h2>Tools in this bench</h2>
- <span>17 tools · click any card to open it</span>
+ <span>32 tools · click any card to open it</span>
 </div>
 <section class="category-section cat-pdf" id="cat-pdf">
 
@@ -328,14 +328,494 @@
  </div>
 </div>
 
-<div class="strip">
- <div class="strip-inner reveal-stagger">
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-shield"/></svg></div><h4>Nothing uploaded</h4><p>Every tool runs inside your browser tab using your device's own processing power. Files are never sent to a server.</p></div>
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-bolt"/></svg></div><h4>No account, no limit</h4><p>There's no sign-up wall and no daily cap. Open a bench, drop a file, get your result.</p></div>
- <div class="strip-item"><div class="ico"><svg class="icon"><use href="#i-spark"/></svg></div><h4>No watermark</h4><p>What you export is exactly what you made nothing stamped on top of it.</p></div>
- </div>
+<div class="trust-line">
+  <span>🔒 100% browser-based</span> · <span>No uploads</span> · <span>No sign-up</span> · <span>No watermarks</span>
+</div>
 </div>
 
+<section class="tool-seo-content reveal">
+  <h2>PDF Tools Guide</h2>
+  <article class="tool-guide" id="merge-pdf-guide">
+    <h3>How to use the Merge PDF tool</h3>
+    <p>Combining multiple documents into a single cohesive file is a frequent requirement for legal professionals, educators, and office workers. This tool seamlessly stitches together your PDFs right inside your browser without any round-trips to a server. You can quickly consolidate monthly reports or assemble a complete portfolio securely.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Drag and drop your PDF documents into the upload area.</li>
+      <li>Reorder the files if necessary to match your desired output sequence.</li>
+      <li>Click the 'Merge' button to bind them together.</li>
+      <li>Save the newly created single PDF file to your local drive.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will my documents be uploaded?</summary><p>No, the merging process utilizes PDF-lib locally in your browser. Nothing is ever transferred over the internet.</p></details>
+    <details class="tool-faq"><summary>Can I merge files of different sizes?</summary><p>Absolutely, files with varying dimensions and layouts can be merged effortlessly without losing formatting.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> To prevent layout issues, ensure that the page orientations (portrait vs landscape) match where possible, though the tool handles mixed orientations without dropping content.</div>
+  </article>
+  <article class="tool-guide" id="split-pdf-guide">
+    <h3>How to use the Split PDF tool</h3>
+    <p>When you have a massive PDF but only need a few specific pages, breaking it apart is the most efficient solution. The Split PDF feature slices your bulky documents into individual, manageable pages locally. It is perfect for extracting invoices from a bulk batch or sharing a single book chapter.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Select the PDF you want to break apart.</li>
+      <li>Specify if you want all pages split or a particular subset.</li>
+      <li>Initiate the split operation.</li>
+      <li>Download your individual pages packed neatly in a ZIP archive.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>How are the output files named?</summary><p>Each page is saved with a sequential suffix corresponding to its original page number.</p></details>
+    <details class="tool-faq"><summary>Is there a limit on how many pages I can split?</summary><p>Since processing happens entirely client-side using PDF-lib, your device's memory is the only practical limitation.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For extremely large files (500+ pages), ensure your browser has enough RAM available, as the extraction happens locally.</div>
+  </article>
+  <article class="tool-guide" id="rotate-pdf-guide">
+    <h3>How to use the Rotate PDF tool</h3>
+    <p>Scanned documents often come out upside down or sideways, making them frustrating to read. By rotating your PDF pages, you can permanently fix orientation issues in seconds. This utility lets you correct the angle of every page uniformly without degrading the document quality.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Load the PDF containing the incorrectly oriented pages.</li>
+      <li>Select the rotation angle: 90 degrees, 180 degrees, or 270 degrees.</li>
+      <li>Apply the rotation transformation.</li>
+      <li>Export the corrected file directly to your system.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does rotating the PDF reduce text clarity?</summary><p>Not at all. The rotation modifies the document's metadata matrix via PDF-lib, keeping the original content completely intact.</p></details>
+    <details class="tool-faq"><summary>Can I rotate just one page?</summary><p>Currently, this tool applies the selected rotation to all pages globally for consistency.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If only some pages are sideways, you might want to use the <a href='#extract-pdf-pages'>Extract Pages</a> tool first, rotate them, and then <a href='#merge-pdf'>Merge</a> them back.</div>
+  </article>
+  <article class="tool-guide" id="compress-pdf-guide">
+    <h3>How to use the Compress PDF tool</h3>
+    <p>Large PDF files often bounce back from email servers and consume too much storage space. Our local compression engine re-encodes image-heavy pages, reducing the overall file size dramatically. This is an essential utility for sharing scanned documents, portfolios, or graphic-heavy presentations.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload your large PDF document into the tool.</li>
+      <li>Choose a compression level balancing quality and file size.</li>
+      <li>Start the optimization process.</li>
+      <li>Review the file size savings and download the lighter PDF.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>How does the tool shrink the file?</summary><p>It uses the HTML5 Canvas API to rasterize and re-encode high-resolution images at a more efficient DPI, leaving vector text untouched where possible.</p></details>
+    <details class="tool-faq"><summary>Will my text become blurry?</summary><p>Vector text remains perfectly crisp. Only embedded images and raster graphics are affected by the compression algorithms.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For text-only PDFs, compression may not significantly reduce the size. This tool is most effective on documents containing many scanned pages or photos.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-jpg-guide">
+    <h3>How to use the PDF to JPG tool</h3>
+    <p>Converting PDF pages into individual JPG images is incredibly useful when you need to embed document snippets into presentations or upload them to social media. This entirely local process rasterizes your PDF content into standard image formats quickly. It turns multi-page reports into a simple gallery of images.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Import the PDF you wish to convert.</li>
+      <li>Adjust any desired image quality settings.</li>
+      <li>Click convert to rasterize the document.</li>
+      <li>Download the resulting JPGs, which are bundled into a convenient ZIP file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>What resolution are the JPGs saved at?</summary><p>We use PDF.js to render the pages at a high scale factor, resulting in crisp images suitable for printing or screen viewing.</p></details>
+    <details class="tool-faq"><summary>Is my sensitive data sent to an image server?</summary><p>No, the entire rasterization process happens in your browser using the local Canvas API.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you need images with transparent backgrounds, try the <a href='#pdf-to-png'>PDF to PNG</a> tool instead, as JPG does not support transparency.</div>
+  </article>
+  <article class="tool-guide" id="jpg-to-pdf-guide">
+    <h3>How to use the JPG/PNG to PDF tool</h3>
+    <p>Gathering multiple photos or scanned JPGs into a single document makes them infinitely easier to distribute. This utility takes your loose image files and cleanly embeds them into standard PDF pages. Whether you are assembling a receipt bundle or a visual mood board, it happens instantly in-browser.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Drag and drop your JPG or PNG files into the work area.</li>
+      <li>Drag to reorder the images to your preferred sequence.</li>
+      <li>Click to generate the PDF.</li>
+      <li>Save the compiled document to your device.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does it stretch my images to fit?</summary><p>Images are embedded proportionally. The PDF page size is either matched to the image dimensions or the image is scaled to fit standard pages like A4, depending on the tool settings.</p></details>
+    <details class="tool-faq"><summary>Can I include PNG files as well?</summary><p>Yes, the tool fully supports mixing both JPG and PNG files into the same document.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Optimize your images before converting if you want to keep the final PDF file size small. Alternatively, you can use the <a href='#compress-pdf'>Compress PDF</a> tool afterwards.</div>
+  </article>
+  <article class="tool-guide" id="add-page-numbers-guide">
+    <h3>How to use the Add Page Numbers tool</h3>
+    <p>Adding page numbers to an existing PDF provides structure and makes long documents navigable during meetings or reviews. This utility instantly stamps clear pagination onto every page without requiring heavy desktop software. It's perfect for academic papers, legal briefs, and lengthy manuals.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the unnumbered PDF file.</li>
+      <li>Choose the position for the page numbers (e.g., bottom right, top center).</li>
+      <li>Click to apply the pagination.</li>
+      <li>Download the newly numbered document.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Can I change the font of the numbers?</summary><p>The tool uses standard embedded fonts provided by PDF-lib to ensure maximum compatibility and speed.</p></details>
+    <details class="tool-faq"><summary>Will it overwrite existing footer text?</summary><p>The numbers are stamped on top. Ensure your document has a sufficient margin at the bottom or top to prevent overlap.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you merge several documents together using the <a href='#merge-pdf'>Merge PDF</a> tool, use this tool afterwards to give the final compilation unified page numbers.</div>
+  </article>
+  <article class="tool-guide" id="word-to-pdf-guide">
+    <h3>How to use the Word to PDF tool</h3>
+    <p>Converting a Word document (DOCX) to PDF ensures that your formatting, fonts, and layouts remain locked in place no matter what device opens the file. This client-side converter transforms your text documents into uneditable, universally readable PDFs. Ideal for finalizing resumes, contracts, and assignments before sending.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Drop your .docx file into the designated area.</li>
+      <li>Wait a moment while the local engine parses the document structure.</li>
+      <li>Finalize the conversion process.</li>
+      <li>Download the exact PDF replica of your Word document.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Are my custom fonts preserved?</summary><p>Standard fonts are converted seamlessly. Highly custom fonts might fall back to standard web-safe alternatives depending on your local browser environment.</p></details>
+    <details class="tool-faq"><summary>Does it handle complex tables?</summary><p>Yes, basic and moderately complex table layouts are parsed and rendered into the resulting PDF.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For the most accurate representation, ensure your original Word document uses standard fonts like Arial, Times New Roman, or Calibri.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-word-guide">
+    <h3>How to use the PDF to Word tool</h3>
+    <p>When you receive a PDF that requires heavy editing, converting it back to a Word format is a massive time-saver. This local tool parses the text layout and rebuilds it into an editable document structure. Avoid retyping entire paragraphs by extracting the raw text and rough formatting straight to DOCX.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Load the PDF you need to edit.</li>
+      <li>Initiate the text extraction and layout parsing.</li>
+      <li>Wait for the conversion to finish building the document.</li>
+      <li>Download your new editable Word file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will the layout be perfectly identical?</summary><p>The tool uses PDF.js to map text coordinates, but complex layouts with multi-columns may require minor manual adjustments in Word.</p></details>
+    <details class="tool-faq"><summary>Does this work on scanned documents?</summary><p>Standard conversion only extracts embedded text. For scanned images, you would need to use the <a href='#pdf-ocr'>PDF OCR</a> tool instead.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> This tool works best on text-heavy documents like contracts and essays. Highly graphical PDFs may lose some visual fidelity during conversion.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-excel-guide">
+    <h3>How to use the PDF to Excel tool</h3>
+    <p>Extracting tabular data from a PDF into a spreadsheet manually is incredibly tedious and error-prone. This utility analyzes the spatial positioning of text within the PDF to reconstruct tables and export them as CSV/Excel data. It is indispensable for financial analysts and accountants dealing with PDF bank statements.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload a PDF containing tabular data.</li>
+      <li>Let the local engine identify the table structures.</li>
+      <li>Review the extraction settings.</li>
+      <li>Download the extracted data as a CSV or Excel-compatible file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>How does it recognize columns?</summary><p>The tool analyzes the horizontal spacing between text blocks to infer column boundaries locally.</p></details>
+    <details class="tool-faq"><summary>Can it extract multiple tables from one page?</summary><p>Yes, distinct blocks of tabular data are processed, though they may be output into a continuous spreadsheet layout.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Since PDFs lack native table structures, you may need to perform some minor clean-up in Excel, especially if the original PDF had invisible borders.</div>
+  </article>
+  <article class="tool-guide" id="excel-to-pdf-guide">
+    <h3>How to use the Excel to PDF tool</h3>
+    <p>Sharing financial data or schedules as an Excel file can lead to accidental edits or formatting chaos on the recipient's end. Converting your CSV or spreadsheet data into a PDF locks the grid visually. This ensures your data is presented cleanly and professionally, exactly as intended.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Select your CSV or spreadsheet file.</li>
+      <li>Adjust the page orientation (landscape is usually best for wide tables).</li>
+      <li>Generate the document.</li>
+      <li>Download the protected PDF version of your data.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will large tables get cut off?</summary><p>The tool attempts to scale the data to fit standard page widths, but extremely wide tables might wrap or require smaller font sizes.</p></details>
+    <details class="tool-faq"><summary>Is my financial data secure?</summary><p>Absolutely. The conversion happens entirely in your browser memory. No data is sent over the network.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For very wide datasets, try removing unnecessary columns before conversion to keep the final PDF highly legible.</div>
+  </article>
+  <article class="tool-guide" id="unlock-pdf-guide">
+    <h3>How to use the Unlock PDF tool</h3>
+    <p>Forgetting the permissions password on your own PDF document can prevent you from editing, printing, or copying text. As long as you have the right to modify the file, this tool strips away those restrictive permissions locally. It quickly restores full utility to your documents without uploading sensitive content.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the restricted PDF file.</li>
+      <li>If it has an open password, provide it.</li>
+      <li>Click to strip the permission restrictions.</li>
+      <li>Download the fully unlocked, unrestricted PDF.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Can it bypass the open/read password?</summary><p>No, you must know the open password if the file is encrypted for reading. This tool removes owner/permission restrictions.</p></details>
+    <details class="tool-faq"><summary>Is it legal to use this?</summary><p>This tool is intended strictly for use on documents you own or have explicit permission to modify.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Once unlocked, you can freely use other tools like <a href='#extract-pdf-pages'>Extract Pages</a> or <a href='#pdf-to-word'>PDF to Word</a> on the document.</div>
+  </article>
+  <article class="tool-guide" id="protect-pdf-guide">
+    <h3>How to use the Protect PDF tool</h3>
+    <p>When sharing sensitive information like financial records or personal data, adding an encryption layer is vital. This feature secures your PDF by applying robust AES encryption locally using the Web Crypto API. You can safely lock your files with a password before emailing them to clients or colleagues.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Drop the PDF you wish to secure into the tool.</li>
+      <li>Enter and confirm a strong password.</li>
+      <li>Apply the encryption.</li>
+      <li>Save the locked PDF to your device.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>What type of encryption is used?</summary><p>The tool uses industry-standard AES encryption provided by PDF-lib and the browser's native cryptography APIs.</p></details>
+    <details class="tool-faq"><summary>Can you help me recover a lost password?</summary><p>No. The encryption happens locally, and we do not store your passwords or files. If you lose the password, the file cannot be recovered.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use a password manager to generate and store a strong, unique password for your encrypted documents.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-png-guide">
+    <h3>How to use the PDF to PNG tool</h3>
+    <p>Sometimes you need pristine, lossless images of your PDF pages, particularly when dealing with graphics, logos, or vectors. Converting to PNG ensures that the crispness of the original document is maintained without compression artifacts. It's the ideal choice for high-quality presentations and web publishing.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Select the PDF to convert.</li>
+      <li>Choose your target resolution or scale.</li>
+      <li>Initiate the conversion.</li>
+      <li>Download a ZIP file containing the uncompressed PNG images.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Why is the ZIP file so large?</summary><p>PNG is a lossless format, meaning it retains maximum quality at the cost of larger file sizes compared to JPG.</p></details>
+    <details class="tool-faq"><summary>Are transparent backgrounds supported?</summary><p>PDFs typically have a white background by default, but vector elements without a solid background can be rendered with transparency depending on the file structure.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If file size is a major concern and you don't need lossless quality, consider using the <a href='#pdf-to-jpg'>PDF to JPG</a> tool instead.</div>
+  </article>
+  <article class="tool-guide" id="png-to-pdf-guide">
+    <h3>How to use the PNG to PDF tool</h3>
+    <p>When you have a collection of high-quality PNG graphics, screenshots, or transparent assets, compiling them into a PDF makes them easy to showcase. This tool creates a crisp, professional document out of your raw PNGs. It performs the compilation instantly without requiring heavy desktop design software.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload your PNG images.</li>
+      <li>Rearrange them into the exact order you want the pages to appear.</li>
+      <li>Click to compile the document.</li>
+      <li>Download your finished PDF portfolio.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will transparency be preserved?</summary><p>Yes, PNG transparency is supported and will be rendered correctly against the PDF page background.</p></details>
+    <details class="tool-faq"><summary>Is there a quality loss?</summary><p>No, the PNG files are embedded directly into the PDF structure using PDF-lib without re-compression.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you plan to email the resulting file, keep an eye on the total size of your PNGs, as they can quickly add up to a massive PDF.</div>
+  </article>
+  <article class="tool-guide" id="ppt-to-pdf-guide">
+    <h3>How to use the PPT to PDF tool</h3>
+    <p>Sharing presentation slides in their native format runs the risk of missing fonts, broken layouts, or accidental edits. Converting your PowerPoint slides to PDF locks the visual design securely in place. This client-side tool ensures your deck looks identical on every screen during your big pitch.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Import your presentation file.</li>
+      <li>Allow the local engine to parse the slide layouts.</li>
+      <li>Confirm the conversion.</li>
+      <li>Download the static PDF version of your presentation.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Are slide transitions preserved?</summary><p>No, PDFs are static documents. Animations and transitions are removed during the conversion to flat pages.</p></details>
+    <details class="tool-faq"><summary>Will my presenter notes be included?</summary><p>Currently, the tool focuses on rendering the primary slide canvas, omitting hidden presenter notes.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> To make your slides more accessible, consider using the <a href='#compress-pdf'>Compress PDF</a> tool afterwards if your deck contains heavy background images.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-html-guide">
+    <h3>How to use the PDF to HTML tool</h3>
+    <p>Repurposing a PDF document for the web usually involves copying and pasting text manually while losing all formatting. This tool parses the text and layout to generate a clean, responsive HTML structure. It is perfect for turning static reports into accessible web pages locally and instantly.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the PDF you want to web-ify.</li>
+      <li>Start the extraction process.</li>
+      <li>Review the generated markup.</li>
+      <li>Download the HTML file and associated assets.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does it create responsive HTML?</summary><p>The tool attempts to create fluid layouts, but highly rigid PDF designs might require CSS tweaks to look perfect on mobile devices.</p></details>
+    <details class="tool-faq"><summary>Are images extracted?</summary><p>Yes, embedded images are extracted and referenced in the resulting HTML structure.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use this as a starting point. The generated HTML provides the raw content and basic structure, which you can then style perfectly with your own CSS.</div>
+  </article>
+  <article class="tool-guide" id="extract-pdf-pages-guide">
+    <h3>How to use the Extract PDF Pages tool</h3>
+    <p>When you only need a specific section of a massive document, sending the whole file is inefficient. This tool allows you to slice out exactly the page ranges you need and save them as a new, concise PDF. It completely eliminates the need for expensive desktop PDF software.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Load the large PDF document.</li>
+      <li>Enter the specific page numbers or ranges (e.g., 1-5, 8, 11-13).</li>
+      <li>Click extract.</li>
+      <li>Download the tailored, smaller PDF.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Can I extract multiple disjointed sections?</summary><p>Absolutely. You can specify complex ranges separated by commas to pull exactly what you need.</p></details>
+    <details class="tool-faq"><summary>Does this alter the original file?</summary><p>No, the original file on your device remains completely untouched. A new file is generated.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you extract pages and realize you missed one, you can use the <a href='#merge-pdf'>Merge PDF</a> tool to add it in later.</div>
+  </article>
+  <article class="tool-guide" id="delete-pdf-pages-guide">
+    <h3>How to use the Delete PDF Pages tool</h3>
+    <p>Removing confidential pages, blank sheets, or irrelevant sections from a PDF shouldn't require premium software. This browser-based utility lets you selectively delete pages from your document in seconds. It is a vital tool for sanitizing reports before public distribution.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the PDF containing unwanted pages.</li>
+      <li>Specify the page numbers you wish to remove.</li>
+      <li>Apply the deletion.</li>
+      <li>Save the newly cleaned document.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>How do I know which pages to delete?</summary><p>It helps to preview the document first. Enter the exact page numbers as they appear in the PDF index.</p></details>
+    <details class="tool-faq"><summary>Is the removed data permanently gone?</summary><p>Yes, the generated output file will not contain any structural trace of the deleted pages.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Double-check your page numbers before deleting, especially in documents where the printed page number differs from the PDF index number.</div>
+  </article>
+  <article class="tool-guide" id="rearrange-pdf-pages-guide">
+    <h3>How to use the Rearrange PDF Pages tool</h3>
+    <p>Putting a document together from multiple scans often results in pages being completely out of order. Instead of rescanning, this tool allows you to intuitively change the sequence of pages within an existing PDF. You can drag and drop your page order locally without any server delays.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Open the out-of-order PDF.</li>
+      <li>Enter the new desired page sequence (e.g., 3, 1, 2, 4-10).</li>
+      <li>Process the reordering.</li>
+      <li>Download the correctly sequenced file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Can I omit pages while rearranging?</summary><p>Yes, if you leave a page number out of your sequence, it will be excluded from the final document entirely.</p></details>
+    <details class="tool-faq"><summary>Will internal links still work?</summary><p>Rearranging pages can break internal bookmarks or hyperlinks that rely on static page indexes.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> This tool is an excellent follow-up if you previously used the <a href='#merge-pdf'>Merge PDF</a> tool and didn't get the initial file order quite right.</div>
+  </article>
+  <article class="tool-guide" id="duplicate-pdf-pages-guide">
+    <h3>How to use the Duplicate PDF Pages tool</h3>
+    <p>Creating forms, worksheets, or templates often requires the same page to be repeated multiple times. This utility allows you to clone specific pages and append them to the document seamlessly. It is highly useful for educators making class materials or businesses generating bulk receipt templates.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the source PDF.</li>
+      <li>Specify which page to duplicate and how many copies you need.</li>
+      <li>Generate the expanded document.</li>
+      <li>Save the final PDF with the cloned pages.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does duplicating a page increase file size massively?</summary><p>PDF-lib handles duplication efficiently by referencing the same internal objects, so the file size increase is incredibly minimal.</p></details>
+    <details class="tool-faq"><summary>Can I duplicate multiple different pages at once?</summary><p>You can specify complex duplication logic depending on the tool interface settings.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you are creating a booklet, duplicate your blank pages here first before using a dedicated printing tool.</div>
+  </article>
+  <article class="tool-guide" id="pdf-ocr-guide">
+    <h3>How to use the PDF OCR tool</h3>
+    <p>Scanned documents are essentially just pictures of text, making them impossible to search, copy, or edit. By running your file through our local Optical Character Recognition (OCR) engine, you can extract the text from the images. Tesseract.js handles the heavy lifting entirely via WebAssembly in your browser.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the scanned PDF document.</li>
+      <li>Select the language of the text for better accuracy.</li>
+      <li>Start the OCR process (this may take a moment depending on page count).</li>
+      <li>Download the extracted text or a searchable PDF.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Why does OCR take longer than other tools?</summary><p>OCR requires complex machine learning models to visually analyze every pixel on the page locally via Tesseract.js.</p></details>
+    <details class="tool-faq"><summary>Does it work on handwritten notes?</summary><p>Accuracy is significantly lower for handwriting. It works best on standard printed typography.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For faster processing, only run OCR on the specific pages you need by using the <a href='#extract-pdf-pages'>Extract Pages</a> tool first.</div>
+  </article>
+  <article class="tool-guide" id="extract-pdf-images-guide">
+    <h3>How to use the Extract PDF Images tool</h3>
+    <p>When a PDF contains high-quality photos or charts you need to reuse elsewhere, taking a screenshot ruins the resolution. This tool digs into the PDF structure and pulls out the raw, embedded image files at their original quality. It saves you time and ensures you get the best possible graphical assets.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Load the PDF containing the desired images.</li>
+      <li>Initiate the extraction process.</li>
+      <li>The tool isolates all embedded raster graphics.</li>
+      <li>Download all extracted images neatly packaged in a ZIP archive.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will it extract vector graphics?</summary><p>No, this tool specifically targets embedded raster images (like JPGs and PNGs). Vector shapes are part of the page canvas.</p></details>
+    <details class="tool-faq"><summary>Why are some images split into pieces?</summary><p>Some PDF generators slice large images into tiles to optimize memory. The tool extracts exactly what is stored in the file structure.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you need an image of the entire page layout (including text and vectors), use the <a href='#pdf-to-jpg'>PDF to JPG</a> tool instead.</div>
+  </article>
+  <article class="tool-guide" id="sign-pdf-guide">
+    <h3>How to use the Sign PDF tool</h3>
+    <p>Printing, signing, and rescanning a document is a massive waste of paper and time. This tool allows you to visually stamp a digital signature image onto any PDF page directly in your browser. It securely finalizes contracts and forms without any data ever touching a third-party server.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Open the PDF requiring your signature.</li>
+      <li>Upload your signature image (PNG with transparency works best).</li>
+      <li>Position and scale the signature on the document canvas.</li>
+      <li>Apply and save the signed PDF.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Is this a cryptographic digital signature?</summary><p>No, this tool places a visual signature (image) on the document. It does not apply cryptographic certificate binding.</p></details>
+    <details class="tool-faq"><summary>Can I sign multiple pages?</summary><p>Yes, you can place the signature graphic on any page before finalizing the export.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use a clear PNG image of your signature with a transparent background for the most professional result.</div>
+  </article>
+  <article class="tool-guide" id="fill-pdf-forms-guide">
+    <h3>How to use the Fill PDF Forms tool</h3>
+    <p>Interactive PDF forms can be notoriously difficult to fill out if you don't have dedicated desktop software installed. This utility lets you input text, check boxes, and select dropdowns natively in the browser. It flattens the data securely so you can email the completed form without worrying about edits.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the interactive PDF form.</li>
+      <li>Click on the highlighted form fields to type your data.</li>
+      <li>Review your entries for accuracy.</li>
+      <li>Export the filled document to your local storage.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will the recipient be able to change my answers?</summary><p>Depending on the export settings, the form fields are usually flattened into static text to prevent tampering.</p></details>
+    <details class="tool-faq"><summary>Does this work on flat, non-interactive PDFs?</summary><p>No, this tool requires the PDF to have actual AcroForm fields. For flat PDFs, use a text overlay tool.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If the form requires a signature at the end, export the filled form first, then run it through the <a href='#sign-pdf'>Sign PDF</a> tool.</div>
+  </article>
+  <article class="tool-guide" id="compare-pdfs-guide">
+    <h3>How to use the Compare PDFs tool</h3>
+    <p>When reviewing contracts or collaborative documents, tracking subtle text changes between two versions is exhausting. This client-side tool compares the raw text of two PDFs side-by-side, highlighting additions and deletions. It is essential for legal professionals and editors who need to verify revisions quickly.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the original PDF document.</li>
+      <li>Upload the revised PDF document.</li>
+      <li>Run the comparison engine.</li>
+      <li>Review the generated report detailing the textual differences.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does it compare formatting and images?</summary><p>Currently, the tool focuses entirely on extracting and comparing the textual content to highlight wording changes.</p></details>
+    <details class="tool-faq"><summary>Are my sensitive contracts uploaded?</summary><p>Never. The text extraction and diffing algorithms run 100% locally via PDF.js.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> For the most accurate comparison, ensure both documents are text-based. Scanned PDFs will need to run through <a href='#pdf-ocr'>PDF OCR</a> first.</div>
+  </article>
+  <article class="tool-guide" id="repair-pdf-guide">
+    <h3>How to use the Repair PDF tool</h3>
+    <p>Corrupted PDF files—often caused by incomplete downloads or minor transfer errors—can throw frustrating errors when you try to open them. This tool attempts to rebuild the file's cross-reference table and fix structural anomalies locally. It can often resurrect broken documents without needing expensive recovery services.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the damaged or corrupted PDF.</li>
+      <li>The tool will parse the raw byte structure.</li>
+      <li>It automatically rebuilds the xref tables and headers.</li>
+      <li>Download the repaired, viewable document.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Can it fix a completely overwritten file?</summary><p>No. The tool fixes structural PDF errors. If the file is filled with zero-bytes or entirely missing data, it cannot be salvaged.</p></details>
+    <details class="tool-faq"><summary>Will the repaired file look exactly the same?</summary><p>In most cases, yes. However, if specific page objects were irreparably corrupted, those elements might be missing.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Always keep a backup of the original corrupted file, just in case a different recovery method is needed later.</div>
+  </article>
+  <article class="tool-guide" id="flatten-pdf-guide">
+    <h3>How to use the Flatten PDF tool</h3>
+    <p>PDFs with complex layers, interactive forms, or transparent objects can render unpredictably on different devices or printers. Flattening forces everything into a single static visual layer. This ensures that what you see on your screen is exactly what gets printed, sealing the document securely.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Import the complex or interactive PDF.</li>
+      <li>Initialize the flattening process.</li>
+      <li>The engine renders the pages into static canvases.</li>
+      <li>Download the visually identical, flattened file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does flattening increase file size?</summary><p>It can, because interactive elements and vectors may be rasterized into high-resolution image data depending on the exact method used.</p></details>
+    <details class="tool-faq"><summary>Can a flattened PDF be edited?</summary><p>Flattening makes the document highly resistant to editing, as discrete objects (like text blocks and forms) become part of the page background.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use this tool before sending final designs to a professional printer to avoid font substitution or layering errors.</div>
+  </article>
+  <article class="tool-guide" id="edit-pdf-metadata-guide">
+    <h3>How to use the Edit PDF Metadata tool</h3>
+    <p>Documents often carry outdated or incorrect internal metadata, which looks unprofessional when viewed in a PDF reader's properties panel. This utility lets you directly modify the Title, Author, Subject, and Keywords of your file. It ensures your digital paperwork is accurately labeled for search engines and archives.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the PDF you want to label.</li>
+      <li>Edit the fields for Title, Author, Subject, and Keywords.</li>
+      <li>Apply the metadata changes.</li>
+      <li>Save the updated document locally.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does changing metadata affect the document text?</summary><p>No, metadata is purely informational data stored in the file header. It does not alter the visible pages.</p></details>
+    <details class="tool-faq"><summary>Why is metadata important?</summary><p>Search engines, document management systems, and accessibility screen readers heavily rely on accurate metadata to index and describe files.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> If you are distributing a document publicly, make sure the Author field reflects your organization rather than your personal computer's username.</div>
+  </article>
+  <article class="tool-guide" id="remove-pdf-metadata-guide">
+    <h3>How to use the Remove PDF Metadata tool</h3>
+    <p>PDF files silently harbor hidden data like the author's name, creation dates, and the software used to generate them. When publishing documents publicly, this poses a minor privacy risk. This tool scrubs the internal dictionary of all non-essential metadata, sanitizing the file before you share it.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Drop the PDF into the scrubbing tool.</li>
+      <li>Confirm you want to strip the metadata.</li>
+      <li>The tool removes the informational dictionaries.</li>
+      <li>Download the sanitized, privacy-safe file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Will this delete my text or images?</summary><p>Not at all. The tool only targets the hidden XMP and Info dictionaries, leaving the visual content completely intact.</p></details>
+    <details class="tool-faq"><summary>Can stripped metadata be recovered?</summary><p>No, once the file is overwritten and saved without the metadata, that hidden information is permanently gone.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use this tool in conjunction with the <a href='#flatten-pdf'>Flatten PDF</a> tool for maximum document sanitization and security before public release.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-markdown-guide">
+    <h3>How to use the PDF to Markdown tool</h3>
+    <p>Developers, technical writers, and bloggers frequently need to move content from static PDFs into modern content management systems. This tool extracts the text and attempts to infer structure, outputting clean Markdown formatting. It drastically speeds up the process of migrating documentation to web repositories like GitHub.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Select the PDF documentation.</li>
+      <li>The tool extracts text and analyzes spatial layouts.</li>
+      <li>It generates Markdown syntax (like hashes for headers).</li>
+      <li>Download the lightweight .md file.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>Does it capture images?</summary><p>Standard extraction focuses purely on text. Images are ignored in the Markdown output.</p></details>
+    <details class="tool-faq"><summary>How accurate is the heading detection?</summary><p>It relies on font size and weight differences. Complex layouts may require some manual cleanup in your Markdown editor.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> This tool is perfect for extracting text from clean, text-heavy manuals. For highly visual brochures, expect to do some manual formatting afterwards.</div>
+  </article>
+  <article class="tool-guide" id="pdf-to-json-guide">
+    <h3>How to use the PDF to JSON tool</h3>
+    <p>Data scientists and developers often need to programmatically analyze the contents of a PDF document. This highly specialized tool parses the internal structure and text of the PDF, outputting it as a structured JSON object. It turns an unreadable proprietary layout into standard, machine-readable data instantly.</p>
+    <h4>Step-by-step instructions:</h4>
+    <ol>
+      <li>Upload the PDF you wish to parse.</li>
+      <li>The engine recursively reads the document tree.</li>
+      <li>It serializes the text and metadata into JSON.</li>
+      <li>Download the resulting .json file for your data pipeline.</li>
+    </ol>
+    <h4>Frequently Asked Questions</h4>
+    <details class="tool-faq"><summary>What does the JSON structure look like?</summary><p>It typically includes an array of pages, each containing the extracted text strings and their associated coordinate data.</p></details>
+    <details class="tool-faq"><summary>Is this processed on a server?</summary><p>No, the complex parsing and serialization happen entirely within your browser's JavaScript environment.</p></details>
+    <div class="tool-tip-box"><strong>Pro Tip:</strong> Use this structured output to feed text data into your own custom scripts, databases, or natural language processing workflows.</div>
+  </article>
+</section>
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-col">

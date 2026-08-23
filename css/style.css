@@ -2826,3 +2826,187 @@ body.drawer-open{ overflow: hidden; }
 [data-theme="dark"] .mobile-drawer{ background: var(--n-surface); }
 [data-theme="dark"] .drawer-close{ background: rgba(255,255,255,0.06); border-color: var(--n-border); }
 [data-theme="dark"] .dl-badge{ background: rgba(255,255,255,0.08); }
+
+/* ===========================================================
+   TOOL GUIDE SEO CONTENT SECTIONS
+   Per-tool crawlable content: guides, how-to, FAQs
+   =========================================================== */
+.tool-seo-content{
+  max-width: 1220px;
+  margin: 48px auto 0;
+  padding: 0 28px 40px;
+}
+.tool-seo-content > h2{
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  margin-bottom: 24px;
+  color: var(--n-text);
+}
+.tool-guide{
+  background: var(--n-surface);
+  border: 1px solid var(--n-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 0.2s var(--ease);
+}
+.tool-guide:hover{
+  box-shadow: var(--shadow-2);
+}
+.tool-guide > h3{
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--n-text);
+  letter-spacing: -0.2px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.tool-guide > h3 a{
+  color: inherit;
+  text-decoration: none;
+}
+.tool-guide > h3 a:hover{
+  color: var(--accent);
+}
+.tool-guide > p{
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--n-text-soft);
+  margin-bottom: 14px;
+  max-width: 780px;
+}
+.tool-guide > h4{
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--n-text);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.tool-guide ol{
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+.tool-guide ol li{
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--n-text-soft);
+  margin-bottom: 4px;
+}
+.tool-guide ol li strong{
+  color: var(--n-text);
+  font-weight: 600;
+}
+.tool-guide .tool-tip-box{
+  font-size: 12.5px;
+  color: var(--n-text-soft);
+  background: var(--n-bg-alt);
+  border: 1px solid var(--n-border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-top: 12px;
+  line-height: 1.55;
+}
+.tool-guide .tool-tip-box strong{
+  color: var(--n-text);
+}
+
+/* Collapsible FAQ (native <details>) */
+.tool-faq{
+  border: 1px solid var(--n-border);
+  border-radius: var(--radius-md);
+  margin-top: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.tool-faq[open]{
+  border-color: var(--accent);
+}
+.tool-faq summary{
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--n-text);
+  padding: 11px 14px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--n-bg-alt);
+  transition: background 0.15s;
+}
+.tool-faq summary:hover{
+  background: var(--n-bg);
+}
+.tool-faq summary::before{
+  content: "▸";
+  font-size: 11px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.tool-faq[open] summary::before{
+  transform: rotate(90deg);
+}
+.tool-faq summary::-webkit-details-marker{ display: none; }
+.tool-faq > p{
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--n-text-soft);
+  padding: 10px 14px 14px;
+  margin: 0;
+}
+.tool-faq > p a{
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Compact trust line (replaces 3-card strip on bench pages) */
+.trust-line{
+  max-width: 1220px;
+  margin: 8px auto 0;
+  padding: 10px 28px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--n-text-faint);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.trust-line span{
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Responsive */
+@media (max-width: 760px){
+  .tool-seo-content{ padding: 0 16px 32px; margin-top: 32px; }
+  .tool-guide{ padding: 18px 18px 16px; }
+  .tool-guide > h3{ font-size: 15px; }
+  .tool-guide > p{ font-size: 13px; }
+  .tool-faq summary{ font-size: 12.5px; padding: 10px 12px; }
+  .tool-faq > p{ font-size: 12.5px; padding: 8px 12px 12px; }
+}
+
+/* Dark mode */
+[data-theme="dark"] .tool-guide{
+  background: var(--n-surface);
+  border-color: var(--n-border);
+}
+[data-theme="dark"] .tool-faq summary{
+  background: rgba(255,255,255,0.03);
+}
+[data-theme="dark"] .tool-faq summary:hover{
+  background: rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .tool-guide .tool-tip-box{
+  background: rgba(255,255,255,0.03);
+  border-color: var(--n-border);
+}
+
